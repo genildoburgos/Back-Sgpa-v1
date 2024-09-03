@@ -11,7 +11,7 @@
 	<groupId>br.edu.ufape.poo.sgpa</groupId>
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Sisterma de Gerenciamento Para Academias</name>
+	<name>Sistema de Gerenciamento Para Academias</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
