@@ -18,8 +18,7 @@ public class Responsavel {
     public Responsavel() {
     }
 
-    public Responsavel(long id, String parentesco, String telefone) {
-        this.id = id;
+    public Responsavel(String parentesco, String telefone) {
         this.parentesco = parentesco;
         this.telefone = telefone;
     }
