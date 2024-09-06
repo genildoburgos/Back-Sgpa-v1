@@ -4,18 +4,26 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name="endereco", schema = "academia")
 public class Endereco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name="rua")
     private String rua;
+    @Column(name="numero")
     private String numero;
+    @Column(name="complemento")
     private String complemento;
+    @Column(name="bairro")
     private String bairro;
+    @Column(name="cidade")
     private String cidade;
+    @Column(name="estado")
     private String estado;
+    @Column(name="cep")
     private String cep;
 
     @OneToOne(mappedBy = "endereco")
@@ -120,6 +128,7 @@ public class Endereco {
                ", cidade='" + cidade + '\'' +
                ", estado='" + estado + '\'' +
                ", cep='" + cep + '\'' +
+               ", id=" + id +
                '}';
     }
 
