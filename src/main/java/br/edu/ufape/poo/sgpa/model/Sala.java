@@ -50,19 +50,22 @@ public class Sala {
     }
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof Sala sala)) return false;
-			return getId() == sala.getId() &&
-	               getCapacidade() == sala.getCapacidade() &&
-	               Objects.equals(getBloco(), sala.getBloco()) &&
-	               Objects.equals(getNumero(), sala.getNumero());
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Sala other = (Sala) obj;
+		return Objects.equals(bloco, other.bloco) && capacidade == other.capacidade && id == other.id
+				&& Objects.equals(numero, other.numero);
 	}
-	
+
 	@Override
-    public int hashCode() {
-        return Objects.hash(getId(), getBloco(), getNumero(), getCapacidade());
-    }
+	public int hashCode() {
+		return Objects.hash(bloco, capacidade, id, numero);
+	}
 	 
 	public long getId() {
 		return id;
