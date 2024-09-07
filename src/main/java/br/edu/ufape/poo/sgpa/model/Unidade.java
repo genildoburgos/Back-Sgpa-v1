@@ -201,24 +201,23 @@ public class Unidade {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Unidade)) return false;
-        Unidade unidade = (Unidade) o;
-        return getId() == unidade.getId() &&
+        if (!(o instanceof Unidade unidade)) return false;
+        return Objects.equals(getId(), unidade.getId()) &&
                Objects.equals(getNome(), unidade.getNome()) &&
                Objects.equals(getCnpj(), unidade.getCnpj()) &&
                Objects.equals(getContato(), unidade.getContato()) &&
                Objects.equals(getHorarioDeFuncionamento(), unidade.getHorarioDeFuncionamento()) &&
                Objects.equals(getEmail(), unidade.getEmail()) &&
-               /*Objects.equals(getInstrutor(), unidade.getInstrutor()) &&*/
+               /*Onjects.equals(getInstrutor(), unidade.getInstrutor()) && */
                Objects.equals(getPlano(), unidade.getPlano()) &&
                Objects.equals(getSegmento(), unidade.getSegmento()) &&
                Objects.equals(getEndereco(), unidade.getEndereco()) &&
                Objects.equals(getMembro(), unidade.getMembro()) &&
-               Objects.equals(getTurma(), unidade.getTurma()) && /*
-               Objects.equals(getAdministrador, unidade.getInstrutor()) && */
+               Objects.equals(getTurma(), unidade.getTurma()) &&
+               /*Objects.equals(getAdministrador(), unidade.getAdministrador()) && */
                Objects.equals(getSala(), unidade.getSala());
     }
-
+    
 
     @Override
     public int hashCode() {
