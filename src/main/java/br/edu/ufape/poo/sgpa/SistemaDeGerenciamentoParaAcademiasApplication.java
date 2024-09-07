@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SistermaDeGerenciamentoParaAcademiasApplication {
+public class SistemaDeGerenciamentoParaAcademiasApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SistermaDeGerenciamentoParaAcademiasApplication.class, args);
+		SpringApplication.run(SistemaDeGerenciamentoParaAcademiasApplication.class, args);
 	}
 
 }
