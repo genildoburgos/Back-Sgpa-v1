@@ -11,6 +11,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,21 +31,21 @@ public class Matricula {
 	@Enumerated(EnumType.STRING)
 	private StatusDaMatricula statusDaMatricula;
 	
-	//@ManyToOne
-    //private Membro membro;
+	@ManyToOne
+    private Membro membro;
 	
-	//@ManyToOne
-	//private Turma turma; 
+	@ManyToOne
+	private Turma turma; 
 	
 	public Matricula() {	
 	}
 	
-	public Matricula(LocalDate dataDeMatricula, LocalDate dataDeExpiracao) {
+	public Matricula(LocalDate dataDeMatricula, LocalDate dataDeExpiracao, Membro membro, Turma turma) {
 		this.dataDeMatricula = dataDeMatricula;
 		this.dataDeExpiracao = dataDeExpiracao;
 		this.statusDaMatricula = StatusDaMatricula.ATIVA;
-		//this.membro = membro;
-		//this.turma = turma;
+		this.membro = membro;
+		this.turma = turma;
 	}
 	
 	public void ativarMatricula() {
@@ -58,35 +59,32 @@ public class Matricula {
 	public boolean estaExpirada() {
         return LocalDate.now().isAfter(this.dataDeExpiracao);
     }
-	
+
 	@Override
-    public String toString() {
-        return "Matricula{" +
-                "id=" + id +
-                ", dataDeMatricula=" + dataDeMatricula +
-                ", dataDeExpiracao=" + dataDeExpiracao +
-                ", statusDaMatricula=" + statusDaMatricula +
-               // ", membro=" + membro + membro.toString()
-               // ", turma=" + turma + turma.toString()
-                '}';
-    }
+	public String toString() {
+		return "Matricula [id=" + id + ", dataDeMatricula=" + dataDeMatricula + ", dataDeExpiracao=" + dataDeExpiracao
+				+ ", statusDaMatricula=" + statusDaMatricula + ", membro=" + membro + ", turma=" + turma + "]";
+	}
 
-    /*@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Matricula matricula)) return false;
-        return getId() == matricula.getId() &&
-               Objects.equals(getDataDeMatricula(), matricula.getDataDeMatricula()) &&
-               Objects.equals(getDataDeExpiracao(), matricula.getDataDeExpiracao()) &&
-               getStatusDaMatricula() == matricula.getStatusDaMatricula() &&
-               Objects.equals(getMembro(), matricula.getMembro()) &&
-               Objects.equals(getTurma(), matricula.getTurma());
-    }/*
+	@Override
+	public int hashCode() {
+		return Objects.hash(dataDeExpiracao, dataDeMatricula, id, membro, statusDaMatricula, turma);
+	}
 
-    /*@Override
-    public int hashCode() {
-        return Objects.hash(getId(), getDataDeMatricula(), getDataDeExpiracao(), getStatusDaMatricula(), getMembro(), getTurma());
-    }*/
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Matricula other = (Matricula) obj;
+		return Objects.equals(dataDeExpiracao, other.dataDeExpiracao)
+				&& Objects.equals(dataDeMatricula, other.dataDeMatricula) && id == other.id
+				&& Objects.equals(membro, other.membro) && statusDaMatricula == other.statusDaMatricula
+				&& Objects.equals(turma, other.turma);
+	}
 
 	public long getId() {
 		return id;
@@ -116,7 +114,7 @@ public class Matricula {
 		this.statusDaMatricula = statusDaMatricula;
 	}
 
-	/*public Membro getMembro() {
+	public Membro getMembro() {
 		return membro;
 	}
 
@@ -130,5 +128,5 @@ public class Matricula {
 
 	public void setTurma(Turma turma) {
 		this.turma = turma;
-	}*/
+	}
 }
