@@ -10,7 +10,7 @@ import java.util.Objects;
 public class SlotHorario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     @Column(name="horarioinicial")
     private LocalTime horarioInicial;
     @Column(name="horariofinal")
@@ -28,11 +28,11 @@ public class SlotHorario {
         DiaDaSemana = diaDaSemana;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

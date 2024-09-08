@@ -2,6 +2,7 @@ package br.edu.ufape.poo.sgpa.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -28,7 +29,7 @@ public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     public Pessoa() {
     }
@@ -99,8 +100,35 @@ public class Pessoa {
         this.email = email;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "id=" + id +
+                ", endereco=" + endereco +
+                ", email='" + email + '\'' +
+                ", contatoDeEmergencia='" + contatoDeEmergencia + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", dataDeNascimento=" + dataDeNascimento +
+                ", sexo='" + sexo + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", nome='" + nome + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Pessoa pessoa)) return false;
+        return Objects.equals(getNome(), pessoa.getNome()) && Objects.equals(getCpf(), pessoa.getCpf()) && Objects.equals(getSexo(), pessoa.getSexo()) && Objects.equals(getDataDeNascimento(), pessoa.getDataDeNascimento()) && Objects.equals(getTelefone(), pessoa.getTelefone()) && Objects.equals(getContatoDeEmergencia(), pessoa.getContatoDeEmergencia()) && Objects.equals(getEmail(), pessoa.getEmail()) && Objects.equals(endereco, pessoa.endereco) && Objects.equals(getId(), pessoa.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getNome(), getCpf(), getSexo(), getDataDeNascimento(), getTelefone(), getContatoDeEmergencia(), getEmail(), endereco, getId());
     }
 }
 
