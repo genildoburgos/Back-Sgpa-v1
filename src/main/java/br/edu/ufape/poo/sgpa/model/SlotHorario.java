@@ -22,8 +22,7 @@ public class SlotHorario {
     public SlotHorario() {
     }
 
-    public SlotHorario(Long id, LocalTime horarioInicial, LocalTime horarioFinal, br.edu.ufape.poo.sgpa.model.enums.DiaDaSemana diaDaSemana) {
-        this.id = id;
+    public SlotHorario(LocalTime horarioInicial, LocalTime horarioFinal, br.edu.ufape.poo.sgpa.model.enums.DiaDaSemana diaDaSemana) {
         this.horarioInicial = horarioInicial;
         this.horarioFinal = horarioFinal;
         DiaDaSemana = diaDaSemana;
