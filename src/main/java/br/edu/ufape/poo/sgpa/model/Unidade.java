@@ -33,25 +33,24 @@ public class Unidade {
     @JoinColumn(name ="plano_id")
     private List<Plano> plano;
 
-    @ManyToMany
-    @JoinColumn(name ="segmento_id")
+    @JoinColumn(name ="segmento")
     @Enumerated(EnumType.STRING)
-    private List<Segmento> segmento;
+    private Segmento segmento;
 
     @OneToOne
     @JoinColumn(name="endereco_id")
     private Endereco endereco;
 
-
+    @ManyToOne
     @JoinColumn(name="membro_id")
     private Membro membro;
 
     
-    //@ManyToOne
-    //@JoinColumn(name="administrador_id")
-    //private Administrador administrador;
+    @ManyToOne
+    @JoinColumn(name="administrador_id")
+    private Administrador administrador;
     
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name="turma_id")
     private Turma turma;
 
@@ -63,7 +62,7 @@ public class Unidade {
 
     }
 
-    public Unidade(String nome, String cnpj, String contato, String horarioDeFuncionamento, String email,/*Instrutor instrutor */ List<Plano> plano, List<Segmento> segmento, Endereco endereco, Membro membro, Turma turma,/*Administrador administrador */ List<Sala> sala){
+    public Unidade(String nome, String cnpj, String contato, String horarioDeFuncionamento, String email,/*Instrutor instrutor */ List<Plano> plano, Segmento segmento, Endereco endereco, Membro membro, Turma turma,/*Administrador administrador */ List<Sala> sala){
         this.nome = nome;
         this.cnpj= cnpj;
         this.contato = contato;
@@ -143,10 +142,10 @@ public class Unidade {
         this.endereco = endereco;
     }
 
-    public List<Segmento> getSegmento(){
+    public Segmento getSegmento(){
         return segmento;
     }
-    public void setSegmento(List<Segmento> segmento){
+    public void setSegmento(Segmento segmento){
         this.segmento = segmento;
     }
 
@@ -164,12 +163,12 @@ public class Unidade {
         this.turma = turma;
     }
 
-    /*public Administrador getAdministrador(){
-     * return administrador;
-    } 
+    public Administrador getAdministrador(){
+      return administrador;
+    }
      public void setAdministrador(Administrador administrador){
      this.administrador = administrador;
-     }*/
+     }
 
      public List<Sala> getSala(){
         return sala;
