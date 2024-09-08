@@ -27,6 +27,7 @@ public class Endereco {
     private String cep;
 
     @OneToOne(mappedBy = "endereco")
+    @JoinColumn(name="pessoa_id")
     private Pessoa pessoa;
 
     // Construtor padrão
