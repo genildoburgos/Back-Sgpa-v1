@@ -1,15 +1,35 @@
 package br.edu.ufape.poo.sgpa.model;
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table (name="pessoa", schema = "academia" )
 public class Pessoa {
+    @Column(name="nome")
 	private String nome;
-	private String cpf;
-	private String sexo;
-	private LocalDate dataDeNascimento;
-	private String telefone;
-	private String contatoDeEmergencia;
-	private String email;
-	
+    @Column(name="cpf")
+    private String cpf;
+    @Column(name="sexo")
+    private String sexo;
+    @Column(name="data_de_nascimento")
+    private LocalDate dataDeNascimento;
+    @Column(name="telefome")
+    private String telefone;
+    @Column(name="contato_de_emergencia")
+    private String contatoDeEmergencia;
+    @Column(name="email")
+    private String email;
+
+    @OneToOne
+    @JoinColumn(name="endereco_id")
+    private Endereco endereco;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     public Pessoa() {
     }
 
@@ -77,6 +97,10 @@ public class Pessoa {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
 
