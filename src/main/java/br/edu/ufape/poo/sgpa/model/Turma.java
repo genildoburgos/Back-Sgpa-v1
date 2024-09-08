@@ -24,8 +24,8 @@ public class Turma {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 	
-	//@ManyToOne
-	//private Instrutor instrutor;
+	@ManyToOne
+	private Instrutor instrutor;
 	
 	@OneToMany(mappedBy = "turma")
 	private List<Matricula> matriculas;
@@ -43,27 +43,28 @@ public class Turma {
 		this.matriculas = new ArrayList<>();
 	}
 	
-	public Turma(/*Instrutor instrutor, */Sala sala, Vagas vagas, Modalidade modalidade) {
-		//this.instrutor = instrutor;
+	public Turma(Instrutor instrutor, Sala sala, Vagas vagas, Modalidade modalidade) {
+		this.instrutor = instrutor;
 		this.modalidade = modalidade;
 		this.sala = sala;
 		this.vagas = vagas;
 	}
-	
-	@Override
-	public String toString() {
-		return "Turma [id=" + id +  
-				", modalidade=" + modalidade + 
-				", sala=" + sala.toString() + 
-				", vagas=" + vagas.toString() + 
-				//", instrutor=" + instrutor.toString +
-				"]";
-	}
-	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, modalidade, sala, vagas);
-		//adicionar instrutor aqui depois
+		return Objects.hash(getId(), getInstrutor(), getMatriculas(), getModalidade(), getSala(), getVagas());
+	}
+
+	@Override
+	public String toString() {
+		return "Turma{" +
+				"id=" + id +
+				", instrutor=" + instrutor +
+				", matriculas=" + matriculas +
+				", modalidade=" + modalidade +
+				", sala=" + sala +
+				", vagas=" + vagas +
+				'}';
 	}
 
 	@Override
@@ -77,20 +78,20 @@ public class Turma {
 		Turma other = (Turma) obj;
 		return id == other.id && 
 				modalidade == other.modalidade && Objects.equals(sala, other.sala) && Objects.equals(vagas, other.vagas)
-				/*&& Objects.equals(instrutor, other.instrutor)*/;
+				&& Objects.equals(instrutor, other.instrutor);
 	}
 	
 	public long getId() {
 		return id;
 	}
 
-	/*public Instrutor getInstrutor() {
+	public Instrutor getInstrutor() {
 		return instrutor;
 	}
 
 	public void setInstrutor(Instrutor instrutor) {
 		this.instrutor = instrutor;
-	}*/
+	}
 
 	public List<Matricula> getMatriculas() {
 		return matriculas;

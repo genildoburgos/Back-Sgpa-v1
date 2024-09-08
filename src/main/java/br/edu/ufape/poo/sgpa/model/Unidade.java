@@ -25,13 +25,16 @@ public class Unidade {
     @Column(name = "email")
     private String email;
 
-    /*@ManyToMany
-    @JoinColumn(name= "instrutor_id")
-    private Instrutor instrutor;*/
+    @ManyToMany
+    @JoinTable(
+            name = "unidade_instrutor",
+            joinColumns = @JoinColumn(name = "unidade_id"),
+            inverseJoinColumns = @JoinColumn(name = "instrutor_id")
+    )
+    private List<Instrutor> instrutores;
 
     @OneToMany
-    @JoinColumn(name ="plano_id")
-    private List<Plano> plano;
+    private List<Plano> planos;
 
     @JoinColumn(name ="segmento")
     @Enumerated(EnumType.STRING)
@@ -49,33 +52,36 @@ public class Unidade {
     @ManyToOne
     @JoinColumn(name="administrador_id")
     private Administrador administrador;
-    
-    @ManyToOne
-    @JoinColumn(name="turma_id")
-    private Turma turma;
+
+    @ManyToMany
+    @JoinTable(
+            name = "unidade_turma",
+            joinColumns = @JoinColumn(name = "unidade_id"),
+            inverseJoinColumns = @JoinColumn(name = "turma_id")
+    )
+    private List<Turma> turmas;
 
     @OneToMany
-    @JoinColumn(name="sala_id")
-    private List<Sala> sala;
+    private List<Sala> salas;
 
     public Unidade(){
 
     }
 
-    public Unidade(String nome, String cnpj, String contato, String horarioDeFuncionamento, String email,/*Instrutor instrutor */ List<Plano> plano, Segmento segmento, Endereco endereco, Membro membro, Turma turma,/*Administrador administrador */ List<Sala> sala){
+    public Unidade(String nome, String cnpj, String contato, String horarioDeFuncionamento, String email, List<Instrutor> instrutores, List<Plano> planos, Segmento segmento, Endereco endereco, Membro membro, List<Turma> turma, Administrador administrador, List<Sala> salas){
         this.nome = nome;
         this.cnpj= cnpj;
         this.contato = contato;
         this.horarioDeFuncionamento = horarioDeFuncionamento;
         this.email = email;
-        /*this.instrutor = instrutor; */
-        this.plano = plano;
+        this.instrutores = instrutores;
+        this.planos = planos;
         this.segmento = segmento;
         this.endereco = endereco;
         this.membro = membro;
-        this.turma = turma;
-        /*this.administrador = administrador; */
-        this.sala = sala;
+        this.turmas = turma;
+        this.administrador = administrador;
+        this.salas = salas;
 
     }
 
@@ -121,18 +127,19 @@ public class Unidade {
         this.email = email;
     }
 
-    /*public Instrutor getInstrutor(){
-     return instrutor;
-     }
-      public void setInstrutor(Instrutor instrutor){
-     this.instrutor = instrutor;
-     }
-    */
-    public List<Plano> getPlano(){
-        return plano;
+    public List<Instrutor> getInstrutores() {
+        return instrutores;
     }
-    public void setPlano(List<Plano> plano){
-        this.plano = plano;
+
+    public void setInstrutores(List<Instrutor> instrutores) {
+        this.instrutores = instrutores;
+    }
+
+    public List<Plano> getPlanos(){
+        return planos;
+    }
+    public void setPlanos(List<Plano> planos){
+        this.planos = planos;
     }
 
     public Endereco getEndereco(){
@@ -152,15 +159,16 @@ public class Unidade {
     public Membro getMembro(){
         return membro;
     }
-    public void seMembro(Membro membro){
+    public void setMembro(Membro membro){
         this.membro = membro;
     }
 
-    public Turma getTurma(){
-        return turma;
+    public List<Turma> getTurmas() {
+        return turmas;
     }
-    public void settTurma(Turma turma){
-        this.turma = turma;
+
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
     }
 
     public Administrador getAdministrador(){
@@ -171,10 +179,10 @@ public class Unidade {
      }
 
      public List<Sala> getSala(){
-        return sala;
+        return salas;
      }
-     public void setSala(List<Sala> sala){
-        this.sala = sala;
+     public void setSala(List<Sala> salas){
+        this.salas = salas;
      }
 
     @Override
@@ -184,15 +192,15 @@ public class Unidade {
                 ", cnpj='" + cnpj + '\'' +
                 ", contato='" + contato + '\'' +
                 ", horarioDeFuncionamento='" + horarioDeFuncionamento + '\'' +
-                ", email='" + email + '\'' +/*
-                ", instrutor=" + instrutor + */
-                ", plano=" + plano +
+                ", email='" + email + '\'' +
+                ", instrutor=" + instrutores +
+                ", plano=" + planos +
                 ", segmentos=" + segmento +
                 ", endereco=" + endereco +
                 ", membros=" + membro +
-                ", turmas=" + turma +/* 
-                ", administrador=" + administrador +*/
-                ", salas=" + sala +
+                ", turmas=" + turmas +
+                ", administrador=" + administrador +
+                ", salas=" + salas +
                 "id=" + id +
                 '}';
     }
@@ -200,26 +208,25 @@ public class Unidade {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Unidade unidade)) return false;
-        return Objects.equals(getId(), unidade.getId()) &&
-               Objects.equals(getNome(), unidade.getNome()) &&
-               Objects.equals(getCnpj(), unidade.getCnpj()) &&
-               Objects.equals(getContato(), unidade.getContato()) &&
-               Objects.equals(getHorarioDeFuncionamento(), unidade.getHorarioDeFuncionamento()) &&
-               Objects.equals(getEmail(), unidade.getEmail()) &&
-               /*Onjects.equals(getInstrutor(), unidade.getInstrutor()) && */
-               Objects.equals(getPlano(), unidade.getPlano()) &&
-               Objects.equals(getSegmento(), unidade.getSegmento()) &&
-               Objects.equals(getEndereco(), unidade.getEndereco()) &&
-               Objects.equals(getMembro(), unidade.getMembro()) &&
-               Objects.equals(getTurma(), unidade.getTurma()) &&
-               /*Objects.equals(getAdministrador(), unidade.getAdministrador()) && */
-               Objects.equals(getSala(), unidade.getSala());
+        if (!(o instanceof Unidade)) return false;
+        Unidade unidade = (Unidade) o;
+        return id == unidade.id &&
+                Objects.equals(nome, unidade.nome) &&
+                Objects.equals(cnpj, unidade.cnpj) &&
+                Objects.equals(contato, unidade.contato) &&
+                Objects.equals(horarioDeFuncionamento, unidade.horarioDeFuncionamento) &&
+                Objects.equals(email, unidade.email) &&
+                Objects.equals(instrutores, unidade.instrutores) &&
+                Objects.equals(planos, unidade.planos) &&
+                Objects.equals(segmento, unidade.segmento) &&
+                Objects.equals(endereco, unidade.endereco) &&
+                Objects.equals(turmas, unidade.turmas) &&
+                Objects.equals(salas, unidade.salas);
     }
     
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getNome(), getCnpj(), getContato(), getHorarioDeFuncionamento(), getEmail(),/*getInstrutor(), */ getPlano(), getSegmento(), getEndereco(), getMembro(), getTurma(),/*getAdministrador(), */ getSala());
+        return Objects.hash(id, nome, cnpj, contato, horarioDeFuncionamento, email, instrutores, planos, segmento, endereco, turmas, salas);
     }
 }
