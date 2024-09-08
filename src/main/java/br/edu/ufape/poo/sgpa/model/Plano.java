@@ -10,7 +10,7 @@ public class Plano {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name="valor")
     private double valor;
@@ -36,10 +36,10 @@ public class Plano {
         this.unidade = unidade;
     }
 
-    public Long getId(){
+    public long getId(){
         return id;
     }
-    public void setId(Long id){
+    public void setId(long id){
         this.id = id;
     }
 
