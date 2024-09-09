@@ -11,6 +11,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -25,6 +26,7 @@ public class Turma {
     private long id;
 	
 	@ManyToOne
+	@JoinColumn(name = "instrutor_id")
 	private Instrutor instrutor;
 	
 	@OneToMany(mappedBy = "turma")
@@ -34,9 +36,11 @@ public class Turma {
 	private Modalidade modalidade;
 	
 	@ManyToOne
+	@JoinColumn(name = "sala_id")
 	private Sala sala;
 	
 	@OneToOne
+	@JoinColumn(name = "vagas_id")
 	private Vagas vagas;
 	
 	public Turma() {
