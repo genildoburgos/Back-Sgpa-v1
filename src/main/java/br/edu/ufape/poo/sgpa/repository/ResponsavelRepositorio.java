@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface ResponsavelRepositorio extends JpaRepository<Responsavel, Long> {
+
 /*
     List<Responsavel> findByNomeIgnoreCaseOrderByNome(String nome); // busca por nome e retorna uma lista de responsaveis ordenada por nome
 
@@ -24,4 +25,5 @@ public interface ResponsavelRepositorio extends JpaRepository<Responsavel, Long>
 
     List<Responsavel> findByNomeIgnoreCaseAndParentescoIgnoreCase(String nome, String parentesco); //busca por nome e parentesco
 */
+
 }
