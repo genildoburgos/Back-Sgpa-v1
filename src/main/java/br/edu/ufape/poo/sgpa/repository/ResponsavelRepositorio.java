@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface RepositorioResponsavel extends JpaRepository<Responsavel, Long> {
-
+public interface ResponsavelRepositorio extends JpaRepository<Responsavel, Long> {
+/*
     List<Responsavel> findByNomeIgnoreCaseOrderByNome(String nome); // busca por nome e retorna uma lista de responsaveis ordenada por nome
 
     List<Responsavel> findByNomeContainingIgnoreCaseOrderByNome(String infixo); // busca por uma parte do nome e retorna uma lista
@@ -23,5 +23,5 @@ public interface RepositorioResponsavel extends JpaRepository<Responsavel, Long>
     Optional<Responsavel> findByTelefone(String telefone); //busca por telefone
 
     List<Responsavel> findByNomeIgnoreCaseAndParentescoIgnoreCase(String nome, String parentesco); //busca por nome e parentesco
-
+*/
 }
