@@ -10,30 +10,36 @@ public class Plano {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name="valor")
     private double valor;
-    @Column(name="dataDeVencimento")
+    @Column(name="data_de_vencimento")
     private String dataDeVencimento;
 
     @Enumerated(EnumType.STRING)
+    @JoinColumn(name="peridiocidade_id")
     private Periodicidade periodicidade;
+
+    @ManyToOne
+    @JoinColumn(name="unidade_id")
+    private Unidade unidade;
 
     public Plano(){
 
     }
 
-    public Plano(double valor, String dataDeVencimento, Periodicidade periodicidade){
+    public Plano(double valor, String dataDeVencimento, Periodicidade periodicidade, Unidade unidade){
         this.valor = valor;
         this.dataDeVencimento = dataDeVencimento;
         this.periodicidade = periodicidade;
+        this.unidade = unidade;
     }
 
-    public Long getId(){
+    public long getId(){
         return id;
     }
-    public void setId(Long id){
+    public void setId(long id){
         this.id = id;
     }
 
@@ -58,12 +64,20 @@ public class Plano {
         this.periodicidade = periodicidade;
     }
 
+    public Unidade getUnidade(){
+        return unidade;
+    }
+    public void setUnidade(Unidade unidade){
+        this.unidade = unidade;
+    }
+
     @Override
     public String toString(){
         return "Plano{"+
                 "valor=" + valor +
                 ", dataDeVencimento='" + dataDeVencimento + '\'' +
                 ", periodicidade=" + periodicidade +
+                ", unidade=" + unidade +
                 ", id=" + id +
                 '}';
     }
@@ -75,11 +89,12 @@ public class Plano {
         return Double.compare(plano.getValor(), getValor()) == 0 &&
                 Objects.equals(getId(), plano.getId()) &&
                 Objects.equals(getDataDeVencimento(), plano.getDataDeVencimento()) &&
+                Objects.equals(getUnidade(), plano.getUnidade()) &&
                 getPeriodicidade() == plano.getPeriodicidade();
     }
 
     @Override
     public int hashCode(){
-        return Objects.hash(getId(), getValor(), getDataDeVencimento(), getPeriodicidade());
+        return Objects.hash(getId(), getValor(), getDataDeVencimento(), getPeriodicidade(), getUnidade());
     }
 }

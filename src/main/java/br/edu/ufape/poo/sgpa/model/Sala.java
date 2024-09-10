@@ -1,5 +1,7 @@
 package br.edu.ufape.poo.sgpa.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -7,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,8 +28,8 @@ public class Sala {
 	@Column(name="capacidade")
 	private int capacidade;
 	
-	//@OneToMany(mappedBy = "sala")
-	//private List<SlotHorario> slotsHorario;
+	@OneToMany
+	private List<SlotHorario> slotsHorario;
 	
 	public Sala() {
 	}
@@ -35,19 +38,14 @@ public class Sala {
 		this.bloco = bloco;
 		this.numero = numero;
 		this.capacidade = capacidade;
-		//this.slotsHorario = new ArrayList<>();
+		this.slotsHorario = new ArrayList<>();
 	}
-	
+
 	@Override
-    public String toString() {
-        return "Sala{" +
-                "id=" + id +
-                ", bloco='" + bloco + '\'' +
-                ", numero='" + numero + '\'' +
-                ", capacidade=" + capacidade +
-                //", slotsHorario=" + slotsHorario.toString()
-                '}';
-    }
+	public String toString() {
+		return "Sala [id=" + id + ", bloco=" + bloco + ", numero=" + numero + ", capacidade=" + capacidade
+				+ ", slotsHorario=" + slotsHorario + "]";
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -59,12 +57,12 @@ public class Sala {
 			return false;
 		Sala other = (Sala) obj;
 		return Objects.equals(bloco, other.bloco) && capacidade == other.capacidade && id == other.id
-				&& Objects.equals(numero, other.numero);
+				&& Objects.equals(numero, other.numero) && Objects.equals(slotsHorario, other.slotsHorario);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(bloco, capacidade, id, numero);
+		return Objects.hash(bloco, capacidade, id, numero, slotsHorario);
 	}
 	 
 	public long getId() {
@@ -95,7 +93,7 @@ public class Sala {
 		this.capacidade = capacidade;
 	}
 	
-	public void reservarSala() {
-		//this.slotsHorario.add(slotHorario);
+	public void reservarSala(SlotHorario slotHorario) {
+		this.slotsHorario.add(slotHorario);
 	}
 }

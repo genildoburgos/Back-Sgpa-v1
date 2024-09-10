@@ -27,11 +27,13 @@ public class Membro extends Pessoa {
     @JoinColumn(name = "responsavel_id")
     private Responsavel responsavel;
 
-//    Quando for implementado a classe turma no sistema, atualizar:
-//    @ManyToMany
-//    @JoinColumn(name = "turma_id")
-//    private Turma turma;
-
+    @ManyToMany
+    @JoinTable(
+            name = "membro_turma",
+            joinColumns = @JoinColumn(name = "membro_id"),
+            inverseJoinColumns = @JoinColumn(name = "turma_id")
+    )
+    private List<Turma> turmas;
 
     public Membro(List<Matricula> matricula, String numeroDeMatricula, Responsavel responsavel, StatusDePagamento statusDePagamento) {
         this.matricula = matricula;
@@ -84,16 +86,25 @@ public class Membro extends Pessoa {
         this.statusDePagamento = statusDePagamento;
     }
 
+    public List<Turma> getTurmas() {
+        return turmas;
+    }
+
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Membro membro)) return false;
-        return Objects.equals(getNumeroDeMatricula(), membro.getNumeroDeMatricula()) && getStatusDePagamento() == membro.getStatusDePagamento() && Objects.equals(getMatricula(), membro.getMatricula()) && Objects.equals(getResponsavel(), membro.getResponsavel());
+        if (!super.equals(o)) return false;
+        return Objects.equals(getNumeroDeMatricula(), membro.getNumeroDeMatricula()) && getStatusDePagamento() == membro.getStatusDePagamento() && Objects.equals(getMatricula(), membro.getMatricula()) && Objects.equals(getResponsavel(), membro.getResponsavel()) && Objects.equals(getTurmas(), membro.getTurmas());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getNumeroDeMatricula(), getStatusDePagamento(), getMatricula(), getResponsavel());
+        return Objects.hash(super.hashCode(), getNumeroDeMatricula(), getStatusDePagamento(), getMatricula(), getResponsavel(), getTurmas());
     }
 
     @Override
@@ -103,6 +114,8 @@ public class Membro extends Pessoa {
                 ", numeroDeMatricula='" + numeroDeMatricula + '\'' +
                 ", statusDePagamento=" + statusDePagamento +
                 ", responsavel=" + responsavel +
+                ", turmas=" + turmas +
                 '}';
     }
+
 }

@@ -9,7 +9,7 @@ public class Endereco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name="rua")
     private String rua;
@@ -27,6 +27,7 @@ public class Endereco {
     private String cep;
 
     @OneToOne(mappedBy = "endereco")
+    @JoinColumn(name="pessoa_id")
     private Pessoa pessoa;
 
     // Construtor padrão
@@ -46,11 +47,11 @@ public class Endereco {
     }
 
     // Getters e Setters
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
