@@ -10,6 +10,8 @@ public class Responsavel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(name="nome")
+    private String nome;
     @Column(name="parentesco")
     private String parentesco;
     @Column(name="telefone")
@@ -18,7 +20,8 @@ public class Responsavel {
     public Responsavel() {
     }
 
-    public Responsavel(String parentesco, String telefone) {
+    public Responsavel(String nome, String parentesco, String telefone) {
+        this.nome = nome;
         this.parentesco = parentesco;
         this.telefone = telefone;
     }
@@ -47,10 +50,19 @@ public class Responsavel {
         this.id = id;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     @Override
     public String toString() {
         return "Responsavel{" +
                 "id=" + id +
+                ", nome='" + nome + '\'' +
                 ", parentesco='" + parentesco + '\'' +
                 ", telefone='" + telefone + '\'' +
                 '}';
@@ -60,11 +72,11 @@ public class Responsavel {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Responsavel that)) return false;
-        return getId() == that.getId() && Objects.equals(getParentesco(), that.getParentesco()) && Objects.equals(getTelefone(), that.getTelefone());
+        return getId() == that.getId() && Objects.equals(getNome(), that.getNome()) && Objects.equals(getParentesco(), that.getParentesco()) && Objects.equals(getTelefone(), that.getTelefone());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getParentesco(), getTelefone());
+        return Objects.hash(getId(), getNome(), getParentesco(), getTelefone());
     }
 }
