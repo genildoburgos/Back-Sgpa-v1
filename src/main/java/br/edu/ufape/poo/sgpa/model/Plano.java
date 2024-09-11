@@ -2,6 +2,7 @@ package br.edu.ufape.poo.sgpa.model;
 
 import br.edu.ufape.poo.sgpa.model.enums.Periodicidade;
 import jakarta.persistence.*;
+
 import java.util.Objects;
 
 @Entity
@@ -24,7 +25,7 @@ public class Plano {
     @ManyToOne
     @JoinColumn(name="unidade_id")
     private Unidade unidade;
-
+    
     public Plano(){
 
     }
