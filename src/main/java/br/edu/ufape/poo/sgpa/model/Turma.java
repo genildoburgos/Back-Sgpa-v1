@@ -41,22 +41,22 @@ public class Turma {
 	
 	@OneToOne
 	@JoinColumn(name = "vagas_id")
-	private Vagas vagas;
+	private Vaga vaga;
 	
 	public Turma() {
 		this.matriculas = new ArrayList<>();
 	}
 	
-	public Turma(Instrutor instrutor, Sala sala, Vagas vagas, Modalidade modalidade) {
+	public Turma(Instrutor instrutor, Sala sala, Vaga vagas, Modalidade modalidade) {
 		this.instrutor = instrutor;
 		this.modalidade = modalidade;
 		this.sala = sala;
-		this.vagas = vagas;
+		this.vaga = vagas;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(getId(), getInstrutor(), getMatriculas(), getModalidade(), getSala(), getVagas());
+		return Objects.hash(getId(), getInstrutor(), getMatriculas(), getModalidade(), getSala(), getVaga());
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class Turma {
 				", matriculas=" + matriculas +
 				", modalidade=" + modalidade +
 				", sala=" + sala +
-				", vagas=" + vagas +
+				", vagas=" + vaga +
 				'}';
 	}
 
@@ -81,7 +81,7 @@ public class Turma {
 			return false;
 		Turma other = (Turma) obj;
 		return id == other.id && 
-				modalidade == other.modalidade && Objects.equals(sala, other.sala) && Objects.equals(vagas, other.vagas)
+				modalidade == other.modalidade && Objects.equals(sala, other.sala) && Objects.equals(vaga, other.vaga)
 				&& Objects.equals(instrutor, other.instrutor);
 	}
 	
@@ -121,11 +121,11 @@ public class Turma {
 		this.sala = sala;
 	}
 
-	public Vagas getVagas() {
-		return vagas;
+	public Vaga getVaga() {
+		return vaga;
 	}
 
-	public void setVagas(Vagas vagas) {
-		this.vagas = vagas;
+	public void setVaga(Vaga vagas) {
+		this.vaga = vagas;
 	}
 }

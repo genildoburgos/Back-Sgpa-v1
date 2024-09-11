@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table ( name = "vagas", schema = "academia")
-public class Vagas {
+@Table(name = "vaga", schema = "academia")
+public class Vaga {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -15,12 +15,12 @@ public class Vagas {
     @Column(name="quantidade")
     private int quantidade;
 
-    public Vagas(int capacidade, int quantidade) {
+    public Vaga(int capacidade, int quantidade) {
         this.capacidade = capacidade;
         this.quantidade = quantidade;
     }
 
-    public Vagas() {
+    public Vaga() {
 
     }
 
@@ -57,16 +57,16 @@ public class Vagas {
                 '}';
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Vagas vagas)) return false;
-        return getId() == vagas.getId() && getCapacidade() == vagas.getCapacidade() && getQuantidade() == vagas.getQuantidade();
+        if (!(o instanceof Vaga vaga)) return false;
+        return getId() == vaga.getId() && getCapacidade() == vaga.getCapacidade() && getQuantidade() == vaga.getQuantidade();
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getCapacidade(), getQuantidade());
     }
-
 }
