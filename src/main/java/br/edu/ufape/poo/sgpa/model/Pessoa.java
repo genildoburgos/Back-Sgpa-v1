@@ -16,7 +16,7 @@ public class Pessoa {
     private String sexo;
     @Column(name="data_de_nascimento")
     private LocalDate dataDeNascimento;
-    @Column(name="telefome")
+    @Column(name="telefone")
     private String telefone;
     @Column(name="contato_de_emergencia")
     private String contatoDeEmergencia;
