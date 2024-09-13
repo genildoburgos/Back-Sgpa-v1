@@ -8,7 +8,7 @@ import br.edu.ufape.poo.sgpa.model.Membro;
 
 public interface MembroRepository extends JpaRepository<Membro, Long>{
 	
-	public void deleteByCpf(String cpf);
+	void deleteByCpf(String cpf);
     Optional<Membro> findByCpfOrderByNome(String cpf);
     Optional<Membro> findByNumeroDeMatriculaOrderByNome(String numeroDeMatricula);
     List<Membro> findByNomeContainingIgnoreCaseOrderByNome(String nome);
