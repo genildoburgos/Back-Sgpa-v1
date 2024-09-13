@@ -5,16 +5,12 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name="responsavel", schema="academia")
 public class Responsavel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name="nome")
     private String nome;
-    @Column(name="parentesco")
     private String parentesco;
-    @Column(name="telefone")
     private String telefone;
 
     public Responsavel() {

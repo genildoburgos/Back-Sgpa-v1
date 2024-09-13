@@ -6,24 +6,19 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name="planos", schema ="academia")
 public class Plano {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name="valor")
     private double valor;
-    @Column(name="data_de_vencimento")
     private String dataDeVencimento;
 
     @Enumerated(EnumType.STRING)
-    @JoinColumn(name="peridiocidade_id")
     private Periodicidade periodicidade;
 
     @ManyToOne
-    @JoinColumn(name="unidade_id")
     private Unidade unidade;
     
     public Plano(){

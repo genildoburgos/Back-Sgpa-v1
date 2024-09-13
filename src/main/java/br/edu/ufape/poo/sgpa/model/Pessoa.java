@@ -6,25 +6,16 @@ import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table (name="pessoa", schema = "academia" )
 public class Pessoa {
-    @Column(name="nome")
 	private String nome;
-    @Column(name="cpf")
     private String cpf;
-    @Column(name="sexo")
     private String sexo;
-    @Column(name="data_de_nascimento")
     private LocalDate dataDeNascimento;
-    @Column(name="telefone")
     private String telefone;
-    @Column(name="contato_de_emergencia")
     private String contatoDeEmergencia;
-    @Column(name="email")
     private String email;
 
     @OneToOne
-    @JoinColumn(name="endereco_id")
     private Endereco endereco;
 
     @Id

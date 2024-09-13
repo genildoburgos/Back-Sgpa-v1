@@ -9,30 +9,20 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table ( name = "membro", schema = "academia")
 public class Membro extends Pessoa {
 
-    @Column(name = "numero_de_matricula")
     private String numeroDeMatricula;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="status_de_pagamento")
     private StatusDePagamento statusDePagamento;
 
     @OneToMany
-    @Column(name = "matricula_id")
     private List<Matricula> matricula;
 
     @OneToOne
-    @JoinColumn(name = "responsavel_id")
     private Responsavel responsavel;
 
     @ManyToMany
-    @JoinTable(
-            name = "membro_turma",
-            joinColumns = @JoinColumn(name = "membro_id"),
-            inverseJoinColumns = @JoinColumn(name = "turma_id")
-    )
     private List<Turma> turmas;
 
     public Membro(List<Matricula> matricula, String numeroDeMatricula, Responsavel responsavel, StatusDePagamento statusDePagamento) {

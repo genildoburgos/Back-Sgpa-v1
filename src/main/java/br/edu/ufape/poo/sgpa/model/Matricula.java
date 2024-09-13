@@ -16,17 +16,13 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "matricula", schema = "academia")
 public class Matricula {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-	@Column(name="data_de_matricula")
 	private LocalDate dataDeMatricula;
-	
-	@Column(name="data_de_expiracao")
 	private LocalDate dataDeExpiracao;
 	
 	@Enumerated(EnumType.STRING)
@@ -36,7 +32,6 @@ public class Matricula {
     private Membro membro;
 	
 	@ManyToOne
-	@JoinColumn(name = "turma_id")
 	private Turma turma; 
 	
 	public Matricula() {	

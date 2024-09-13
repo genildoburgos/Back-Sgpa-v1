@@ -9,40 +9,20 @@ import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table (name="instrutor", schema = "academia" )
 public class Instrutor extends Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name="clt")
     private String clt;
 
     @ManyToMany
-    @JoinTable(
-            name = "instrutor_horariosdetrabalho", // Nome da tabela de junção
-            joinColumns = @JoinColumn(name = "instrutor_id"), // Chave estrangeira da tabela Instrutor
-            inverseJoinColumns = @JoinColumn(name = "horariosdetrabalho_id"), // Chave estrangeira da tabela Modalidade
-            schema = "academia"
-    )
     private List<SlotHorario> horariosDeTrabalho;
 
 
     @ElementCollection(targetClass = Modalidade.class) // Indica que é uma coleção de elementos simples
     @Enumerated(EnumType.STRING) // Armazena como String no banco de dados
-    @CollectionTable(
-            name = "instrutor_modalidades", // Nome da tabela que vai armazenar as modalidades
-            joinColumns = @JoinColumn(name = "instrutor_id"), // Referência ao instrutor
-            schema = "academia"
-    )
-    @Column(name = "modalidade") // Nome da coluna que vai armazenar cada modalidade
     private List<Modalidade> modalidades;
     @ManyToMany
-    @JoinTable(
-            name = "instrutor_unidade",
-            joinColumns = @JoinColumn(name = "instrutor_id"),
-            inverseJoinColumns = @JoinColumn(name = "unidade_id"),
-            schema = "academia"
-    )
     private List<Unidade> unidades;
 
 

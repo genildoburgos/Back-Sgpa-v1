@@ -26,7 +26,6 @@ public class Turma {
     private long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "instrutor_id")
 	private Instrutor instrutor;
 	
 	@OneToMany(mappedBy = "turma")
@@ -36,11 +35,9 @@ public class Turma {
 	private Modalidade modalidade;
 	
 	@ManyToOne
-	@JoinColumn(name = "sala_id")
 	private Sala sala;
 	
 	@OneToOne
-	@JoinColumn(name = "vagas_id")
 	private Vaga vaga;
 	
 	public Turma() {

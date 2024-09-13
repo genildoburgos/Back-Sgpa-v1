@@ -9,11 +9,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table (name = "administrador", schema = "academia")
 public class Administrador extends Pessoa {
 
     @ManyToOne
-    @JoinColumn(name = "unidade_id")
     private Unidade unidade;
 
     public Administrador(){

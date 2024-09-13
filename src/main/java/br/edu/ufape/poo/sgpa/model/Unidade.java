@@ -7,7 +7,6 @@ import br.edu.ufape.poo.sgpa.model.enums.Segmento;
 
 
 @Entity
-@Table( name="unidade", schema="academia")
 public class Unidade {
 
     @Id
@@ -26,39 +25,25 @@ public class Unidade {
     private String email;
 
     @ManyToMany
-    @JoinTable(
-            name = "unidade_instrutor",
-            joinColumns = @JoinColumn(name = "unidade_id"),
-            inverseJoinColumns = @JoinColumn(name = "instrutor_id")
-    )
     private List<Instrutor> instrutores;
 
     @OneToMany
     private List<Plano> planos;
 
-    @JoinColumn(name ="segmento")
     @Enumerated(EnumType.STRING)
     private Segmento segmento;
 
     @OneToOne
-    @JoinColumn(name="endereco_id")
     private Endereco endereco;
 
     @ManyToOne
-    @JoinColumn(name="membro_id")
     private Membro membro;
 
     
     @ManyToOne
-    @JoinColumn(name="administrador_id")
     private Administrador administrador;
 
     @ManyToMany
-    @JoinTable(
-            name = "unidade_turma",
-            joinColumns = @JoinColumn(name = "unidade_id"),
-            inverseJoinColumns = @JoinColumn(name = "turma_id")
-    )
     private List<Turma> turmas;
 
     @OneToMany
@@ -174,7 +159,7 @@ public class Unidade {
     public Administrador getAdministrador(){
       return administrador;
     }
-     public void setAdministrador(Administrador administrador){
+    public void setAdministrador(Administrador administrador){
      this.administrador = administrador;
      }
 

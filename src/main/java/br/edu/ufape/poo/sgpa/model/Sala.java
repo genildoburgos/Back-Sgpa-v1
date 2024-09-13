@@ -13,19 +13,15 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table ( name = "sala", schema = "academia")
 public class Sala {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-	
-	@Column(name="bloco")
+
 	private String bloco;
-	
-	@Column(name="numero")
+
 	private String numero;
-	
-	@Column(name="capacidade")
+
 	private int capacidade;
 	
 	@OneToMany

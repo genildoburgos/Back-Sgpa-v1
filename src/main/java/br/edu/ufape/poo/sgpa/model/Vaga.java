@@ -5,14 +5,11 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "vaga", schema = "academia")
 public class Vaga {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name="capacidade")
     private int capacidade;
-    @Column(name="quantidade")
     private int quantidade;
 
     public Vaga(int capacidade, int quantidade) {

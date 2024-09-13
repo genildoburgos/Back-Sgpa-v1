@@ -11,12 +11,9 @@ public class SlotHorario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name="horarioinicial")
     private LocalTime horarioInicial;
-    @Column(name="horariofinal")
     private LocalTime horarioFinal;
     @Enumerated(EnumType.STRING)
-    @Column(name = "diadasemana")
     private DiaDaSemana DiaDaSemana;
 
     public SlotHorario() {
