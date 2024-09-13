@@ -3,6 +3,7 @@ package br.edu.ufape.poo.sgpa.controller;
 import br.edu.ufape.poo.sgpa.controller.dto.request.VagaRequest;
 import br.edu.ufape.poo.sgpa.controller.dto.response.VagaResponse;
 import br.edu.ufape.poo.sgpa.facade.Facade;
+import br.edu.ufape.poo.sgpa.model.Vaga;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,8 @@ public class VagaController {
     @ResponseStatus(HttpStatus.CREATED)
     public VagaResponse criarVaga(@RequestBody VagaRequest novoObj){
         try{
-            return new VagaResponse(facade.criarVaga(novoObj));
+            Vaga vaga = novoObj.toVaga();
+            return new VagaResponse(facade.criarVaga(vaga));
         } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Dados invalidos para criar uma vaga", e);
         }
@@ -62,7 +64,8 @@ public class VagaController {
     @PutMapping("atualizar/{id}")
     public VagaResponse atualizarVaga(@PathVariable Long id, @RequestBody VagaRequest vagaAtualizada){
         try{
-            return new VagaResponse(facade.atualizarVaga(id, vagaAtualizada));
+            Vaga vagaAtual = vagaAtualizada.toVaga();
+            return new VagaResponse(facade.atualizarVaga(id, vagaAtual));
         }catch (EntityNotFoundException e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "vaga não encotrada com o id "+ id, e);
         } catch (IllegalArgumentException e) {
