@@ -21,17 +21,17 @@ public interface InstrutorRepository extends JpaRepository<Instrutor, Long> {
 
     Optional<Instrutor> findByClt(String clt);
 
-    Optional<Instrutor> findByNomeIgnoreCaseOrderByNome(String nome);
+    Optional<Instrutor> findByNomeIgnoreCaseOrderByNome(String nome);*/
     List<Instrutor> findByNomeContainsIgnoreCaseOrderByNome(String nome);
-
+/*
     Optional<Instrutor> findByEmail(String email);
 
     List<Instrutor> findBySexoOrderByNome(String sexo);
 
     Optional<Instrutor> findByTelefone(String telefone);
-
+    */
     Optional<Instrutor> findByCpf(String cpf);
-
+/*
     // Encontra instrutores disponíveis um dia da semana
     List<Instrutor> findByHorariosDeTrabalho_DiaDaSemana(DiaDaSemana diaDaSemana);
 
