@@ -1,53 +1,66 @@
 package br.edu.ufape.poo.sgpa.service;
 
 import br.edu.ufape.poo.sgpa.model.Plano;
+import br.edu.ufape.poo.sgpa.repository.PlanoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @Service
-public class PlanoService {
+public class PlanoService implements PlanoServiceInterface {
 
     @Autowired
     private PlanoRepository repository;
 
+    @Override
     public List<Plano> listarPlanos(){
         return repository.findAll();
     }
 
+    @Override
     public Plano criarPlano(Plano novoObj){
-        return repository.save(novoObj);
+        validaPlano(novoObj);
+        try{
+            return repository.save(novoObj);
+        } catch (IllegalArgumentException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Dados invalidos para criar um plano", e);
+        }
     }
 
-    public Plano buscarPlano(Long id){
-        return repository.findById(id).orElseThrow(()-> new RuntimeException("Plano com o id informado não encontrado"));
+    @Override
+    public Plano buscarPlano(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Plano com o id informado não encontrado"));
     }
 
+    @Override
     public void deletarPlano(Long id){
         buscarPlano(id);
         repository.deleteById(id);
     }
 
-    public Plano atualizarPlano(Long id, Plano novoObj){
-        Plano planoAntigo = buscarPlano(id);
-
-        if(novoObj.getDataDeVencimento() != null){
-            planoAntigo.setDataDeVencimento(novoObj.getDataDeVencimento());
+    @Override
+    public Plano atualizarPlano(Plano plano, Long id){
+        if(plano == null){
+            throw new IllegalArgumentException("plano não pode ser null.");
         }
 
-        if(novoObj.getPeriodicidade() != null){
-            planoAntigo.setPeriodicidade(novoObj.getPeriodicidade());
-        }
+        Plano entity = buscarPlano(id);
+        validaPlano(plano);
 
-        if(novoObj.getUnidade() != null){
-            planoAntigo.setUnidade(novoObj.getUnidade());
-        }
-        if(novoObj.getValor() != 0.0){
-            planoAntigo.setValor(novoObj.getValor());
-        }
+        entity.setValor(plano.getValor());
+        entity.setUnidade(plano.getUnidade());
+        entity.setPeriodicidade(plano.getPeriodicidade());
+        entity.setDataDeVencimento(plano.getDataDeVencimento());
 
-        return repository.save(planoAntigo);
+        try{
+            return repository.save(entity);
+        } catch (IllegalArgumentException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Dados inválidos para atualizar o plano", e);
+        }
     }
 
 }

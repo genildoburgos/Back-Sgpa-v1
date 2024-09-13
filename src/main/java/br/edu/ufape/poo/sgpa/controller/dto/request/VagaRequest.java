@@ -29,9 +29,7 @@ public class VagaRequest {
         // Supondo que Vaga tenha os mesmos atributos de VagaRequest
         vaga.setCapacidade(this.capacidade);
         vaga.setQuantidade(this.quantidade);
-        // Se necessário, setar o id também (se estiver sendo utilizado)
-        
-        return vaga;
 
+        return vaga;
     }
 }

@@ -33,5 +33,5 @@ public class Facade {
     public Vaga buscarVagaPorId(Long id){return vagaService.buscarVagaPorId(id);}
 
     // Atulizar vaga
-    public Vaga atualizarVaga(Long id, Vaga obj) {return vagaService.atualizarVaga(id, obj);}
+    public Vaga atualizarVaga(Vaga obj, Long id) {return vagaService.atualizarVaga(obj, id);}
 }

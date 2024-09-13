@@ -32,44 +32,22 @@ public class VagaController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public VagaResponse criarVaga(@RequestBody VagaRequest novoObj){
-        try{
-            Vaga vaga = novoObj.toVaga();
-            return new VagaResponse(facade.criarVaga(vaga));
-        } catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Dados invalidos para criar uma vaga", e);
-        }
+        return new VagaResponse(facade.criarVaga(novoObj.toVaga()));
     }
 
     @GetMapping("buscar/{id}")
     public VagaResponse buscarPorId(@PathVariable Long id) {
-        try{
-            return new VagaResponse(facade.buscarVagaPorId(id));
-        } catch (EntityNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Vaga não encontrada com o id " + id, e);
-        }
+        return new VagaResponse(facade.buscarVagaPorId(id));
     }
 
     @DeleteMapping("deletar/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarVaga(@PathVariable Long id){
-        try{
-            facade.deletarVaga(id);
-        } catch (EntityNotFoundException e){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Vaga não encontrada com o id " + id, e);
-        }catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao deletar a vaga", e);
-        }
+        facade.deletarVaga(id);
     }
 
     @PutMapping("atualizar/{id}")
-    public VagaResponse atualizarVaga(@PathVariable Long id, @RequestBody VagaRequest vagaAtualizada){
-        try{
-            Vaga vagaAtual = vagaAtualizada.toVaga();
-            return new VagaResponse(facade.atualizarVaga(id, vagaAtual));
-        }catch (EntityNotFoundException e){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "vaga não encotrada com o id "+ id, e);
-        } catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Dados invalidos para atualizar a vaga", e);
-        }
+    public VagaResponse atualizarVaga(@RequestBody VagaRequest vagaAtualizada, @PathVariable Long id){
+        return new VagaResponse(facade.atualizarVaga(vagaAtualizada.toVaga(), id));
     }
 }
