@@ -30,8 +30,8 @@ public class Instrutor extends Pessoa {
         super();
     }
 
-    public Instrutor(String nome, String cpf, String sexo, LocalDate dataDeNascimento, String telefone, String contatoDeEmergencia, String email, List<Unidade> unidades, List<Modalidade> modalidades, List<SlotHorario> horariosDeTrabalho, String clt) {
-        super(nome, cpf, sexo, dataDeNascimento, telefone, contatoDeEmergencia, email);
+    public Instrutor(String nome, String cpf, String sexo, LocalDate dataDeNascimento, String telefone, String contatoDeEmergencia, String email, List<Unidade> unidades, List<Modalidade> modalidades, List<SlotHorario> horariosDeTrabalho, String clt, int idade) {
+        super(nome, cpf, sexo, dataDeNascimento, telefone, contatoDeEmergencia, email, idade);
         this.unidades = unidades;
         this.modalidades = modalidades;
         this.horariosDeTrabalho = horariosDeTrabalho;
@@ -39,7 +39,7 @@ public class Instrutor extends Pessoa {
     }
 
     public Instrutor(Pessoa pessoa, List<Unidade> unidades, List<Modalidade> modalidades, List<SlotHorario> horariosDeTrabalho, String clt) {
-        super(pessoa.getNome(), pessoa.getCpf(), pessoa.getSexo(), pessoa.getDataDeNascimento(), pessoa.getTelefone(), pessoa.getContatoDeEmergencia(), pessoa.getEmail());
+        super(pessoa.getNome(), pessoa.getCpf(), pessoa.getSexo(), pessoa.getDataDeNascimento(), pessoa.getTelefone(), pessoa.getContatoDeEmergencia(), pessoa.getEmail(), pessoa.getIdade());
         this.unidades = unidades;
         this.modalidades = modalidades;
         this.horariosDeTrabalho = horariosDeTrabalho;
