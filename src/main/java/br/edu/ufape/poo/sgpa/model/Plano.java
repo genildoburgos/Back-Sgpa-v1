@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class Plano {
+public class Plano implements IPlano {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -92,5 +92,10 @@ public class Plano {
     @Override
     public int hashCode(){
         return Objects.hash(getId(), getValor(), getDataDeVencimento(), getPeriodicidade(), getUnidade());
+    }
+
+    @Override
+    public Double calcularDesconto(int valor, int porcentagemDesconto) {
+        return (double) (valor * porcentagemDesconto);
     }
 }

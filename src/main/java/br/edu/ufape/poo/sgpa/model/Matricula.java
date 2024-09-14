@@ -4,19 +4,16 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import br.edu.ufape.poo.sgpa.model.enums.StatusDaMatricula;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
-public class Matricula {
+public class Matricula implements IMatricula {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,14 +42,17 @@ public class Matricula {
 		this.turma = turma;
 	}
 	
+	@Override
 	public void ativarMatricula() {
 		this.statusDaMatricula = StatusDaMatricula.ATIVA;
 	}
 	
+	@Override
 	public void suspenderMatricula() {
 		this.statusDaMatricula = StatusDaMatricula.SUSPENSA;
 	}
 	
+	@Override
 	public boolean estaExpirada() {
         return LocalDate.now().isAfter(this.dataDeExpiracao);
     }
