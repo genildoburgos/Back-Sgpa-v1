@@ -17,7 +17,7 @@ public class Membro extends Pessoa {
     private StatusDePagamento statusDePagamento;
 
     @OneToMany
-    private List<Matricula> matricula;
+    private List<Matricula> matriculas;
 
     @OneToOne
     private Responsavel responsavel;
@@ -26,15 +26,15 @@ public class Membro extends Pessoa {
     private List<Turma> turmas;
 
     public Membro(List<Matricula> matricula, String numeroDeMatricula, Responsavel responsavel, StatusDePagamento statusDePagamento) {
-        this.matricula = matricula;
+        this.matriculas = matricula;
         this.numeroDeMatricula = numeroDeMatricula;
         this.responsavel = responsavel;
         this.statusDePagamento = statusDePagamento;
     }
 
-    public Membro(String nome, String cpf, String sexo, LocalDate dataDeNascimento, String telefone, String contatoDeEmergencia, String email, List<Matricula> matricula, String numeroDeMatricula, Responsavel responsavel, StatusDePagamento statusDePagamento) {
-        super(nome, cpf, sexo, dataDeNascimento, telefone, contatoDeEmergencia, email);
-        this.matricula = matricula;
+    public Membro(String nome, String cpf, String sexo, LocalDate dataDeNascimento, String telefone, String contatoDeEmergencia, String email, List<Matricula> matricula, String numeroDeMatricula, Responsavel responsavel, StatusDePagamento statusDePagamento, int idade) {
+        super(nome, cpf, sexo, dataDeNascimento, telefone, contatoDeEmergencia, email, idade);
+        this.matriculas = matricula;
         this.numeroDeMatricula = numeroDeMatricula;
         this.responsavel = responsavel;
         this.statusDePagamento = statusDePagamento;
@@ -44,12 +44,12 @@ public class Membro extends Pessoa {
 
     }
 
-    public List<Matricula> getMatricula() {
-        return matricula;
+    public List<Matricula> getMatriculas() {
+        return matriculas;
     }
 
-    public void setMatricula(List<Matricula> matricula) {
-        this.matricula = matricula;
+    public void setMatriculas(List<Matricula> matricula) {
+        this.matriculas = matricula;
     }
 
     public String getNumeroDeMatricula() {
@@ -89,18 +89,18 @@ public class Membro extends Pessoa {
         if (this == o) return true;
         if (!(o instanceof Membro membro)) return false;
         if (!super.equals(o)) return false;
-        return Objects.equals(getNumeroDeMatricula(), membro.getNumeroDeMatricula()) && getStatusDePagamento() == membro.getStatusDePagamento() && Objects.equals(getMatricula(), membro.getMatricula()) && Objects.equals(getResponsavel(), membro.getResponsavel()) && Objects.equals(getTurmas(), membro.getTurmas());
+        return Objects.equals(getNumeroDeMatricula(), membro.getNumeroDeMatricula()) && getStatusDePagamento() == membro.getStatusDePagamento() && Objects.equals(getMatriculas(), membro.getMatriculas()) && Objects.equals(getResponsavel(), membro.getResponsavel()) && Objects.equals(getTurmas(), membro.getTurmas());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getNumeroDeMatricula(), getStatusDePagamento(), getMatricula(), getResponsavel(), getTurmas());
+        return Objects.hash(super.hashCode(), getNumeroDeMatricula(), getStatusDePagamento(), getMatriculas(), getResponsavel(), getTurmas());
     }
 
     @Override
     public String toString() {
         return "Membro{" +
-                "matricula=" + matricula +
+                "matricula=" + matriculas +
                 ", numeroDeMatricula='" + numeroDeMatricula + '\'' +
                 ", statusDePagamento=" + statusDePagamento +
                 ", responsavel=" + responsavel +

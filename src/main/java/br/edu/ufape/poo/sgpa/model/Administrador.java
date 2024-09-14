@@ -18,8 +18,8 @@ public class Administrador extends Pessoa {
 
     }
 
-    public Administrador(String nome, String cpf, String sexo, LocalDate dataDeNascimento, String telefone, String contatoDeEmergencia, String email, Unidade unidade) {
-        super(nome, cpf, sexo, dataDeNascimento, telefone, contatoDeEmergencia, email);
+    public Administrador(String nome, String cpf, String sexo, LocalDate dataDeNascimento, String telefone, String contatoDeEmergencia, String email, Unidade unidade, int idade) {
+        super(nome, cpf, sexo, dataDeNascimento, telefone, contatoDeEmergencia, email, idade);
         this.unidade = unidade;
     }
     public Unidade getUnidade(){
@@ -43,7 +43,8 @@ public class Administrador extends Pessoa {
            Objects.equals(getContatoDeEmergencia(), administrador.getContatoDeEmergencia()) &&
            Objects.equals(getEmail(), administrador.getEmail()) &&
            Objects.equals(getUnidade(), administrador.getUnidade()) &&
-           Objects.equals(getId(), administrador.getId());
+           Objects.equals(getId(), administrador.getId()) &&
+           Objects.equals(getIdade(), administrador.getIdade());
     }
 
     @Override
@@ -63,6 +64,7 @@ public class Administrador extends Pessoa {
                 ", email='" + getEmail() + '\'' +
                 ", unidade=" + unidade +
                 "id=" + getId() +
+                "idade=" + getIdade() +
                 '}';
 
                 }
