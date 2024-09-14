@@ -2,67 +2,78 @@ package br.edu.ufape.poo.sgpa.service;
 
 import br.edu.ufape.poo.sgpa.model.Administrador;
 import br.edu.ufape.poo.sgpa.repository.AdministradorRepository;
-import br.edu.ufape.poo.sgpa.controller.dto.request.AdministradorRequest;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
-
-
 @Service
-public class AdministradorService {
+public class AdministradorService implements AdministradorServiceInterface {
     @Autowired
     private AdministradorRepository repository;
 
-    public Administrador criarAdministrador(AdministradorRequest novaInstancia){
-        
-        Administrador administrador = new Administrador();
-        administrador.setNome(novaInstancia.getNome());
-        administrador.setCpf(novaInstancia.getCpf());
-        administrador.setSexo(novaInstancia.getSexo());
-        administrador.setDataDeNascimento(novaInstancia.getDataDeNascimento());
-        administrador.setTelefone(novaInstancia.getTelefone());
-        administrador.setContatoDeEmergencia(novaInstancia.getContatoDeEmergencia());
-        administrador.setEmail(novaInstancia.getEmail());
-        administrador.setUnidade(novaInstancia.getUnidade());
-        
-
-        return repository.save(administrador);
-    } 
-
+    @Override
     public List<Administrador> listarAdministradores() {
         return repository.findAll();
     }
-    
-    public void deletarAdministrador(Long id){
-        buscarAdministradorPorId(id);
-        repository.deleteById(id); 
+
+    @Override
+    public Administrador criarAdministrador(Administrador novaInstancia) {
+        validaAdministrador(novaInstancia);
+        try {
+            return repository.save(novaInstancia);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Dados inválidos para criar um administrador", e);
+        }
     }
 
-    public Administrador atualizarAdministrador(Long id, AdministradorRequest obj){
-        Administrador administradorAntigo = repository.findById(id).orElseThrow(() -> 
-        new EntityNotFoundException("Administrador não existe")
-    );
+    @Override
+    public Administrador buscarAdministradorPorId(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Administrador não encontrado com o id " + id));
+    }
 
-        administradorAntigo.setNome(obj.getNome());
-        administradorAntigo.setCpf(obj.getCpf());
-        administradorAntigo.setSexo(obj.getSexo());
-        administradorAntigo.setDataDeNascimento(obj.getDataDeNascimento());
-        administradorAntigo.setTelefone(obj.getTelefone());
-        administradorAntigo.setContatoDeEmergencia(obj.getContatoDeEmergencia());
-        administradorAntigo.setEmail(obj.getEmail());
-        administradorAntigo.setUnidade(obj.getUnidade());
-
-        Administrador administradorAtualizado = repository.save(administradorAntigo);
-        return administradorAntigo;
-
+    @Override
+    public void deletarAdministrador(Long id) {
+        buscarAdministradorPorId(id);
+        try {
+            repository.deleteById(id);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao deletar o administrador", e);
         }
+    }
 
-        public Administrador buscarAdministradorPorId(Long id){
-        return repository.findById(id).orElseThrow(()-> new EntityNotFoundException("Administrador não encontrado"));
-        
+    @Override
+    public Administrador atualizarAdministrador(Administrador administrador, Long id) {
+        Administrador entity = buscarAdministradorPorId(id);
+        validaAdministrador(administrador);
+
+        entity.setNome(administrador.getNome());
+        entity.setEmail(administrador.getEmail());
+        entity.setCpf(administrador.getCpf());
+        entity.setDataDeNascimento(administrador.getDataDeNascimento());
+        entity.setTelefone(administrador.getTelefone());
+        entity.setContatoDeEmergencia(administrador.getContatoDeEmergencia());
+        entity.setUnidade(administrador.getUnidade());  
+
+        try {
+            return repository.save(entity);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Dados inválidos para atualizar o administrador", e);
         }
+    }
 
-   }
+    @Override
+    public Administrador buscarAdministradorPorCpf(String cpf) { 
+        return repository.findByCpf(cpf)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Administrador com o CPF " + cpf + " não encontrado"));
+    }
+
+    @Override
+    public List<Administrador> buscarAdministradoresPorNome(String nome) {
+        return repository.findByNomeContainsIgnoreCaseOrderByNome(nome);
+    }
+}
