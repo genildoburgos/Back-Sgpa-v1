@@ -19,8 +19,10 @@ public class Unidade {
     private String cnpj;
     @Column(name = "contato")
     private String contato;
-    @Column(name = "horario_de_funcionamento")
-    private String horarioDeFuncionamento;
+
+    @ManyToMany
+    private List<SlotHorario> horarioDeFuncionamento;
+
     @Column(name = "email")
     private String email;
 
@@ -53,9 +55,9 @@ public class Unidade {
 
     }
 
-    public Unidade(String nome, String cnpj, String contato, String horarioDeFuncionamento, String email, List<Instrutor> instrutores, List<Plano> planos, Segmento segmento, Endereco endereco, Membro membro, List<Turma> turma, Administrador administrador, List<Sala> salas){
+    public Unidade(String nome, String cnpj, String contato, List<SlotHorario> horarioDeFuncionamento, String email, List<Instrutor> instrutores, List<Plano> planos, Segmento segmento, Endereco endereco, Membro membro, Administrador administrador, List<Turma> turmas, List<Sala> salas) {
         this.nome = nome;
-        this.cnpj= cnpj;
+        this.cnpj = cnpj;
         this.contato = contato;
         this.horarioDeFuncionamento = horarioDeFuncionamento;
         this.email = email;
@@ -64,10 +66,9 @@ public class Unidade {
         this.segmento = segmento;
         this.endereco = endereco;
         this.membro = membro;
-        this.turmas = turma;
         this.administrador = administrador;
+        this.turmas = turmas;
         this.salas = salas;
-
     }
 
     public long getId(){
@@ -98,11 +99,19 @@ public class Unidade {
         this.contato = contato;
     }
 
-    public String getHorarioDeFuncionamento(){
+    public List<SlotHorario> getHorarioDeFuncionamento() {
         return horarioDeFuncionamento;
     }
-    public void setHorarioDeFuncionamento(String horarioDeFuncionamento){
+
+    public void setHorarioDeFuncionamento(List<SlotHorario> horarioDeFuncionamento) {
         this.horarioDeFuncionamento = horarioDeFuncionamento;
+    }
+
+    public List<Sala> getSalas() {
+        return salas;
+    }
+    public void setSalas(List<Sala> salas) {
+        this.salas = salas;
     }
 
     public String getEmail(){
