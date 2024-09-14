@@ -4,9 +4,11 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import br.edu.ufape.poo.sgpa.exception.TelefoneInvalidoException;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Pessoa {
+public class Pessoa implements IPessoa {
 	private String nome;
     private String cpf;
     private String sexo;
@@ -14,6 +16,7 @@ public class Pessoa {
     private String telefone;
     private String contatoDeEmergencia;
     private String email;
+    private int idade;
 
     @OneToOne
     private Endereco endereco;
@@ -25,7 +28,7 @@ public class Pessoa {
     public Pessoa() {
     }
 
-    public Pessoa(String nome, String cpf, String sexo, LocalDate dataDeNascimento, String telefone, String contatoDeEmergencia, String email) {
+    public Pessoa(String nome, String cpf, String sexo, LocalDate dataDeNascimento, String telefone, String contatoDeEmergencia, String email, int idade) {
         this.nome = nome;
         this.cpf = cpf;
         this.sexo = sexo;
@@ -33,7 +36,45 @@ public class Pessoa {
         this.telefone = telefone;
         this.contatoDeEmergencia = contatoDeEmergencia;
         this.email = email;
+        this.idade = idade;
     }
+    
+    @Override
+    public boolean validarCPF(String cpf) {
+		cpf = cpf.replaceAll("\\D", "");
+
+		if (cpf.length() != 11 || cpf.matches("(\\d)\\1{10}")) {
+			return false;
+		}
+
+		try {
+			int primeiroDigito = calcularDigitoVerificador(cpf.substring(0, 9), 10);
+			int segundoDigito = calcularDigitoVerificador(cpf.substring(0, 9) + primeiroDigito, 11);
+			return cpf.equals(cpf.substring(0, 9) + primeiroDigito + segundoDigito);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
+
+    @Override
+	public int calcularDigitoVerificador(String base, int pesoInicial) {
+		int soma = 0;
+		for (int i = 0; i < base.length(); i++) {
+			int digito = Integer.parseInt(base.substring(i, i + 1));
+			soma += digito * pesoInicial--;
+		}
+		int resto = soma % 11;
+		return (resto < 2) ? 0 : 11 - resto;
+	}
+
+	@Override
+	public boolean checarTelefone(String telefone) throws TelefoneInvalidoException {
+		if (telefone.length() > 15 || telefone.length() < 15) {
+			throw new TelefoneInvalidoException();
+		} else {
+			return true;
+		}
+	}
 	
 	public String getNome() {
         return this.nome;
@@ -95,7 +136,15 @@ public class Pessoa {
         return id;
     }
 
-    @Override
+    public int getIdade() {
+		return idade;
+	}
+
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+
+	@Override
     public String toString() {
         return "Pessoa{" +
                 "id=" + id +
@@ -107,6 +156,7 @@ public class Pessoa {
                 ", sexo='" + sexo + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", nome='" + nome + '\'' +
+                ", idade='" + idade + '\'' +
                 '}';
     }
 
@@ -114,12 +164,12 @@ public class Pessoa {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Pessoa pessoa)) return false;
-        return Objects.equals(getNome(), pessoa.getNome()) && Objects.equals(getCpf(), pessoa.getCpf()) && Objects.equals(getSexo(), pessoa.getSexo()) && Objects.equals(getDataDeNascimento(), pessoa.getDataDeNascimento()) && Objects.equals(getTelefone(), pessoa.getTelefone()) && Objects.equals(getContatoDeEmergencia(), pessoa.getContatoDeEmergencia()) && Objects.equals(getEmail(), pessoa.getEmail()) && Objects.equals(endereco, pessoa.endereco) && Objects.equals(getId(), pessoa.getId());
+        return Objects.equals(getNome(), pessoa.getNome()) && Objects.equals(getCpf(), pessoa.getCpf()) && Objects.equals(getSexo(), pessoa.getSexo()) && Objects.equals(getDataDeNascimento(), pessoa.getDataDeNascimento()) && Objects.equals(getTelefone(), pessoa.getTelefone()) && Objects.equals(getContatoDeEmergencia(), pessoa.getContatoDeEmergencia()) && Objects.equals(getEmail(), pessoa.getEmail()) && Objects.equals(endereco, pessoa.endereco) && Objects.equals(getId(), pessoa.getId()) && Objects.equals(getIdade(), pessoa.getIdade());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getNome(), getCpf(), getSexo(), getDataDeNascimento(), getTelefone(), getContatoDeEmergencia(), getEmail(), endereco, getId());
+        return Objects.hash(getNome(), getCpf(), getSexo(), getDataDeNascimento(), getTelefone(), getContatoDeEmergencia(), getEmail(), endereco, getId(), getIdade());
     }
 }
 
