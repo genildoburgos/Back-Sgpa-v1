@@ -13,7 +13,13 @@ public interface UnidadeServiceInterface {
 
     void deletarUnidade(Long id);
 
-    void atualizarUnidade(Unidade obj, Long id);
+    Unidade atualizarUnidade(Unidade obj, Long id);
+
+    Unidade buscarUnidadePorNome(String nome);
+
+   List<Unidade> buscarUnidadesPorNome(String nome);
+
+   Unidade buscarUnidadePorCnpj(String cnpj);
 
     default void validarUnidade(Unidade unidade) {
         if (unidade.getEndereco().getCidade() == null || unidade.getEndereco().getCidade().isEmpty()
