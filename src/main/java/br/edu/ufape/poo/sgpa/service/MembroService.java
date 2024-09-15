@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufape.poo.sgpa.repository.MembroRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class MembroService implements IMembroService {
@@ -125,6 +126,7 @@ public class MembroService implements IMembroService {
 		repository.save(entity);
 	}
 
+	@Transactional
 	@Override
 	public void deletarMembroPorCpf(String cpf) throws MembroNaoExisteException {
 		Optional<Membro> membroOpt = repository.findByCpfOrderByNome(cpf);
