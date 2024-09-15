@@ -13,7 +13,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Matricula implements IMatricula {
+public class Matricula
+		//implements IMatricula
+{
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +43,7 @@ public class Matricula implements IMatricula {
 		this.membro = membro;
 		this.turma = turma;
 	}
-	
+	/*
 	@Override
 	public void ativarMatricula() {
 		this.statusDaMatricula = StatusDaMatricula.ATIVA;
@@ -56,6 +58,8 @@ public class Matricula implements IMatricula {
 	public boolean estaExpirada() {
         return LocalDate.now().isAfter(this.dataDeExpiracao);
     }
+
+	 */
 
 	@Override
 	public String toString() {

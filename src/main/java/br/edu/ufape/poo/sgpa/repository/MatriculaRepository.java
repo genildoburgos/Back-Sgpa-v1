@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public interface MatriculaRepository extends JpaRepository<Matricula, Long> {
 
-    Optional<Matricula> findByMembro(Membro membro);
+    List<Matricula> findByMembro(Membro membro);
     List<Matricula> findByDataDeMatricula(LocalDate dataDeMatricula);
     List<Matricula> findBydataDeExpiracao(LocalDate dataDeExpiracao);
     List<Matricula> findByStatusDaMatricula(StatusDaMatricula status);
