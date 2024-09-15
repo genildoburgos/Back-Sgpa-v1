@@ -7,13 +7,19 @@ import br.edu.ufape.poo.sgpa.model.Membro;
 import br.edu.ufape.poo.sgpa.model.Responsavel;
 import br.edu.ufape.poo.sgpa.model.Turma;
 import br.edu.ufape.poo.sgpa.model.enums.StatusDePagamento;
+import jakarta.validation.constraints.NotNull;
 
 public class MembroRequest {
 	
+	@NotNull
 	private String numeroDeMatricula;
+	@NotNull
     private StatusDePagamento statusDePagamento;
+	@NotNull
     private List<Matricula> matriculas;
+	@NotNull
     private Responsavel responsavel;
+	@NotNull
     private List<Turma> turmas;
     
     public MembroRequest() {}
@@ -65,7 +71,7 @@ public class MembroRequest {
 	    membro.setStatusDePagamento(this.statusDePagamento);
 	    membro.setMatriculas(this.matriculas);
 	    membro.setResponsavel(this.responsavel);
-	    membro.setTurmas(turmas);
+	    membro.setTurmas(this.turmas);
 		
 		return membro;
 	}
