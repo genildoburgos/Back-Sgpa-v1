@@ -16,6 +16,8 @@ public class MembroResponse {
     private Responsavel responsavel;
     private List<Turma> turmas;
 
+    public MembroResponse() {}
+    
     public MembroResponse(Membro membro) {
         this.numeroDeMatricula = membro.getNumeroDeMatricula();
         this.statusDePagamento = membro.getStatusDePagamento();
