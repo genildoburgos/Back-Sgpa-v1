@@ -1,40 +1,43 @@
-package br.edu.ufape.poo.sgpa.controller.dto.request;
+package br.edu.ufape.poo.sgpa.controller.dto.response;
 
 import java.time.LocalDate;
-
-import br.edu.ufape.poo.sgpa.model.Unidade;
 import br.edu.ufape.poo.sgpa.model.Administrador;
-import jakarta.validation.constraints.NotNull;
+import br.edu.ufape.poo.sgpa.model.Unidade;
 
-public class AdministradorRequest {
-    
-    @NotNull
+public class AdministradorResponse {
+
+    private Long id;
     private String nome;
-    @NotNull
     private String cpf;
-    @NotNull
-    private String sexo;
-    @NotNull
     private LocalDate dataDeNascimento;
-    @NotNull
     private String telefone;
-    @NotNull
     private String contatoDeEmergencia;
-    @NotNull
     private String email;
-    @NotNull
     private Unidade unidade;
 
+    public AdministradorResponse(Administrador administrador){
+        this.id = administrador.getId();
+        this.nome = administrador.getNome();
+        this.cpf = administrador.getCpf();
+        this.dataDeNascimento = administrador.getDataDeNascimento();
+        this.telefone = administrador.getTelefone();
+        this.contatoDeEmergencia = administrador.getContatoDeEmergencia();
+        this.email = administrador.getEmail();
+        this.unidade = administrador.getUnidade();
+    }
 
-    public AdministradorRequest(){
-
+    public Long getId(){
+        return id;
+    }
+    public void setId(Long id){
+        this.id = id;
     }
 
     public String getNome(){
         return nome;
     }
     public void setNome(String nome){
-        this.nome = nome;
+        this.nome= nome;
     }
 
     public String getCpf(){
@@ -42,13 +45,6 @@ public class AdministradorRequest {
     }
     public void setCpf(String cpf){
         this.cpf = cpf;
-    }
-
-    public String getSexo(){
-        return sexo;
-    }
-    public void setSexo(String sexo){
-        this.sexo = sexo;
     }
 
     public LocalDate getDataDeNascimento(){
@@ -78,26 +74,13 @@ public class AdministradorRequest {
     public void setEmail(String email){
         this.email = email;
     }
-
+    
     public Unidade getUnidade(){
         return unidade;
     }
     public void setUnidade(Unidade unidade){
-        this.unidade= unidade;
+        this.unidade = unidade;
     }
 
-     public Administrador toAdministrador() {
-        Administrador administrador = new Administrador();
-      
-        administrador.setNome(this.nome);
-        administrador.setCpf(this.cpf);
-        administrador.setSexo(this.sexo);
-        administrador.setDataDeNascimento(this.dataDeNascimento);
-        administrador.setTelefone(this.telefone);
-        administrador.setContatoDeEmergencia(this.contatoDeEmergencia);
-        administrador.setEmail(this.email);
-        administrador.setUnidade(this.unidade);
-
-        return administrador;
-    } 
+    
 }
