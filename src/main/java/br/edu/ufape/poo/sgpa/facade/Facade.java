@@ -1,6 +1,5 @@
 package br.edu.ufape.poo.sgpa.facade;
 
-
 import br.edu.ufape.poo.sgpa.exception.CampoObrigatorioNuloException;
 import br.edu.ufape.poo.sgpa.exception.CpfInvalidoException;
 import br.edu.ufape.poo.sgpa.exception.DataForaDaFaixaException;
@@ -8,11 +7,13 @@ import br.edu.ufape.poo.sgpa.exception.MembroExisteException;
 import br.edu.ufape.poo.sgpa.exception.MembroMenorDeIdadeException;
 import br.edu.ufape.poo.sgpa.exception.MembroNaoExisteException;
 import br.edu.ufape.poo.sgpa.exception.TelefoneInvalidoException;
+import br.edu.ufape.poo.sgpa.exception.TurmaNaoExisteException;
 import br.edu.ufape.poo.sgpa.model.*;
 import br.edu.ufape.poo.sgpa.service.*;
 import br.edu.ufape.poo.sgpa.model.Membro;
 import br.edu.ufape.poo.sgpa.model.Plano;
 import br.edu.ufape.poo.sgpa.model.Vaga;
+import br.edu.ufape.poo.sgpa.model.enums.Modalidade;
 import br.edu.ufape.poo.sgpa.model.Administrador;
 import br.edu.ufape.poo.sgpa.service.MembroService;
 import br.edu.ufape.poo.sgpa.service.PlanoService;
@@ -27,180 +28,254 @@ import java.util.Optional;
 @Service
 public class Facade {
 
-    public Facade(MembroService membroService, PlanoService planoService, VagaService vagaService, InstrutorService instrutorService, AdministradorService administradorService, UnidadeService unidadeService, TurmaService turmaService) {
+	public Facade(MembroService membroService, PlanoService planoService, VagaService vagaService,
+			InstrutorService instrutorService, AdministradorService administradorService, UnidadeService unidadeService,
+			TurmaService turmaService) {
 		this.membroService = membroService;
-        this.planoService = planoService;
-        this.vagaService = vagaService;
-        this.instrutorService = instrutorService;
-        this.administradorService = administradorService;
-        this.unidadeService = unidadeService;
-        //this.turmaService = turmaService;
-    }
-    
-    // ------------------------ Membro --------------------------------
-    
-    @Autowired
-    private final MembroService membroService;
-    
-    // Atualizar membro
-    public void atualizarMembro(Membro membroAtualizado, Long id) throws MembroNaoExisteException, CampoObrigatorioNuloException, TelefoneInvalidoException, DataForaDaFaixaException {
-        membroService.atualizarMembro(membroAtualizado, id);
-    }
+		this.planoService = planoService;
+		this.vagaService = vagaService;
+		this.instrutorService = instrutorService;
+		this.administradorService = administradorService;
+		this.unidadeService = unidadeService;
+		this.turmaService = turmaService;
+	}
 
-    // Buscar membro por CPF
-    public Optional<Membro> buscarMembroPorCpf(String cpf) throws MembroNaoExisteException {
-        return membroService.buscarMembroPorCpf(cpf);
-    }
+	// ------------------------ Membro --------------------------------
 
-    // Buscar membro por número de matrícula
-    public Optional<Membro> buscarMembroPorNumeroDeMatricula(String numeroDeMatricula) throws MembroNaoExisteException {
-        return membroService.buscarMembroPorNumeroDeMatricula(numeroDeMatricula);
-    }
+	@Autowired
+	private final MembroService membroService;
 
-    // Buscar membro por nome
-    public List<Membro> buscarMembroPorNome(String nome) {
-        return membroService.buscarMembroPorNome(nome);
-    }
+	// Atualizar membro
+	public void atualizarMembro(Membro membroAtualizado, Long id) throws MembroNaoExisteException,
+			CampoObrigatorioNuloException, TelefoneInvalidoException, DataForaDaFaixaException {
+		membroService.atualizarMembro(membroAtualizado, id);
+	}
 
-    // Buscar membro por CPF, número de matrícula ou nome
-    public List<Membro> buscarMembroPorCpfOuNumeroDeMatriculaOuNome(String cpf, String numeroDeMatricula, String nome) {
-        return membroService.buscarMembroPorCpfOuNumeroDeMatriculaOuNome(cpf, numeroDeMatricula, nome);
-    }
+	// Buscar membro por CPF
+	public Optional<Membro> buscarMembroPorCpf(String cpf) throws MembroNaoExisteException {
+		return membroService.buscarMembroPorCpf(cpf);
+	}
 
-    // Cadastrar um novo membro
-    public void cadastrarMembro(Membro novoMembro) throws CampoObrigatorioNuloException, CpfInvalidoException, MembroExisteException, TelefoneInvalidoException, DataForaDaFaixaException, MembroMenorDeIdadeException {
-        membroService.cadastrarMembro(novoMembro);
-    }
+	// Buscar membro por número de matrícula
+	public Optional<Membro> buscarMembroPorNumeroDeMatricula(String numeroDeMatricula) throws MembroNaoExisteException {
+		return membroService.buscarMembroPorNumeroDeMatricula(numeroDeMatricula);
+	}
 
-    // Deletar membro por CPF
-    public void deletarMembroPorCpf(String cpf) throws MembroNaoExisteException {
-        membroService.deletarMembroPorCpf(cpf);
-    }
-    
-    // Listar todos os membros
-    public List<Membro> listarMembros() {
-        return membroService.listarMembros();
-    }
-    
-     // ------------------------ Plano --------------------------------
+	// Buscar membro por nome
+	public List<Membro> buscarMembroPorNome(String nome) {
+		return membroService.buscarMembroPorNome(nome);
+	}
 
-    @Autowired
-    private final PlanoService planoService;
+	// Buscar membro por CPF, número de matrícula ou nome
+	public List<Membro> buscarMembroPorCpfOuNumeroDeMatriculaOuNome(String cpf, String numeroDeMatricula, String nome) {
+		return membroService.buscarMembroPorCpfOuNumeroDeMatriculaOuNome(cpf, numeroDeMatricula, nome);
+	}
 
-    //Listar planos
-    public List<Plano> listarPlanosgit (){return planoService.listarPlanos();}
+	// Cadastrar um novo membro
+	public void cadastrarMembro(Membro novoMembro) throws CampoObrigatorioNuloException, CpfInvalidoException,
+			MembroExisteException, TelefoneInvalidoException, DataForaDaFaixaException, MembroMenorDeIdadeException {
+		membroService.cadastrarMembro(novoMembro);
+	}
 
-    // Criar plano
-    public Plano criarPlano(Plano obj){return planoService.criarPlano(obj);}
+	// Deletar membro por CPF
+	public void deletarMembroPorCpf(String cpf) throws MembroNaoExisteException {
+		membroService.deletarMembroPorCpf(cpf);
+	}
 
-    //Deletar plano
-    public void deletarPlano(Long id){planoService.deletarPlano(id);}
+	// Listar todos os membros
+	public List<Membro> listarMembros() {
+		return membroService.listarMembros();
+	}
 
-    //Buscar plano por id
-    public Plano buscarPlano(Long id){return planoService.buscarPlano(id);}
+	// ------------------------ Plano --------------------------------
 
-    // Atualizar plano
-    public Plano atualizarPlano(Plano obj, Long id){return planoService.atualizarPlano(obj, id);}
-    
- // ------------------------ Vaga --------------------------------
+	@Autowired
+	private final PlanoService planoService;
 
-    @Autowired
-    private final VagaService vagaService;
+	// Listar planos
+	public List<Plano> listarPlanosgit() {
+		return planoService.listarPlanos();
+	}
 
-    // Listar vagas
-    public List<Vaga> listarVagas() {return vagaService.listarVagas();}
+	// Criar plano
+	public Plano criarPlano(Plano obj) {
+		return planoService.criarPlano(obj);
+	}
 
-    // Criar nova vaga
-    public Vaga criarVaga(Vaga novoObj) {return vagaService.criarVaga(novoObj);}
+	// Deletar plano
+	public void deletarPlano(Long id) {
+		planoService.deletarPlano(id);
+	}
 
-    // Deletar vaga
-    public void deletarVaga(Long id) {vagaService.deletarVaga(id);}
+	// Buscar plano por id
+	public Plano buscarPlano(Long id) {
+		return planoService.buscarPlano(id);
+	}
 
-    // Burcar vaga por Id
-    public Vaga buscarVagaPorId(Long id){return vagaService.buscarVagaPorId(id);}
+	// Atualizar plano
+	public Plano atualizarPlano(Plano obj, Long id) {
+		return planoService.atualizarPlano(obj, id);
+	}
 
-    // Atulizar vaga
-    public Vaga atualizarVaga(Vaga obj, Long id) {return vagaService.atualizarVaga(obj, id);}
+	// ------------------------ Vaga --------------------------------
 
+	@Autowired
+	private final VagaService vagaService;
 
-    //---------------------- Instrutor ---------------------------
-    @Autowired
-    private final InstrutorService instrutorService;
+	// Listar vagas
+	public List<Vaga> listarVagas() {
+		return vagaService.listarVagas();
+	}
 
-    //Listar instrutor
-    public List <Instrutor> listarInstrutores() {return instrutorService.listarInstrutores();}
+	// Criar nova vaga
+	public Vaga criarVaga(Vaga novoObj) {
+		return vagaService.criarVaga(novoObj);
+	}
 
-    //criar instrutor
-    public Instrutor criarInstrutor(Instrutor novoInstrutor) {return instrutorService.criarInstrutor(novoInstrutor);}
+	// Deletar vaga
+	public void deletarVaga(Long id) {
+		vagaService.deletarVaga(id);
+	}
 
-    // deletar instrutor
-    public void deletarInstrutor(Long id){instrutorService.deletarIntrutor(id);}
+	// Burcar vaga por Id
+	public Vaga buscarVagaPorId(Long id) {
+		return vagaService.buscarVagaPorId(id);
+	}
 
-    //buscar instrutor por id
-    public Instrutor buscarInstrutor(Long id){return instrutorService.buscarInstrutor(id);}
+	// Atulizar vaga
+	public Vaga atualizarVaga(Vaga obj, Long id) {
+		return vagaService.atualizarVaga(obj, id);
+	}
 
-    //atualizar instrutor
-    public Instrutor atualizarInstrutor(Instrutor instrutor, Long id){return instrutorService.atualizarInsturor(instrutor, id);}
+	// ---------------------- Instrutor ---------------------------
+	@Autowired
+	private final InstrutorService instrutorService;
 
+	// Listar instrutor
+	public List<Instrutor> listarInstrutores() {
+		return instrutorService.listarInstrutores();
+	}
 
-    //------------------- Unidade --------------------
-    @Autowired
-    private final UnidadeService unidadeService;
-    //listar unidades
-    public List<Unidade> listarUnidades() {return unidadeService.listarUnidades();}
+	// criar instrutor
+	public Instrutor criarInstrutor(Instrutor novoInstrutor) {
+		return instrutorService.criarInstrutor(novoInstrutor);
+	}
 
-    //criar unidade
-    public Unidade criarUnidade(Unidade unidade) {return unidadeService.criarUnidade(unidade);}
+	// deletar instrutor
+	public void deletarInstrutor(Long id) {
+		instrutorService.deletarIntrutor(id);
+	}
 
-    //deletar unidade
-    public void deletarUnidade(Long id){unidadeService.deletarUnidade(id);}
+	// buscar instrutor por id
+	public Instrutor buscarInstrutor(Long id) {
+		return instrutorService.buscarInstrutor(id);
+	}
 
-    //buscar unidade por id
-    public Unidade buscarUnidade(Long id){return unidadeService.buscarUnidade(id);}
+	// atualizar instrutor
+	public Instrutor atualizarInstrutor(Instrutor instrutor, Long id) {
+		return instrutorService.atualizarInsturor(instrutor, id);
+	}
 
-    //atualizar unidade
-    public Unidade atualizarUnidade(Unidade unidade, Long id){return unidadeService.atualizarUnidade(unidade, id);}
-  
-    //------------------- Administrador --------------------
-  
-     @Autowired
-     private final AdministradorService administradorService;
+	// ------------------- Unidade --------------------
+	@Autowired
+	private final UnidadeService unidadeService;
 
-     public List<Administrador> listarAdministradores(){
-        return administradorService.listarAdministradores();
-     }
+	// listar unidades
+	public List<Unidade> listarUnidades() {
+		return unidadeService.listarUnidades();
+	}
 
-     public Administrador criarAdministrador(Administrador novaInstancia){
-        return administradorService.criarAdministrador(novaInstancia);
-     }
+	// criar unidade
+	public Unidade criarUnidade(Unidade unidade) {
+		return unidadeService.criarUnidade(unidade);
+	}
 
-     public void deletarAdministrador(Long id){
-        administradorService.deletarAdministrador(id);
-     }
+	// deletar unidade
+	public void deletarUnidade(Long id) {
+		unidadeService.deletarUnidade(id);
+	}
 
-     public Administrador buscarAdministradorPorId(Long id){
-        return administradorService.buscarAdministradorPorId(id);
-     }
+	// buscar unidade por id
+	public Unidade buscarUnidade(Long id) {
+		return unidadeService.buscarUnidade(id);
+	}
 
-     public Administrador atualizarAdministrador(Administrador administrador, Long id){
-        return administradorService.atualizarAdministrador(administrador, id);
-     }
+	// atualizar unidade
+	public Unidade atualizarUnidade(Unidade unidade, Long id) {
+		return unidadeService.atualizarUnidade(unidade, id);
+	}
 
-     public Administrador buscAdministradorPorCpf(String cpf){
-        return administradorService.buscarAdministradorPorCpf(cpf);
-     }
+	// ------------------- Administrador --------------------
 
-     public List<Administrador> buscarAdministradoresPorNome(String nome){
-        return administradorService.buscarAdministradoresPorNome(nome);
-     }
-    }
+	@Autowired
+	private final AdministradorService administradorService;
 
-	//------------------- Turma --------------------
+	public List<Administrador> listarAdministradores() {
+		return administradorService.listarAdministradores();
+	}
 
-	
+	public Administrador criarAdministrador(Administrador novaInstancia) {
+		return administradorService.criarAdministrador(novaInstancia);
+	}
 
+	public void deletarAdministrador(Long id) {
+		administradorService.deletarAdministrador(id);
+	}
 
+	public Administrador buscarAdministradorPorId(Long id) {
+		return administradorService.buscarAdministradorPorId(id);
+	}
 
+	public Administrador atualizarAdministrador(Administrador administrador, Long id) {
+		return administradorService.atualizarAdministrador(administrador, id);
+	}
 
+	public Administrador buscAdministradorPorCpf(String cpf) {
+		return administradorService.buscarAdministradorPorCpf(cpf);
+	}
 
+	public List<Administrador> buscarAdministradoresPorNome(String nome) {
+		return administradorService.buscarAdministradoresPorNome(nome);
+	}
 
+	// ------------------- Turma --------------------
+
+	@Autowired
+	private final TurmaService turmaService;
+
+	public Turma atualizarTurma(Turma turmaAtualizada, Long id) {
+		return turmaService.atualizarTurma(turmaAtualizada, id);
+	}
+
+	public Turma buscarTurmaPorId(Long id) {
+		return turmaService.buscarTurmaPorId(id);
+	}
+
+	public List<Turma> buscarTurmasPorModalidade(Modalidade modalidade) {
+		return turmaService.buscarTurmasPorModalidade(modalidade);
+	}
+
+	public List<Turma> buscarTurmasPorInstrutor(Instrutor instrutor) {
+		return turmaService.buscarTurmasPorInstrutor(instrutor);
+	}
+
+	public List<Turma> buscarTurmasPorModalidadeOuInstrutor(Modalidade modalidade, Instrutor instrutor) {
+		return turmaService.buscarTurmasPorModalidadeOuInstrutor(modalidade, instrutor);
+	}
+
+	public Turma cadastrarTurma(Turma entity) {
+		return turmaService.cadastrarTurma(entity);
+	}
+
+	public void deletarTurma(Long id) throws TurmaNaoExisteException {
+		turmaService.deletarTurma(id);
+	}
+
+	public List<Turma> listarTurmas() {
+		return turmaService.listarTurmas();
+	}
+
+	public boolean verificarExistenciaTurmaId(Long id) {
+		return turmaService.verificarExistenciaTurmaId(id);
+	}
+}
