@@ -1,6 +1,13 @@
 package br.edu.ufape.poo.sgpa.facade;
 
 
+import br.edu.ufape.poo.sgpa.exception.CampoObrigatorioNuloException;
+import br.edu.ufape.poo.sgpa.exception.CpfInvalidoException;
+import br.edu.ufape.poo.sgpa.exception.DataForaDaFaixaException;
+import br.edu.ufape.poo.sgpa.exception.MembroExisteException;
+import br.edu.ufape.poo.sgpa.exception.MembroMenorDeIdadeException;
+import br.edu.ufape.poo.sgpa.exception.MembroNaoExisteException;
+import br.edu.ufape.poo.sgpa.exception.TelefoneInvalidoException;
 import br.edu.ufape.poo.sgpa.model.*;
 import br.edu.ufape.poo.sgpa.service.*;
 import br.edu.ufape.poo.sgpa.model.Membro;
@@ -15,17 +22,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class Facade {
 
-    public Facade(MembroService membroService, PlanoService planoService, VagaService vagaService, InstrutorService instrutorService, AdministradorService administradorService, UnidadeService unidadeService) {
+    public Facade(MembroService membroService, PlanoService planoService, VagaService vagaService, InstrutorService instrutorService, AdministradorService administradorService, UnidadeService unidadeService, TurmaService turmaService) {
 		this.membroService = membroService;
         this.planoService = planoService;
         this.vagaService = vagaService;
         this.instrutorService = instrutorService;
         this.administradorService = administradorService;
         this.unidadeService = unidadeService;
+        //this.turmaService = turmaService;
     }
     
     // ------------------------ Membro --------------------------------
@@ -33,8 +42,46 @@ public class Facade {
     @Autowired
     private final MembroService membroService;
     
-    public List<Membro> listarMembros () {return membroService.listarMembros();}
+    // Atualizar membro
+    public void atualizarMembro(Membro membroAtualizado, Long id) throws MembroNaoExisteException, CampoObrigatorioNuloException, TelefoneInvalidoException, DataForaDaFaixaException {
+        membroService.atualizarMembro(membroAtualizado, id);
+    }
 
+    // Buscar membro por CPF
+    public Optional<Membro> buscarMembroPorCpf(String cpf) throws MembroNaoExisteException {
+        return membroService.buscarMembroPorCpf(cpf);
+    }
+
+    // Buscar membro por número de matrícula
+    public Optional<Membro> buscarMembroPorNumeroDeMatricula(String numeroDeMatricula) throws MembroNaoExisteException {
+        return membroService.buscarMembroPorNumeroDeMatricula(numeroDeMatricula);
+    }
+
+    // Buscar membro por nome
+    public List<Membro> buscarMembroPorNome(String nome) {
+        return membroService.buscarMembroPorNome(nome);
+    }
+
+    // Buscar membro por CPF, número de matrícula ou nome
+    public List<Membro> buscarMembroPorCpfOuNumeroDeMatriculaOuNome(String cpf, String numeroDeMatricula, String nome) {
+        return membroService.buscarMembroPorCpfOuNumeroDeMatriculaOuNome(cpf, numeroDeMatricula, nome);
+    }
+
+    // Cadastrar um novo membro
+    public void cadastrarMembro(Membro novoMembro) throws CampoObrigatorioNuloException, CpfInvalidoException, MembroExisteException, TelefoneInvalidoException, DataForaDaFaixaException, MembroMenorDeIdadeException {
+        membroService.cadastrarMembro(novoMembro);
+    }
+
+    // Deletar membro por CPF
+    public void deletarMembroPorCpf(String cpf) throws MembroNaoExisteException {
+        membroService.deletarMembroPorCpf(cpf);
+    }
+    
+    // Listar todos os membros
+    public List<Membro> listarMembros() {
+        return membroService.listarMembros();
+    }
+    
      // ------------------------ Plano --------------------------------
 
     @Autowired
@@ -147,3 +194,13 @@ public class Facade {
         return administradorService.buscarAdministradoresPorNome(nome);
      }
     }
+
+	//------------------- Turma --------------------
+
+	
+
+
+
+
+
+
