@@ -19,12 +19,12 @@ import java.util.List;
 @Service
 public class Facade {
 
-    public Facade(MembroService membroService, PlanoService planoService, VagaService vagaService, InstrutorService instrutorService, UnidadeService unidadeService) {
+    public Facade(MembroService membroService, PlanoService planoService, VagaService vagaService, InstrutorService instrutorService, AdministradorService administradorService, UnidadeService unidadeService) {
 		this.membroService = membroService;
         this.planoService = planoService;
         this.vagaService = vagaService;
         this.instrutorService = instrutorService;
-   this.administradorService = administradorService;
+        this.administradorService = administradorService;
         this.unidadeService = unidadeService;
     }
     
@@ -113,8 +113,6 @@ public class Facade {
 
     //atualizar unidade
     public Unidade atualizarUnidade(Unidade unidade, Long id){return unidadeService.atualizarUnidade(unidade, id);}
-
-}
   
     //------------------- Administrador --------------------
   
@@ -148,5 +146,4 @@ public class Facade {
      public List<Administrador> buscarAdministradoresPorNome(String nome){
         return administradorService.buscarAdministradoresPorNome(nome);
      }
-
     }
