@@ -5,7 +5,7 @@ import br.edu.ufape.poo.sgpa.model.Unidade;
 import br.edu.ufape.poo.sgpa.model.enums.Periodicidade;
 
 public class PlanoResponse {
-    
+    private Long id;
     private double valor;
     private String dataDeVencimento;
     private Periodicidade periodicidade;
@@ -16,6 +16,7 @@ public class PlanoResponse {
     }
 
     public PlanoResponse(Plano plano) {
+        this.id = plano.getId();
         this.valor = plano.getValor();
         this.dataDeVencimento = plano.getDataDeVencimento();
         this.periodicidade = plano.getPeriodicidade();
