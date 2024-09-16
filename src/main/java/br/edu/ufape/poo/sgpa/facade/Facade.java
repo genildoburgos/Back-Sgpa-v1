@@ -230,7 +230,7 @@ public class Facade {
 		return administradorService.atualizarAdministrador(administrador, id);
 	}
 
-	public Administrador buscAdministradorPorCpf(String cpf) {
+	public Administrador buscarAdministradorPorCpf(String cpf) {
 		return administradorService.buscarAdministradorPorCpf(cpf);
 	}
 

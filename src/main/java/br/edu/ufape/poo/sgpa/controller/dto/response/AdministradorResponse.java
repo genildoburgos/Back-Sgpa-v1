@@ -1,6 +1,8 @@
 package br.edu.ufape.poo.sgpa.controller.dto.response;
 
 import java.time.LocalDate;
+import java.util.List;
+
 import br.edu.ufape.poo.sgpa.model.Administrador;
 import br.edu.ufape.poo.sgpa.model.Unidade;
 
