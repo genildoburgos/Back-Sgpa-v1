@@ -2,14 +2,11 @@ package br.edu.ufape.poo.sgpa.controller.dto.response;
 
 import java.util.List;
 
-import br.edu.ufape.poo.sgpa.model.Instrutor;
-import br.edu.ufape.poo.sgpa.model.Matricula;
-import br.edu.ufape.poo.sgpa.model.Sala;
-import br.edu.ufape.poo.sgpa.model.Vaga;
+import br.edu.ufape.poo.sgpa.model.*;
 import br.edu.ufape.poo.sgpa.model.enums.Modalidade;
 
 public class TurmaResponse {
-
+	private Long id;
 	private Instrutor instrutor;
 	private List<Matricula> matriculas;
 	private Modalidade modalidade;
@@ -18,12 +15,13 @@ public class TurmaResponse {
 	
 	public TurmaResponse() {}
 
-	public TurmaResponse(Instrutor instrutor, List<Matricula> matriculas, Modalidade modalidade, Sala sala, Vaga vaga) {
-		this.instrutor = instrutor;
-		this.matriculas = matriculas;
-		this.modalidade = modalidade;
-		this.sala = sala;
-		this.vaga = vaga;
+	public TurmaResponse(Turma turma) {
+		this.id = turma.getId();
+		this.instrutor = turma.getInstrutor();
+		this.matriculas = turma.getMatriculas();
+		this.modalidade = turma.getModalidade();
+		this.sala = turma.getSala();
+		this.vaga = turma.getVaga();
 	}
 
 	public Instrutor getInstrutor() {
