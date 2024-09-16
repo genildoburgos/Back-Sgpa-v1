@@ -15,6 +15,10 @@ public class PlanoResponse {
 
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public PlanoResponse(Plano plano) {
         this.id = plano.getId();
         this.valor = plano.getValor();

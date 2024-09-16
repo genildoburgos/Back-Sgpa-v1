@@ -24,6 +24,10 @@ public class TurmaResponse {
 		this.vaga = turma.getVaga();
 	}
 
+	public Long getId(){
+		return id;
+	}
+
 	public Instrutor getInstrutor() {
 		return instrutor;
 	}

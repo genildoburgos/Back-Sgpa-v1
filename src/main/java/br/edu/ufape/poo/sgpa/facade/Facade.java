@@ -93,7 +93,7 @@ public class Facade {
 	private final PlanoService planoService;
 
 	// Listar planos
-	public List<Plano> listarPlanosgit() {
+	public List<Plano> listarPlanos() {
 		return planoService.listarPlanos();
 	}
 
