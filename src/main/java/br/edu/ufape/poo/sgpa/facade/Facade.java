@@ -9,8 +9,10 @@ import br.edu.ufape.poo.sgpa.exception.MembroNaoExisteException;
 import br.edu.ufape.poo.sgpa.exception.TelefoneInvalidoException;
 import br.edu.ufape.poo.sgpa.exception.TurmaNaoExisteException;
 import br.edu.ufape.poo.sgpa.model.*;
+import br.edu.ufape.poo.sgpa.model.enums.StatusDaMatricula;
 import br.edu.ufape.poo.sgpa.service.*;
 import br.edu.ufape.poo.sgpa.model.Membro;
+import br.edu.ufape.poo.sgpa.service.MatriculaService;
 import br.edu.ufape.poo.sgpa.model.Plano;
 import br.edu.ufape.poo.sgpa.model.Vaga;
 import br.edu.ufape.poo.sgpa.model.enums.Modalidade;
@@ -22,6 +24,7 @@ import br.edu.ufape.poo.sgpa.service.AdministradorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,8 +32,8 @@ import java.util.Optional;
 public class Facade {
 
 	public Facade(MembroService membroService, PlanoService planoService, VagaService vagaService,
-			InstrutorService instrutorService, AdministradorService administradorService, UnidadeService unidadeService,
-			TurmaService turmaService) {
+                  InstrutorService instrutorService, AdministradorService administradorService, UnidadeService unidadeService,
+                  TurmaService turmaService, MatriculaService matriculaService) {
 		this.membroService = membroService;
 		this.planoService = planoService;
 		this.vagaService = vagaService;
@@ -38,7 +41,8 @@ public class Facade {
 		this.administradorService = administradorService;
 		this.unidadeService = unidadeService;
 		this.turmaService = turmaService;
-	}
+        this.matriculaService = matriculaService;
+    }
 
 	// ------------------------ Membro --------------------------------
 
@@ -277,5 +281,57 @@ public class Facade {
 
 	public boolean verificarExistenciaTurmaId(Long id) {
 		return turmaService.verificarExistenciaTurmaId(id);
+	}
+
+	//--------------- Matricula---------------------------
+	@Autowired
+	private final MatriculaService matriculaService;
+
+	public Matricula criarMatricula(Matricula matricula) {
+		return matriculaService.criarMatricula(matricula);
+	}
+
+	public List<Matricula> listarMatriculas() {
+		return matriculaService.listarMatriculas();
+	}
+
+	public Matricula buscarMatriculaPorId(Long id) {
+		return matriculaService.buscarMatricula(id);
+	}
+
+	public void deletarMatricula(Long id){
+		matriculaService.deletarMatricula(id);
+	}
+
+	public Matricula atualizarMatricula(Matricula matricula, Long id){
+		return matriculaService.atualizarMatricula(matricula, id);
+	}
+
+	public List<Matricula> buscarMatriculasPorMembro(Membro membro) {
+		return matriculaService.buscarMatriculasPorMembro(membro);
+	}
+
+	public List<Matricula> buscarMatriculaPorDataExpiracao(LocalDate dataExpiracao) {
+		return matriculaService.buscarPorDataExpiracao(dataExpiracao);
+	}
+
+	public List<Matricula> buscarMatriculaPorDataDeMatricula(LocalDate dataMatricula) {
+		return matriculaService.buscarPorDataDeMatricula(dataMatricula);
+	}
+
+	public List<Matricula> buscarMatriculaPorStatus(StatusDaMatricula status) {
+		return matriculaService.buscarPorStatus(status);
+	}
+
+	public void ativarMatricula(Matricula matricula) {
+		matriculaService.ativarMatricula(matricula);
+	}
+
+	public void suspenderMatricula(Matricula matricula) {
+		matriculaService.suspenderMatricula(matricula);
+	}
+
+	public boolean MatriculaEstaExpirada(Matricula matricula) {
+		return matriculaService.estaExpirada( matricula );
 	}
 }
