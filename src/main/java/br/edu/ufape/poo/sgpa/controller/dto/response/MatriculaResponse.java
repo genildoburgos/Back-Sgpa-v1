@@ -8,6 +8,7 @@ import br.edu.ufape.poo.sgpa.model.enums.StatusDaMatricula;
 import java.time.LocalDate;
 
 public class MatriculaResponse {
+    private Long id;
     private LocalDate dataDeMatricula;
     private LocalDate dataDeExpiracao;
     private StatusDaMatricula statusDaMatricula;
@@ -23,6 +24,10 @@ public class MatriculaResponse {
         this.statusDaMatricula = statusDaMatricula;
         this.membro = membro;
         this.turma = turma;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public LocalDate getDataDeMatricula() {
