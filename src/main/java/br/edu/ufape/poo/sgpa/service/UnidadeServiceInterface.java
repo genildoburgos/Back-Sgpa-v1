@@ -36,5 +36,8 @@ public interface UnidadeServiceInterface {
         if (unidade.getAdministrador() == null || unidade.getAdministrador().getNome().isEmpty()) {
             throw new IllegalArgumentException("O administrador da unidade não pode ser nulo.");
         }
+        if (unidade.getCnpj() == null || unidade.getCnpj().isEmpty()) {
+            throw new IllegalArgumentException("O cnpj da unidade não pode ser nulo.");
+        }
     }
 }
