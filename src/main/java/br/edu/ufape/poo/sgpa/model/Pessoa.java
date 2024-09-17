@@ -69,7 +69,7 @@ public class Pessoa implements IPessoa {
 
 	@Override
 	public boolean checarTelefone(String telefone) throws TelefoneInvalidoException {
-		if (telefone.length() > 15 || telefone.length() < 15) {
+		if (telefone.length() > 10 || telefone.length() < 10) {
 			throw new TelefoneInvalidoException();
 		} else {
 			return true;
