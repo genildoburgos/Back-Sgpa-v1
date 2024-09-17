@@ -49,4 +49,28 @@ public class MatriculaResponse {
     public Turma getTurma() {
         return turma;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setDataDeMatricula(LocalDate dataDeMatricula) {
+        this.dataDeMatricula = dataDeMatricula;
+    }
+
+    public void setDataDeExpiracao(LocalDate dataDeExpiracao) {
+        this.dataDeExpiracao = dataDeExpiracao;
+    }
+
+    public void setStatusDaMatricula(StatusDaMatricula statusDaMatricula) {
+        this.statusDaMatricula = statusDaMatricula;
+    }
+
+    public void setMembro(Membro membro) {
+        this.membro = membro;
+    }
+
+    public void setTurma(Turma turma) {
+        this.turma = turma;
+    }
 }
