@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import br.edu.ufape.poo.sgpa.model.enums.StatusDaMatricula;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

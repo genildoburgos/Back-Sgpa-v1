@@ -51,6 +51,11 @@ public class Facade {
 	public Optional<Membro> buscarMembroPorCpf(String cpf) throws MembroNaoExisteException {
 		return membroService.buscarMembroPorCpf(cpf);
 	}
+	
+	// Buscar membro por ID
+	public Optional<Membro> buscarMembroPorId(Long id) throws MembroNaoExisteException {
+		return membroService.buscarMembroPorId(id);
+	}
 
 	// Buscar membro por número de matrícula
 	public Optional<Membro> buscarMembroPorNumeroDeMatricula(String numeroDeMatricula) throws MembroNaoExisteException {
@@ -347,7 +352,7 @@ public class Facade {
 		matriculaService.suspenderMatricula(matricula);
 	}
 
-	public boolean MatriculaEstaExpirada(Matricula matricula) {
+	public boolean matriculaEstaExpirada(Matricula matricula) {
 		return matriculaService.estaExpirada( matricula );
 	}
 }

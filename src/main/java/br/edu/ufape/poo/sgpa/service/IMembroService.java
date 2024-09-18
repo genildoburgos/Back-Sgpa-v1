@@ -15,13 +15,14 @@ import br.edu.ufape.poo.sgpa.model.Membro;
 public interface IMembroService {
 	
 	public Optional<Membro> buscarMembroPorCpf(String cpf) throws MembroNaoExisteException;
+	public Optional<Membro> buscarMembroPorId(Long id) throws MembroNaoExisteException;
 	public Optional<Membro> buscarMembroPorNumeroDeMatricula(String numeroDeMatricula) throws MembroNaoExisteException;
 	public List<Membro> buscarMembroPorNome(String nome);
 	public List<Membro> buscarMembroPorCpfOuNumeroDeMatriculaOuNome(String cpf, String numeroDeMatricula, String nome);
 	public void cadastrarMembro(Membro novoMembro) throws CampoObrigatorioNuloException, CpfInvalidoException, MembroExisteException, TelefoneInvalidoException, DataForaDaFaixaException, MembroMenorDeIdadeException;
 	public void deletarMembroPorCpf(String cpf) throws MembroNaoExisteException;
 	public List<Membro> listarMembros();
-	void atualizarMembro(Membro membroAtualizado, Long id)
+	public void atualizarMembro(Membro membroAtualizado, Long id)
 			throws MembroNaoExisteException, CampoObrigatorioNuloException, TelefoneInvalidoException, DataForaDaFaixaException;
 	
 }

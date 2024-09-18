@@ -43,6 +43,11 @@ public class MembroController {
 	public Optional<Membro> buscarMembroPorCpf(@PathVariable String cpf) throws MembroNaoExisteException {
 		return facade.buscarMembroPorCpf(cpf);
 	}
+	
+	@GetMapping("id/{id}")
+	public Optional<Membro> buscarMembroPorId(@PathVariable Long id) throws MembroNaoExisteException {
+		return facade.buscarMembroPorId(id);
+	}
 
 	@GetMapping("/matricula/{numeroDeMatricula}")
 	public Optional<Membro> buscarMembroPorNumeroDeMatricula(@PathVariable String numeroDeMatricula)

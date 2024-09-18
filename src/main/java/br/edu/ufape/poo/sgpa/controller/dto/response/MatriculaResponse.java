@@ -1,5 +1,6 @@
 package br.edu.ufape.poo.sgpa.controller.dto.response;
 
+import br.edu.ufape.poo.sgpa.model.Matricula;
 import br.edu.ufape.poo.sgpa.model.Membro;
 import br.edu.ufape.poo.sgpa.model.Turma;
 import br.edu.ufape.poo.sgpa.model.enums.StatusDaMatricula;
@@ -24,6 +25,14 @@ public class MatriculaResponse {
         this.statusDaMatricula = statusDaMatricula;
         this.membro = membro;
         this.turma = turma;
+    }
+    
+    public MatriculaResponse(Matricula matricula) {
+        this.dataDeMatricula = matricula.getDataDeMatricula();
+        this.dataDeExpiracao = matricula.getDataDeExpiracao();
+        this.statusDaMatricula = matricula.getStatusDaMatricula();
+        this.membro = matricula.getMembro();
+        this.turma = matricula.getTurma();
     }
 
     public Long getId() {

@@ -15,7 +15,7 @@ public interface MatriculaServiceInterface {
     void deletarMatricula(Long id);
     Matricula atualizarMatricula(Matricula matricula, Long id);
 
-    List <Matricula> buscarMatriculasPorMembro(Membro membro);
+    List<Matricula> buscarMatriculasPorMembro(Membro membro);
     List<Matricula> buscarPorDataExpiracao(LocalDate dataExpiracao);
     List<Matricula> buscarPorDataDeMatricula(LocalDate dataExpiracao);
     List<Matricula> buscarPorStatus(StatusDaMatricula status);
@@ -41,4 +41,5 @@ public interface MatriculaServiceInterface {
         }
         // Adicione outras validações necessárias
     }
+    
 }
