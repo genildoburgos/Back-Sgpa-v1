@@ -20,35 +20,35 @@ public class Unidade {
     @Column(name = "contato")
     private String contato;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<SlotHorario> horarioDeFuncionamento;
 
     @Column(name = "email")
     private String email;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Instrutor> instrutores;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Plano> planos;
 
     @Enumerated(EnumType.STRING)
     private Segmento segmento;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Endereco endereco;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Membro membro;
 
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Administrador administrador;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Turma> turmas;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Sala> salas;
 
     public Unidade(){
