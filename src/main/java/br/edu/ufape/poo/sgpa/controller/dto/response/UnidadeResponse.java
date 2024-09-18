@@ -25,20 +25,20 @@ public class UnidadeResponse {
     public UnidadeResponse() {
     }
 
-    public UnidadeResponse(String nome, String cnpj, String contato, List<SlotHorario> horarioDeFuncionamento, String email, List<Instrutor> instrutores, List<Plano> planos, Segmento segmento, Endereco endereco, Membro membro, Administrador administrador, List<Turma> turmas, List<Sala> salas) {
-        this.nome = nome;
-        this.cnpj = cnpj;
-        this.contato = contato;
-        this.horarioDeFuncionamento = horarioDeFuncionamento;
-        this.email = email;
-        this.instrutores = instrutores;
-        this.planos = planos;
-        this.segmento = segmento;
-        this.endereco = endereco;
-        this.membro = membro;
-        this.administrador = administrador;
-        this.turmas = turmas;
-        this.salas = salas;
+    public UnidadeResponse(Unidade unidade) {
+        this.id = unidade.getId();
+        this.nome = unidade.getNome();
+        this.cnpj = unidade.getCnpj();
+        this.contato = unidade.getContato();
+        this.email = unidade.getEmail();
+        this.endereco = unidade.getEndereco();
+        this.segmento = unidade.getSegmento();
+        this.planos = unidade.getPlanos();
+        this.instrutores = unidade.getInstrutores();
+        this.membro = unidade.getMembro();
+        this.turmas = unidade.getTurmas();
+        this.horarioDeFuncionamento = unidade.getHorarioDeFuncionamento();
+        this.administrador = unidade.getAdministrador();
     }
 
     public Long getId() {

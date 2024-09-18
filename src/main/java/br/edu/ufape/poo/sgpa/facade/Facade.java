@@ -11,16 +11,8 @@ import br.edu.ufape.poo.sgpa.exception.TurmaNaoExisteException;
 import br.edu.ufape.poo.sgpa.model.*;
 import br.edu.ufape.poo.sgpa.model.enums.StatusDaMatricula;
 import br.edu.ufape.poo.sgpa.service.*;
-import br.edu.ufape.poo.sgpa.model.Membro;
-import br.edu.ufape.poo.sgpa.service.MatriculaService;
-import br.edu.ufape.poo.sgpa.model.Plano;
-import br.edu.ufape.poo.sgpa.model.Vaga;
 import br.edu.ufape.poo.sgpa.model.enums.Modalidade;
-import br.edu.ufape.poo.sgpa.model.Administrador;
-import br.edu.ufape.poo.sgpa.service.MembroService;
-import br.edu.ufape.poo.sgpa.service.PlanoService;
-import br.edu.ufape.poo.sgpa.service.VagaService;
-import br.edu.ufape.poo.sgpa.service.AdministradorService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -208,6 +200,16 @@ public class Facade {
 	public Unidade atualizarUnidade(Unidade unidade, Long id) {
 		return unidadeService.atualizarUnidade(unidade, id);
 	}
+
+	//buscar unidade por nome
+	 public List<Unidade> buscarUnidadesPorNome(String nome) {
+        return unidadeService.buscarUnidadesPorNome(nome);
+    }
+
+	//buscar unidade por cnpj
+    public Unidade buscarUnidadePorCnpj(String cnpj) {
+        return unidadeService.buscarUnidadePorCnpj(cnpj);
+    }
 
 	// ------------------- Administrador --------------------
 
