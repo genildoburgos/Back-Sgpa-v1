@@ -11,7 +11,6 @@ public class PessoaRequest {
 	private String nome;
 	@NotNull
     private String cpf;
-	@NotNull
     private String sexo;
 	@NotNull
     private LocalDate dataDeNascimento;
@@ -19,9 +18,7 @@ public class PessoaRequest {
     private String telefone;
 	@NotNull
     private String contatoDeEmergencia;
-	@NotNull
     private String email;
-	@NotNull
     private int idade;
 	
 	public PessoaRequest() {}
@@ -98,7 +95,6 @@ public class PessoaRequest {
 		pessoa.setDataDeNascimento(this.dataDeNascimento);
 		pessoa.setEmail(this.email);
 		pessoa.setIdade(this.idade);
-		pessoa.setNome(this.nome);
 		pessoa.setNome(this.nome);
 		pessoa.setSexo(this.sexo);
 		pessoa.setTelefone(this.telefone);

@@ -9,21 +9,18 @@ import br.edu.ufape.poo.sgpa.model.Turma;
 import br.edu.ufape.poo.sgpa.model.enums.StatusDePagamento;
 import jakarta.validation.constraints.NotNull;
 
-public class MembroRequest {
-	
+public class MembroRequest extends PessoaRequest {
+
 	@NotNull
 	private String numeroDeMatricula;
-	@NotNull
-    private StatusDePagamento statusDePagamento;
-	@NotNull
-    private List<Matricula> matriculas;
-	@NotNull
-    private Responsavel responsavel;
-	@NotNull
-    private List<Turma> turmas;
-    
-    public MembroRequest() {}
-    
+	private StatusDePagamento statusDePagamento;
+	private List<Matricula> matriculas;
+	private Responsavel responsavel;
+	private List<Turma> turmas;
+
+	public MembroRequest() {
+	}
+
 	public String getNumeroDeMatricula() {
 		return numeroDeMatricula;
 	}
@@ -66,14 +63,22 @@ public class MembroRequest {
 
 	public Membro toMembro() {
 		Membro membro = new Membro();
-		
+
 		membro.setNumeroDeMatricula(this.numeroDeMatricula);
-	    membro.setStatusDePagamento(this.statusDePagamento);
-	    membro.setMatriculas(this.matriculas);
-	    membro.setResponsavel(this.responsavel);
-	    membro.setTurmas(this.turmas);
-		
+		membro.setStatusDePagamento(this.statusDePagamento);
+		membro.setMatriculas(this.matriculas);
+		membro.setResponsavel(this.responsavel);
+		membro.setTurmas(this.turmas);
+		membro.setContatoDeEmergencia(this.numeroDeMatricula);
+		membro.setCpf(this.numeroDeMatricula);
+		membro.setDataDeNascimento(this.getDataDeNascimento());
+		membro.setEmail(this.numeroDeMatricula);
+		membro.setIdade(this.getIdade());
+		membro.setNome(this.numeroDeMatricula);
+		membro.setSexo(this.numeroDeMatricula);
+		membro.setTelefone(this.numeroDeMatricula);
+
 		return membro;
 	}
- 	
+
 }
