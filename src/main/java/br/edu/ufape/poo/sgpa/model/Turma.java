@@ -23,7 +23,7 @@ public class Turma {
 	@Enumerated(EnumType.STRING)
 	private Modalidade modalidade;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne
 	private Sala sala;
 	
 	@OneToOne

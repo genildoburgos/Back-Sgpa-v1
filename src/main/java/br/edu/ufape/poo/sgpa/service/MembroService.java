@@ -71,6 +71,15 @@ public class MembroService implements IMembroService {
 		}
 		return membroOpt;
 	}
+	
+	@Override
+	public Optional<Membro> buscarMembroPorId(Long id) throws MembroNaoExisteException {
+		Optional<Membro> membroOpt = repository.findById(id);
+		if (!membroOpt.isPresent()) {
+			throw new MembroNaoExisteException();
+		}
+		return membroOpt;
+	}
 
 	@Override
 	public Optional<Membro> buscarMembroPorNumeroDeMatricula(String numeroDeMatricula) throws MembroNaoExisteException {
