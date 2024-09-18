@@ -271,15 +271,19 @@ public class Facade {
 		return turmaService.buscarTurmasPorModalidade(modalidade);
 	}
 
-	public List<Turma> buscarTurmasPorInstrutor(Instrutor instrutor) {
+	public List<Turma> buscarTurmasPorInstrutorId(Long id) {
+		Instrutor instrutor = buscarInstrutor(id);
 		return turmaService.buscarTurmasPorInstrutor(instrutor);
 	}
 
-	public List<Turma> buscarTurmasPorModalidadeOuInstrutor(Modalidade modalidade, Instrutor instrutor) {
+	public List<Turma> buscarTurmasPorModalidadeOuInstrutor(Modalidade modalidade, Long id) {
+		Instrutor instrutor = buscarInstrutor(id);
 		return turmaService.buscarTurmasPorModalidadeOuInstrutor(modalidade, instrutor);
 	}
 
 	public Turma cadastrarTurma(Turma entity) {
+		Vaga vagaCompleta = vagaService.buscarVagaPorId(entity.getVaga().getId());
+		entity.setVaga(vagaCompleta);
 		return turmaService.cadastrarTurma(entity);
 	}
 

@@ -12,9 +12,9 @@ import jakarta.validation.constraints.NotNull;
 
 public class TurmaRequest {
 	
-	@NotNull
+
 	private Instrutor instrutor;
-	@NotNull
+
 	private List<Matricula> matriculas;
 	@NotNull
 	private Modalidade modalidade;

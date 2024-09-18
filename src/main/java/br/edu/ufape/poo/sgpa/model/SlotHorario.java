@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name="slotHorario", schema="academia")
 public class SlotHorario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
