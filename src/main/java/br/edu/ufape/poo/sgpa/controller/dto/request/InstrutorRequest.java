@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 // TODO: Criar DTO para Pessoa e colocar herança
-public class InstrutorRequest {
+public class InstrutorRequest extends PessoaRequest {
     private String clt;
     private List<SlotHorario> horariosDeTrabalho;
     private List<Modalidade> modalidades;
