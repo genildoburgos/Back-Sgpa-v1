@@ -1,4 +1,4 @@
-package br.edu.ufape.poo.sgpa.unitario.vaga;
+package br.edu.ufape.poo.sgpa.unitario;
 
 
 import br.edu.ufape.poo.sgpa.model.Vaga;

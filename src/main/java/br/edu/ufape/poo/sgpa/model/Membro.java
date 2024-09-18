@@ -19,7 +19,7 @@ public class Membro extends Pessoa {
     @OneToMany
     private List<Matricula> matriculas;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Responsavel responsavel;
 
     @ManyToMany
