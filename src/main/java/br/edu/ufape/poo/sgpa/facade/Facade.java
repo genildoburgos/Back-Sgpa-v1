@@ -180,6 +180,16 @@ public class Facade {
 		return instrutorService.atualizarInsturor(instrutor, id);
 	}
 
+	//buscar por cpf
+	public Instrutor buscarInstrutorPorCpf(String cpf) {
+		return instrutorService.buscarInstrutorPorCpf(cpf);
+	}
+
+	//buscar por nome
+	public List<Instrutor> buscarInstrutorPorNome(String nome){
+		return instrutorService.buscarInstrutoresPorNome(nome);
+	}
+
 	// ------------------- Unidade --------------------
 	@Autowired
 	private final UnidadeService unidadeService;
