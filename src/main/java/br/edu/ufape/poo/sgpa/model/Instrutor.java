@@ -15,14 +15,14 @@ public class Instrutor extends Pessoa {
     private long id;
     private String clt;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<SlotHorario> horariosDeTrabalho;
 
 
     @ElementCollection(targetClass = Modalidade.class) // Indica que é uma coleção de elementos simples
     @Enumerated(EnumType.STRING) // Armazena como String no banco de dados
     private List<Modalidade> modalidades;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Unidade> unidades;
 
 

@@ -41,9 +41,9 @@ public interface AdministradorServiceInterface {
         if (administrador.getContatoDeEmergencia() == null || administrador.getContatoDeEmergencia().isEmpty()) {
             throw new IllegalArgumentException("Contato de emergência não pode ser vazio.");
         }
-
+        /*
         if (administrador.getUnidade() == null) {  
             throw new IllegalArgumentException("Unidade do administrador não pode ser nula.");
-        }
+        } */
     }
 }

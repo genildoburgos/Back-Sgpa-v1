@@ -29,10 +29,10 @@ public interface UnidadeServiceInterface {
         }
         if (unidade.getNome() == null || unidade.getNome().isEmpty()) {
             throw new IllegalArgumentException("Nome da unidade não pode ser nulo.");
-        }
+        } /*
         if (unidade.getSalas() == null || unidade.getSalas().isEmpty()) {
             throw new IllegalArgumentException("As salas da unidade não podem ser nulas.");
-        }
+        }*/
         if (unidade.getAdministrador() == null || unidade.getAdministrador().getNome().isEmpty()) {
             throw new IllegalArgumentException("O administrador da unidade não pode ser nulo.");
         }
