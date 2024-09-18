@@ -5,20 +5,9 @@ import java.util.List;
 import java.util.Objects;
 
 import br.edu.ufape.poo.sgpa.model.enums.Modalidade;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table ( name = "turma", schema = "academia")
 public class Turma {
 	
 	@Id
@@ -34,7 +23,7 @@ public class Turma {
 	@Enumerated(EnumType.STRING)
 	private Modalidade modalidade;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Sala sala;
 	
 	@OneToOne
