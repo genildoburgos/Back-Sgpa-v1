@@ -1,15 +1,14 @@
 package br.edu.ufape.poo.sgpa.controller.dto.response;
 
-// TODO: Adicionar herença da classe pessoa
-
 import br.edu.ufape.poo.sgpa.model.Instrutor;
+import br.edu.ufape.poo.sgpa.model.Pessoa;
 import br.edu.ufape.poo.sgpa.model.SlotHorario;
 import br.edu.ufape.poo.sgpa.model.Unidade;
 import br.edu.ufape.poo.sgpa.model.enums.Modalidade;
 
 import java.util.List;
 
-public class InstrutorResponse {
+public class InstrutorResponse extends PessoaResponse {
     private Long id;
     private String clt;
     private List<SlotHorario> horariosDeTrabalho;
@@ -17,6 +16,7 @@ public class InstrutorResponse {
     private List<Unidade> unidades;
 
     public InstrutorResponse(Instrutor instrutor) {
+        super(instrutor);
         this.id = instrutor.getId();
         this.clt = instrutor.getClt();
         this.horariosDeTrabalho = instrutor.getHorariosDeTrabalho();
