@@ -69,14 +69,14 @@ public class MembroRequest extends PessoaRequest {
 		membro.setMatriculas(this.matriculas);
 		membro.setResponsavel(this.responsavel);
 		membro.setTurmas(this.turmas);
-		membro.setContatoDeEmergencia(this.numeroDeMatricula);
-		membro.setCpf(this.numeroDeMatricula);
+		membro.setContatoDeEmergencia(this.getContatoDeEmergencia());
+		membro.setCpf(this.getCpf());
 		membro.setDataDeNascimento(this.getDataDeNascimento());
-		membro.setEmail(this.numeroDeMatricula);
+		membro.setEmail(this.getEmail());
 		membro.setIdade(this.getIdade());
-		membro.setNome(this.numeroDeMatricula);
-		membro.setSexo(this.numeroDeMatricula);
-		membro.setTelefone(this.numeroDeMatricula);
+		membro.setNome(this.getNome());
+		membro.setSexo(this.getSexo());
+		membro.setTelefone(this.getTelefone());
 
 		return membro;
 	}
