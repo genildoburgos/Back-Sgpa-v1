@@ -8,7 +8,7 @@ import br.edu.ufape.poo.sgpa.model.Responsavel;
 import br.edu.ufape.poo.sgpa.model.Turma;
 import br.edu.ufape.poo.sgpa.model.enums.StatusDePagamento;
 
-public class MembroResponse {
+public class MembroResponse extends PessoaResponse{
 	
 	private String numeroDeMatricula;
     private StatusDePagamento statusDePagamento;
@@ -19,6 +19,7 @@ public class MembroResponse {
     public MembroResponse() {}
     
     public MembroResponse(Membro membro) {
+		super(membro);
         this.numeroDeMatricula = membro.getNumeroDeMatricula();
         this.statusDePagamento = membro.getStatusDePagamento();
         this.matriculas = membro.getMatriculas();

@@ -15,6 +15,9 @@ public class InstrutorResponse extends PessoaResponse {
     private List<Modalidade> modalidades;
     private List<Unidade> unidades;
 
+    public InstrutorResponse() {
+    }
+
     public InstrutorResponse(Instrutor instrutor) {
         super(instrutor);
         this.id = instrutor.getId();

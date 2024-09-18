@@ -14,6 +14,9 @@ public class PessoaResponse {
     private String email;
     private int idade;
 
+    public PessoaResponse() {
+    }
+
     public PessoaResponse(Pessoa pessoa){
         this.nome = pessoa.getNome();
         this.cpf = pessoa.getCpf();
