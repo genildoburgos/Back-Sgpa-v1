@@ -57,7 +57,16 @@ public class InstrutorRequest extends PessoaRequest {
         instrutor.setHorariosDeTrabalho(this.horariosDeTrabalho);
         instrutor.setModalidades(this.modalidades);
         instrutor.setUnidades(this.unidades);
-
+        instrutor.setContatoDeEmergencia(this.getContatoDeEmergencia());
+        instrutor.setCpf(this.getCpf());
+        instrutor.setDataDeNascimento(this.getDataDeNascimento());
+        instrutor.setEmail(this.getEmail());
+        instrutor.setIdade(this.getIdade());
+        instrutor.setNome(this.getNome());
+        instrutor.setSexo(this.getSexo());
+        instrutor.setTelefone(this.getTelefone());
+        
         return instrutor;
+        
     }
 }
