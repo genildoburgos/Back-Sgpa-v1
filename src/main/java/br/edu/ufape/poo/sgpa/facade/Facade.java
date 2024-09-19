@@ -6,6 +6,8 @@ import br.edu.ufape.poo.sgpa.exception.DataForaDaFaixaException;
 import br.edu.ufape.poo.sgpa.exception.MembroExisteException;
 import br.edu.ufape.poo.sgpa.exception.MembroMenorDeIdadeException;
 import br.edu.ufape.poo.sgpa.exception.MembroNaoExisteException;
+import br.edu.ufape.poo.sgpa.exception.SalaExisteException;
+import br.edu.ufape.poo.sgpa.exception.SalaNaoExisteException;
 import br.edu.ufape.poo.sgpa.exception.TelefoneInvalidoException;
 import br.edu.ufape.poo.sgpa.exception.TurmaNaoExisteException;
 import br.edu.ufape.poo.sgpa.model.*;
@@ -25,7 +27,7 @@ public class Facade {
 
 	public Facade(MembroService membroService, PlanoService planoService, VagaService vagaService,
                   InstrutorService instrutorService, AdministradorService administradorService, UnidadeService unidadeService,
-                  TurmaService turmaService, MatriculaService matriculaService) {
+                  TurmaService turmaService, MatriculaService matriculaService, SalaService salaService) {
 		this.membroService = membroService;
 		this.planoService = planoService;
 		this.vagaService = vagaService;
@@ -34,6 +36,7 @@ public class Facade {
 		this.unidadeService = unidadeService;
 		this.turmaService = turmaService;
         this.matriculaService = matriculaService;
+        this.salaService = salaService;
     }
 
 	// ------------------------ Membro --------------------------------
@@ -355,4 +358,29 @@ public class Facade {
 	public boolean matriculaEstaExpirada(Matricula matricula) {
 		return matriculaService.estaExpirada( matricula );
 	}
+	
+	//--------------- Matricula---------------------------
+	@Autowired
+	private final SalaService salaService;
+
+	public Optional<Sala> buscarSalaPorBlocoENumero(String bloco, String numero) {
+		return salaService.buscarSalaPorBlocoENumero(bloco, numero);
+	}
+
+	public Sala criarSala(Sala sala) throws CampoObrigatorioNuloException, SalaExisteException {
+		return salaService.criarSala(sala);
+	}
+
+	public Optional<Sala> buscarSalaPorId(Long id) throws SalaNaoExisteException {
+		return salaService.buscarSalaPorId(id);
+	}
+
+	public void deletarSalaPorId(Long id) throws SalaNaoExisteException {
+		salaService.deletarSalaPorId(id);
+	}
+
+	public void deletarSala(Sala entity) throws SalaNaoExisteException {
+		salaService.deletarSala(entity);
+	}
+	
 }
