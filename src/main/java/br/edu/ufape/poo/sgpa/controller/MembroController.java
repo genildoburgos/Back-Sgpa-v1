@@ -2,6 +2,7 @@ package br.edu.ufape.poo.sgpa.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ufape.poo.sgpa.model.Membro;
+import br.edu.ufape.poo.sgpa.controller.dto.request.MembroRequest;
+import br.edu.ufape.poo.sgpa.controller.dto.response.MembroResponse;
 import br.edu.ufape.poo.sgpa.exception.CampoObrigatorioNuloException;
 import br.edu.ufape.poo.sgpa.exception.CpfInvalidoException;
 import br.edu.ufape.poo.sgpa.exception.DataForaDaFaixaException;
@@ -34,42 +36,56 @@ public class MembroController {
 	private Facade facade;
 
 	@PatchMapping("/{id}")
-	public void atualizarMembro(@RequestBody Membro m, @PathVariable Long id) throws MembroNaoExisteException,
+	public MembroResponse atualizarMembro(@RequestBody MembroRequest m, @PathVariable Long id) throws MembroNaoExisteException,
 			CampoObrigatorioNuloException, TelefoneInvalidoException, DataForaDaFaixaException {
-		facade.atualizarMembro(m, id);
+		return new MembroResponse(facade.atualizarMembro(m.toMembro(), id));
 	}
 
 	@GetMapping("/cpf/{cpf}")
-	public Optional<Membro> buscarMembroPorCpf(@PathVariable String cpf) throws MembroNaoExisteException {
-		return facade.buscarMembroPorCpf(cpf);
+	public Optional<MembroResponse> buscarMembroPorCpf(@PathVariable String cpf) throws MembroNaoExisteException {
+		return facade.buscarMembroPorCpf(cpf).map(MembroResponse::new);
 	}
 	
 	@GetMapping("id/{id}")
-	public Optional<Membro> buscarMembroPorId(@PathVariable Long id) throws MembroNaoExisteException {
-		return facade.buscarMembroPorId(id);
+	public Optional<MembroResponse> buscarMembroPorId(@PathVariable Long id) throws MembroNaoExisteException {
+		return facade.buscarMembroPorId(id)
+                .map(MembroResponse::new);
 	}
 
 	@GetMapping("/matricula/{numeroDeMatricula}")
-	public Optional<Membro> buscarMembroPorNumeroDeMatricula(@PathVariable String numeroDeMatricula)
-			throws MembroNaoExisteException {
-		return facade.buscarMembroPorNumeroDeMatricula(numeroDeMatricula);
+	public Optional<MembroResponse> buscarMembroPorNumeroDeMatricula(@PathVariable String numeroDeMatricula)
+	        throws MembroNaoExisteException {
+	    
+	    return facade.buscarMembroPorNumeroDeMatricula(numeroDeMatricula)
+	                 .map(MembroResponse::new);
 	}
 
+
 	@GetMapping("/nome")
-	public List<Membro> buscarMembroPorNome(@RequestParam String nome) {
-		return facade.buscarMembroPorNome(nome);
+	public List<MembroResponse> buscarMembroPorNome(@RequestParam String nome) {
+		return facade.buscarMembroPorNome(nome)
+                .stream()
+                .map(MembroResponse::new)
+                .collect(Collectors.toList());
 	}
 
 	@GetMapping("/pesquisa")
-	public List<Membro> buscarMembroPorCpfOuNumeroDeMatriculaOuNome(@RequestParam(required = false) String cpf,
-			@RequestParam(required = false) String numeroDeMatricula, @RequestParam(required = false) String nome) {
-		return facade.buscarMembroPorCpfOuNumeroDeMatriculaOuNome(cpf, numeroDeMatricula, nome);
+	public List<MembroResponse> buscarMembroPorCpfOuNumeroDeMatriculaOuNome(
+	        @RequestParam(required = false) String cpf,
+	        @RequestParam(required = false) String numeroDeMatricula,
+	        @RequestParam(required = false) String nome) {
+	    
+	    return facade.buscarMembroPorCpfOuNumeroDeMatriculaOuNome(cpf, numeroDeMatricula, nome)
+	                 .stream()
+	                 .map(MembroResponse::new)
+	                 .collect(Collectors.toList());
 	}
 
+
 	@PostMapping
-	public void cadastrarMembro(@RequestBody Membro m) throws CampoObrigatorioNuloException, CpfInvalidoException,
+	public MembroResponse cadastrarMembro(@RequestBody MembroRequest m) throws CampoObrigatorioNuloException, CpfInvalidoException,
 			MembroExisteException, TelefoneInvalidoException, DataForaDaFaixaException, MembroMenorDeIdadeException {
-		facade.cadastrarMembro(m);
+		return new MembroResponse(facade.cadastrarMembro(m.toMembro()));
 	}
 
 	@DeleteMapping("/cpf/{cpf}")
@@ -78,7 +94,11 @@ public class MembroController {
 	}
 
 	@GetMapping
-	public List<Membro> listarMembros() {
-		return facade.listarMembros();
+	public List<MembroResponse> listarMembros() {
+		return facade.listarMembros()
+                .stream()
+                .map(MembroResponse::new)
+                .collect(Collectors.toList());
 	}
+	
 }

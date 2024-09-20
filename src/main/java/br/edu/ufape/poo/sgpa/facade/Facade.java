@@ -45,9 +45,9 @@ public class Facade {
 	private final MembroService membroService;
 
 	// Atualizar membro
-	public void atualizarMembro(Membro membroAtualizado, Long id) throws MembroNaoExisteException,
+	public Membro atualizarMembro(Membro membroAtualizado, Long id) throws MembroNaoExisteException,
 			CampoObrigatorioNuloException, TelefoneInvalidoException, DataForaDaFaixaException {
-		membroService.atualizarMembro(membroAtualizado, id);
+		return membroService.atualizarMembro(membroAtualizado, id);
 	}
 
 	// Buscar membro por CPF
@@ -76,9 +76,9 @@ public class Facade {
 	}
 
 	// Cadastrar um novo membro
-	public void cadastrarMembro(Membro novoMembro) throws CampoObrigatorioNuloException, CpfInvalidoException,
+	public Membro cadastrarMembro(Membro novoMembro) throws CampoObrigatorioNuloException, CpfInvalidoException,
 			MembroExisteException, TelefoneInvalidoException, DataForaDaFaixaException, MembroMenorDeIdadeException {
-		membroService.cadastrarMembro(novoMembro);
+		return membroService.cadastrarMembro(novoMembro);
 	}
 
 	// Deletar membro por CPF

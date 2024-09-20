@@ -19,10 +19,10 @@ public interface IMembroService {
 	public Optional<Membro> buscarMembroPorNumeroDeMatricula(String numeroDeMatricula) throws MembroNaoExisteException;
 	public List<Membro> buscarMembroPorNome(String nome);
 	public List<Membro> buscarMembroPorCpfOuNumeroDeMatriculaOuNome(String cpf, String numeroDeMatricula, String nome);
-	public void cadastrarMembro(Membro novoMembro) throws CampoObrigatorioNuloException, CpfInvalidoException, MembroExisteException, TelefoneInvalidoException, DataForaDaFaixaException, MembroMenorDeIdadeException;
+	public Membro cadastrarMembro(Membro novoMembro) throws CampoObrigatorioNuloException, CpfInvalidoException, MembroExisteException, TelefoneInvalidoException, DataForaDaFaixaException, MembroMenorDeIdadeException;
 	public void deletarMembroPorCpf(String cpf) throws MembroNaoExisteException;
 	public List<Membro> listarMembros();
-	public void atualizarMembro(Membro membroAtualizado, Long id)
+	public Membro atualizarMembro(Membro membroAtualizado, Long id)
 			throws MembroNaoExisteException, CampoObrigatorioNuloException, TelefoneInvalidoException, DataForaDaFaixaException;
 	
 }
