@@ -25,7 +25,7 @@ public class MembroService implements IMembroService {
 	private MembroRepository repository;
 
 	@Override
-	public void atualizarMembro(Membro membroAtualizado, Long id) throws MembroNaoExisteException,
+	public Membro atualizarMembro(Membro membroAtualizado, Long id) throws MembroNaoExisteException,
 			CampoObrigatorioNuloException, TelefoneInvalidoException, DataForaDaFaixaException {
 
 		Optional<Membro> membroOpt = repository.findById(id);
@@ -60,7 +60,7 @@ public class MembroService implements IMembroService {
 		membroExistente.setResponsavel(membroAtualizado.getResponsavel());
 		membroExistente.setTurmas(membroAtualizado.getTurmas());
 
-		repository.save(membroExistente);
+		return repository.save(membroExistente);
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class MembroService implements IMembroService {
 	}
 
 	@Override
-	public void cadastrarMembro(Membro entity) throws CampoObrigatorioNuloException, CpfInvalidoException,
+	public Membro cadastrarMembro(Membro entity) throws CampoObrigatorioNuloException, CpfInvalidoException,
 			MembroExisteException, TelefoneInvalidoException, DataForaDaFaixaException, MembroMenorDeIdadeException {
 
 		if (entity.getCpf() == null || entity.getCpf().isEmpty() || entity.getNome() == null
@@ -132,7 +132,7 @@ public class MembroService implements IMembroService {
 			throw new MembroExisteException();
 		}
 
-		repository.save(entity);
+		return repository.save(entity);
 	}
 
 	@Transactional
