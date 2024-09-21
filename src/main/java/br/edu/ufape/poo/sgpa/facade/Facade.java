@@ -382,5 +382,9 @@ public class Facade {
 	public void deletarSala(Sala entity) throws SalaNaoExisteException {
 		salaService.deletarSala(entity);
 	}
+
+	public List<Sala> findByBloco(String bloco) {
+	  return salaService.findByBloco(bloco);
+	}
 	
 }

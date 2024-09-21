@@ -28,11 +28,11 @@ public class Sala implements ISala {
 	public Sala() {
 	}
 	
-	public Sala(String bloco, String numero, int capacidade) {
+	public Sala(String bloco, String numero, int capacidade, List<SlotHorario> slotHorarios) {
 		this.bloco = bloco;
 		this.numero = numero;
 		this.capacidade = capacidade;
-		this.slotsHorario = new ArrayList<>();
+		this.slotsHorario = slotHorarios;
 	}
 
 	@Override
@@ -86,6 +86,14 @@ public class Sala implements ISala {
 	public void setCapacidade(int capacidade) {
 		this.capacidade = capacidade;
 	}
+
+	public List<SlotHorario> getSlotsHorario() {
+        return slotsHorario;
+    }
+
+    public void setSlotsHorario(List<SlotHorario> slotsHorario) {
+        this.slotsHorario = slotsHorario;
+    }
 	
 	@Override
 	public void reservarSala(SlotHorario slotHorario) {
