@@ -43,7 +43,7 @@ public class SalaController {
         facade.deletarSalaPorId(id);
     }
 
-    @DeleteMapping("deletar/{id}")
+    @DeleteMapping("deletar")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarSala(@PathVariable Sala entity) throws SalaNaoExisteException {
         facade.deletarSala(entity);
