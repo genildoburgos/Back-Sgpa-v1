@@ -54,7 +54,7 @@ public class SalaRequest {
         sala.setBloco(this.bloco);
         sala.setNumero(this.numero);
         sala.setCapacidade(this.capacidade);
-       /* sala.setSlotsHorario(this.slotsHorario);*/
+        sala.setSlotsHorario(this.slotsHorario);
         return sala;
     }
 }

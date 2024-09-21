@@ -17,7 +17,7 @@ public class SalaResponse {
         this.bloco = sala.getBloco();
         this.numero = sala.getNumero();
         this.capacidade = sala.getCapacidade();
-      /* this.slotsHorario = sala.getSlotsHorario();*/
+        this.slotsHorario = sala.getSlotsHorario();
     }
 
 

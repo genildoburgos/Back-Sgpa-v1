@@ -58,9 +58,10 @@ public class SalaController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Sala não encontrada"));
     }
 
-    /* 
+
     @GetMapping("/bloco/{bloco}")
     List<Sala> findByBloco(String bloco){
         return facade.findByBloco(bloco);
-    }*/
+    }
+
 }
