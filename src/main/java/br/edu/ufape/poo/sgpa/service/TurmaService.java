@@ -4,12 +4,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufape.poo.sgpa.exception.CampoObrigatorioNuloException;
+import br.edu.ufape.poo.sgpa.exception.TurmaComMembrosException;
 import br.edu.ufape.poo.sgpa.exception.TurmaNaoExisteException;
 import br.edu.ufape.poo.sgpa.model.Instrutor;
 import br.edu.ufape.poo.sgpa.model.Turma;
 import br.edu.ufape.poo.sgpa.model.enums.Modalidade;
 import br.edu.ufape.poo.sgpa.repository.TurmaRepository;
-import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class TurmaService implements ITurmaService {
@@ -18,10 +19,13 @@ public class TurmaService implements ITurmaService {
 	private TurmaRepository repository;
 	
 	@Override
-	public Turma atualizarTurma(Turma turmaAtualizada, Long id) {
+	public Turma atualizarTurma(Turma turmaAtualizada, Long id) throws TurmaNaoExisteException, CampoObrigatorioNuloException {
         Turma turmaExistente = repository.findById(id).orElseThrow(() -> 
-            new EntityNotFoundException("Turma não existe")
-        );
+             new TurmaNaoExisteException());
+        if (turmaAtualizada.getInstrutor() == null || turmaAtualizada.getModalidade() == null || turmaAtualizada.getSala() == null
+				|| turmaAtualizada.getVaga() == null) {
+			throw new CampoObrigatorioNuloException();
+		}
 
         turmaExistente.setInstrutor(turmaAtualizada.getInstrutor());
         turmaExistente.setModalidade(turmaAtualizada.getModalidade());
@@ -32,8 +36,8 @@ public class TurmaService implements ITurmaService {
     }
 	
 	@Override
-	public Turma buscarTurmaPorId(Long id) {
-		return repository.findById(id).orElseThrow(()-> new EntityNotFoundException("Turma não encontrada"));
+	public Turma buscarTurmaPorId(Long id) throws TurmaNaoExisteException {
+		return repository.findById(id).orElseThrow(()-> new TurmaNaoExisteException());
 	}
 	
 	@Override
@@ -52,22 +56,23 @@ public class TurmaService implements ITurmaService {
 	}
 	
 	@Override
-	public Turma cadastrarTurma(Turma entity) {
-        Turma turma = new Turma();
-        
-        turma.setInstrutor(entity.getInstrutor());
-        turma.setModalidade(entity.getModalidade());
-        turma.setSala(entity.getSala());
-        turma.setVaga(entity.getVaga());
-        
-        return repository.save(turma);
-    }
+	public Turma cadastrarTurma(Turma entity) throws CampoObrigatorioNuloException {
+		if (entity.getInstrutor() == null || entity.getModalidade() == null || entity.getSala() == null
+				|| entity.getVaga() == null) {
+			throw new CampoObrigatorioNuloException();
+		}
+
+		return repository.save(entity);
+	}
 
 	@Override
-	public void deletarTurma(Long id) throws TurmaNaoExisteException {
-		if (!repository.existsById(id)) {
-            throw new TurmaNaoExisteException();
-        }
+	public void deletarTurma(Long id) throws TurmaNaoExisteException, TurmaComMembrosException {
+		Turma turma = repository.findById(id).orElseThrow(() -> new TurmaNaoExisteException());
+		
+		if (turma.getMatriculas() != null && !turma.getMatriculas().isEmpty()) {
+	        throw new TurmaComMembrosException();
+	    }
+		
 		repository.deleteById(id);
 	}
 

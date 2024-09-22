@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import br.edu.ufape.poo.sgpa.exception.CampoObrigatorioNuloException;
-import br.edu.ufape.poo.sgpa.exception.MembroExisteException;
+import br.edu.ufape.poo.sgpa.exception.CpfInvalidoException;
+import br.edu.ufape.poo.sgpa.exception.DataForaDaFaixaException;
+import br.edu.ufape.poo.sgpa.exception.MembroDuplicadoException;
 import br.edu.ufape.poo.sgpa.exception.MembroNaoExisteException;
+import br.edu.ufape.poo.sgpa.exception.TelefoneInvalidoException;
 import br.edu.ufape.poo.sgpa.exception.MembroMenorDeIdadeException;
 import br.edu.ufape.poo.sgpa.model.Membro;
 import br.edu.ufape.poo.sgpa.model.Responsavel;
@@ -31,7 +34,7 @@ class MembroServiceTest {
 		Membro membro2 = new Membro("Enzo Henrique", "16623014489", "Masculino", LocalDate.of(2000, 2, 21),
 				"8781753241", "8781159537", "enzoh@gmail.com", null, "123M34", null, StatusDePagamento.EFETUADO, 21);
 
-		MembroExisteException exception = assertThrows(MembroExisteException.class, () -> {
+		MembroDuplicadoException exception = assertThrows(MembroDuplicadoException.class, () -> {
 			membroService.cadastrarMembro(membro1);
 			membroService.cadastrarMembro(membro2);
 		});
@@ -142,4 +145,21 @@ class MembroServiceTest {
 		assertEquals("O membro não está cadastrado no sistema", exception.getMessage());
 
 	}
+	
+	@Test
+	void gerarMatriculaTest() throws CampoObrigatorioNuloException, CpfInvalidoException, MembroDuplicadoException, TelefoneInvalidoException, DataForaDaFaixaException, MembroMenorDeIdadeException {
+	    Membro membro = new Membro("Enzo Henrique", "98765432100", "Masculino", LocalDate.of(2000, 2, 21),
+	            "8798175324", "9879811595", "enzoh@gmail.com", null, null, null, StatusDePagamento.EFETUADO, 21);
+	    
+	    // Cadastrar o membro para gerar uma matrícula
+	    membroService.cadastrarMembro(membro);
+
+	    String matriculaGerada = membro.getNumeroDeMatricula();
+	    
+	    // Verifica se a matrícula gerada começa com "MA" e tem 12 caracteres no total (2 para "MA" + 10 números)
+	    assertTrue(matriculaGerada.startsWith("MA"));
+	    assertEquals(12, matriculaGerada.length());
+
+	}
+
 }

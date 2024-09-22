@@ -2,6 +2,8 @@ package br.edu.ufape.poo.sgpa.controller;
 
 import br.edu.ufape.poo.sgpa.controller.dto.request.TurmaRequest;
 import br.edu.ufape.poo.sgpa.controller.dto.response.TurmaResponse;
+import br.edu.ufape.poo.sgpa.exception.CampoObrigatorioNuloException;
+import br.edu.ufape.poo.sgpa.exception.TurmaComMembrosException;
 import br.edu.ufape.poo.sgpa.exception.TurmaNaoExisteException;
 import br.edu.ufape.poo.sgpa.facade.Facade;
 import br.edu.ufape.poo.sgpa.model.enums.Modalidade;
@@ -30,23 +32,23 @@ public class TurmaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public TurmaResponse cadastrarTurma(@RequestBody TurmaRequest novaTurma) {
+    public TurmaResponse cadastrarTurma(@RequestBody TurmaRequest novaTurma) throws CampoObrigatorioNuloException {
         return new TurmaResponse(facade.cadastrarTurma(novaTurma.toTurma()));
     }
 
     @GetMapping("/{id}")
-    public TurmaResponse buscarTurmaPorId(@PathVariable Long id) {
+    public TurmaResponse buscarTurmaPorId(@PathVariable Long id) throws TurmaNaoExisteException {
         return new TurmaResponse(facade.buscarTurmaPorId(id));
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletarTurma(@PathVariable Long id) throws TurmaNaoExisteException {
+    public void deletarTurma(@PathVariable Long id) throws TurmaNaoExisteException, TurmaComMembrosException {
         facade.deletarTurma(id);
     }
 
     @PutMapping("/{id}")
-    public TurmaResponse atualizarTurma(@RequestBody TurmaRequest turmaAtualizada, @PathVariable Long id) {
+    public TurmaResponse atualizarTurma(@RequestBody TurmaRequest turmaAtualizada, @PathVariable Long id) throws TurmaNaoExisteException, CampoObrigatorioNuloException {
         return new TurmaResponse(facade.atualizarTurma(turmaAtualizada.toTurma(), id));
     }
 

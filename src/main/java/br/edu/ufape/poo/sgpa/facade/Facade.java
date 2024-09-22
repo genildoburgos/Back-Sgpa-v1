@@ -3,12 +3,13 @@ package br.edu.ufape.poo.sgpa.facade;
 import br.edu.ufape.poo.sgpa.exception.CampoObrigatorioNuloException;
 import br.edu.ufape.poo.sgpa.exception.CpfInvalidoException;
 import br.edu.ufape.poo.sgpa.exception.DataForaDaFaixaException;
-import br.edu.ufape.poo.sgpa.exception.MembroExisteException;
+import br.edu.ufape.poo.sgpa.exception.MembroDuplicadoException;
 import br.edu.ufape.poo.sgpa.exception.MembroMenorDeIdadeException;
 import br.edu.ufape.poo.sgpa.exception.MembroNaoExisteException;
-import br.edu.ufape.poo.sgpa.exception.SalaExisteException;
+import br.edu.ufape.poo.sgpa.exception.SalaDuplicadaException;
 import br.edu.ufape.poo.sgpa.exception.SalaNaoExisteException;
 import br.edu.ufape.poo.sgpa.exception.TelefoneInvalidoException;
+import br.edu.ufape.poo.sgpa.exception.TurmaComMembrosException;
 import br.edu.ufape.poo.sgpa.exception.TurmaNaoExisteException;
 import br.edu.ufape.poo.sgpa.model.*;
 import br.edu.ufape.poo.sgpa.model.enums.StatusDaMatricula;
@@ -77,7 +78,7 @@ public class Facade {
 
 	// Cadastrar um novo membro
 	public Membro cadastrarMembro(Membro novoMembro) throws CampoObrigatorioNuloException, CpfInvalidoException,
-			MembroExisteException, TelefoneInvalidoException, DataForaDaFaixaException, MembroMenorDeIdadeException {
+			MembroDuplicadoException, TelefoneInvalidoException, DataForaDaFaixaException, MembroMenorDeIdadeException {
 		return membroService.cadastrarMembro(novoMembro);
 	}
 
@@ -267,11 +268,11 @@ public class Facade {
 	@Autowired
 	private final TurmaService turmaService;
 
-	public Turma atualizarTurma(Turma turmaAtualizada, Long id) {
+	public Turma atualizarTurma(Turma turmaAtualizada, Long id) throws TurmaNaoExisteException, CampoObrigatorioNuloException {
 		return turmaService.atualizarTurma(turmaAtualizada, id);
 	}
 
-	public Turma buscarTurmaPorId(Long id) {
+	public Turma buscarTurmaPorId(Long id) throws TurmaNaoExisteException {
 		return turmaService.buscarTurmaPorId(id);
 	}
 
@@ -289,13 +290,13 @@ public class Facade {
 		return turmaService.buscarTurmasPorModalidadeOuInstrutor(modalidade, instrutor);
 	}
 
-	public Turma cadastrarTurma(Turma entity) {
+	public Turma cadastrarTurma(Turma entity) throws CampoObrigatorioNuloException {
 		Vaga vagaCompleta = vagaService.buscarVagaPorId(entity.getVaga().getId());
 		entity.setVaga(vagaCompleta);
 		return turmaService.cadastrarTurma(entity);
 	}
 
-	public void deletarTurma(Long id) throws TurmaNaoExisteException {
+	public void deletarTurma(Long id) throws TurmaNaoExisteException, TurmaComMembrosException {
 		turmaService.deletarTurma(id);
 	}
 
@@ -359,7 +360,7 @@ public class Facade {
 		return matriculaService.estaExpirada( matricula );
 	}
 	
-	//--------------- Matricula---------------------------
+	//--------------- Sala ---------------------------
 	@Autowired
 	private final SalaService salaService;
 
@@ -367,7 +368,7 @@ public class Facade {
 		return salaService.buscarSalaPorBlocoENumero(bloco, numero);
 	}
 
-	public Sala criarSala(Sala sala) throws CampoObrigatorioNuloException, SalaExisteException {
+	public Sala criarSala(Sala sala) throws CampoObrigatorioNuloException, SalaDuplicadaException {
 		return salaService.criarSala(sala);
 	}
 

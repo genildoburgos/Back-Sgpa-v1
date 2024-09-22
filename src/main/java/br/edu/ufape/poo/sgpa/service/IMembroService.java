@@ -6,7 +6,7 @@ import java.util.Optional;
 import br.edu.ufape.poo.sgpa.exception.CampoObrigatorioNuloException;
 import br.edu.ufape.poo.sgpa.exception.CpfInvalidoException;
 import br.edu.ufape.poo.sgpa.exception.DataForaDaFaixaException;
-import br.edu.ufape.poo.sgpa.exception.MembroExisteException;
+import br.edu.ufape.poo.sgpa.exception.MembroDuplicadoException;
 import br.edu.ufape.poo.sgpa.exception.MembroMenorDeIdadeException;
 import br.edu.ufape.poo.sgpa.exception.MembroNaoExisteException;
 import br.edu.ufape.poo.sgpa.exception.TelefoneInvalidoException;
@@ -19,8 +19,9 @@ public interface IMembroService {
 	public Optional<Membro> buscarMembroPorNumeroDeMatricula(String numeroDeMatricula) throws MembroNaoExisteException;
 	public List<Membro> buscarMembroPorNome(String nome);
 	public List<Membro> buscarMembroPorCpfOuNumeroDeMatriculaOuNome(String cpf, String numeroDeMatricula, String nome);
-	public Membro cadastrarMembro(Membro novoMembro) throws CampoObrigatorioNuloException, CpfInvalidoException, MembroExisteException, TelefoneInvalidoException, DataForaDaFaixaException, MembroMenorDeIdadeException;
+	public Membro cadastrarMembro(Membro novoMembro) throws CampoObrigatorioNuloException, CpfInvalidoException, MembroDuplicadoException, TelefoneInvalidoException, DataForaDaFaixaException, MembroMenorDeIdadeException;
 	public void deletarMembroPorCpf(String cpf) throws MembroNaoExisteException;
+	public String gerarMatricula();
 	public List<Membro> listarMembros();
 	public Membro atualizarMembro(Membro membroAtualizado, Long id)
 			throws MembroNaoExisteException, CampoObrigatorioNuloException, TelefoneInvalidoException, DataForaDaFaixaException;

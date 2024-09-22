@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import br.edu.ufape.poo.sgpa.exception.CampoObrigatorioNuloException;
-import br.edu.ufape.poo.sgpa.exception.SalaExisteException;
+import br.edu.ufape.poo.sgpa.exception.SalaDuplicadaException;
 import br.edu.ufape.poo.sgpa.exception.SalaNaoExisteException;
 import br.edu.ufape.poo.sgpa.model.Sala;
 
@@ -16,7 +16,7 @@ public interface ISalaService {
 
 	void deletarSala(Sala entity) throws SalaNaoExisteException;
 
-	Sala criarSala(Sala sala) throws CampoObrigatorioNuloException, SalaExisteException;
+	Sala criarSala(Sala sala) throws CampoObrigatorioNuloException, SalaDuplicadaException;
 
 	List<Sala> findByBloco(String bloco);
 
