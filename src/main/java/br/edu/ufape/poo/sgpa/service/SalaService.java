@@ -72,4 +72,9 @@ public class SalaService implements ISalaService {
 		}
 		repository.delete(entity);
 	}
+
+	public Sala salvarSala(Sala sala) {
+		return repository.save(sala);
+	}
+	
 }

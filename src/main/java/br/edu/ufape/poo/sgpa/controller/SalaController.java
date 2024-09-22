@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 import br.edu.ufape.poo.sgpa.controller.dto.response.SalaResponse;
 import br.edu.ufape.poo.sgpa.facade.Facade;
 import br.edu.ufape.poo.sgpa.model.Sala;
+import br.edu.ufape.poo.sgpa.model.SlotHorario;
 import br.edu.ufape.poo.sgpa.exception.SalaNaoExisteException;
 import br.edu.ufape.poo.sgpa.exception.CampoObrigatorioNuloException;
 import br.edu.ufape.poo.sgpa.exception.SalaDuplicadaException;
@@ -63,5 +64,12 @@ public class SalaController {
     List<Sala> findByBloco(String bloco){
         return facade.findByBloco(bloco);
     }
+
+    @PostMapping("/reservar-horario/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Sala reservarHorario(@PathVariable Long id, @RequestBody SlotHorario slotHorario) throws SalaNaoExisteException {
+    return facade.reservarHorario(id, slotHorario);
+}
+
 
 }
