@@ -21,7 +21,7 @@ import br.edu.ufape.poo.sgpa.controller.dto.response.MembroResponse;
 import br.edu.ufape.poo.sgpa.exception.CampoObrigatorioNuloException;
 import br.edu.ufape.poo.sgpa.exception.CpfInvalidoException;
 import br.edu.ufape.poo.sgpa.exception.DataForaDaFaixaException;
-import br.edu.ufape.poo.sgpa.exception.MembroExisteException;
+import br.edu.ufape.poo.sgpa.exception.MembroDuplicadoException;
 import br.edu.ufape.poo.sgpa.exception.MembroMenorDeIdadeException;
 import br.edu.ufape.poo.sgpa.exception.MembroNaoExisteException;
 import br.edu.ufape.poo.sgpa.exception.TelefoneInvalidoException;
@@ -84,7 +84,7 @@ public class MembroController {
 
 	@PostMapping
 	public MembroResponse cadastrarMembro(@RequestBody MembroRequest m) throws CampoObrigatorioNuloException, CpfInvalidoException,
-			MembroExisteException, TelefoneInvalidoException, DataForaDaFaixaException, MembroMenorDeIdadeException {
+			MembroDuplicadoException, TelefoneInvalidoException, DataForaDaFaixaException, MembroMenorDeIdadeException {
 		return new MembroResponse(facade.cadastrarMembro(m.toMembro()));
 	}
 

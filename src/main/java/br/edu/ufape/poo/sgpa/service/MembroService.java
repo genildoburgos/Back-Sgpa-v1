@@ -3,11 +3,12 @@ package br.edu.ufape.poo.sgpa.service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import br.edu.ufape.poo.sgpa.exception.CampoObrigatorioNuloException;
 import br.edu.ufape.poo.sgpa.exception.CpfInvalidoException;
 import br.edu.ufape.poo.sgpa.exception.DataForaDaFaixaException;
-import br.edu.ufape.poo.sgpa.exception.MembroExisteException;
+import br.edu.ufape.poo.sgpa.exception.MembroDuplicadoException;
 import br.edu.ufape.poo.sgpa.exception.MembroMenorDeIdadeException;
 import br.edu.ufape.poo.sgpa.exception.MembroNaoExisteException;
 import br.edu.ufape.poo.sgpa.exception.TelefoneInvalidoException;
@@ -103,7 +104,7 @@ public class MembroService implements IMembroService {
 
 	@Override
 	public Membro cadastrarMembro(Membro entity) throws CampoObrigatorioNuloException, CpfInvalidoException,
-			MembroExisteException, TelefoneInvalidoException, DataForaDaFaixaException, MembroMenorDeIdadeException {
+			MembroDuplicadoException, TelefoneInvalidoException, DataForaDaFaixaException, MembroMenorDeIdadeException {
 
 		if (entity.getCpf() == null || entity.getCpf().isEmpty() || entity.getNome() == null
 				|| entity.getNome().isEmpty() || entity.getDataDeNascimento() == null || entity.getTelefone() == null
@@ -129,8 +130,10 @@ public class MembroService implements IMembroService {
 		}
 
 		if (repository.findByCpfOrderByNome(entity.getCpf()).isPresent()) {
-			throw new MembroExisteException();
+			throw new MembroDuplicadoException();
 		}
+		
+		entity.setNumeroDeMatricula(gerarMatricula());
 
 		return repository.save(entity);
 	}
@@ -144,6 +147,22 @@ public class MembroService implements IMembroService {
 		}
 		repository.deleteByCpf(cpf);
 	}
+	
+	@Override
+	public String gerarMatricula() {
+        Random random = new Random();
+        String novaMatricula;
+
+        do {
+            StringBuilder sb = new StringBuilder("MA");
+            for (int i = 0; i < 10; i++) {
+                sb.append(random.nextInt(10));
+            }
+            novaMatricula = sb.toString();
+        } while (repository.existsByNumeroDeMatricula(novaMatricula));
+
+        return novaMatricula;
+    }
 
 	@Override
 	public List<Membro> listarMembros() {

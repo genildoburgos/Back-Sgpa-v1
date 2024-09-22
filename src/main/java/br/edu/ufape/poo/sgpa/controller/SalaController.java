@@ -14,7 +14,7 @@ import br.edu.ufape.poo.sgpa.facade.Facade;
 import br.edu.ufape.poo.sgpa.model.Sala;
 import br.edu.ufape.poo.sgpa.exception.SalaNaoExisteException;
 import br.edu.ufape.poo.sgpa.exception.CampoObrigatorioNuloException;
-import br.edu.ufape.poo.sgpa.exception.SalaExisteException;
+import br.edu.ufape.poo.sgpa.exception.SalaDuplicadaException;
 
 @RestController
 @RequestMapping("api/v1/sala")
@@ -26,7 +26,7 @@ public class SalaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Sala criarSala(@RequestBody Sala novaSala) throws CampoObrigatorioNuloException, SalaExisteException{
+    public Sala criarSala(@RequestBody Sala novaSala) throws CampoObrigatorioNuloException, SalaDuplicadaException{
         return facade.criarSala(novaSala);
         
     }
@@ -43,7 +43,7 @@ public class SalaController {
         facade.deletarSalaPorId(id);
     }
 
-    @DeleteMapping("deletar/{id}")
+    @DeleteMapping("deletar")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarSala(@PathVariable Sala entity) throws SalaNaoExisteException {
         facade.deletarSala(entity);

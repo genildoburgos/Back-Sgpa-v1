@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufape.poo.sgpa.exception.CampoObrigatorioNuloException;
-import br.edu.ufape.poo.sgpa.exception.SalaExisteException;
+import br.edu.ufape.poo.sgpa.exception.SalaDuplicadaException;
 import br.edu.ufape.poo.sgpa.exception.SalaNaoExisteException;
 import br.edu.ufape.poo.sgpa.model.Sala;
 import br.edu.ufape.poo.sgpa.repository.SalaRepository;
@@ -30,7 +30,7 @@ public class SalaService implements ISalaService {
 	}
 
 	@Override
-	public Sala criarSala(Sala sala) throws CampoObrigatorioNuloException, SalaExisteException {
+	public Sala criarSala(Sala sala) throws CampoObrigatorioNuloException, SalaDuplicadaException {
 
 		if (sala == null) {
 			throw new IllegalArgumentException("A sala não pode ser nula");
@@ -42,7 +42,7 @@ public class SalaService implements ISalaService {
 
 		Optional<Sala> salaExistente = buscarSalaPorBlocoENumero(sala.getBloco(), sala.getNumero());
         if (salaExistente.isPresent()) {
-            throw new SalaExisteException();
+            throw new SalaDuplicadaException();
         }
 
 		return repository.save(sala);
