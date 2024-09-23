@@ -41,6 +41,16 @@ public class Pessoa implements IPessoa {
     
     @Override
     public boolean validarCPF(String cpf) {
+    	
+    	// Este método valida um CPF.
+        // 1. Remove todos os caracteres não numéricos do CPF.
+        // 2. Verifica se o CPF tem exatamente 11 dígitos.
+        // 3. Verifica se o CPF não é uma sequência repetida (ex: 111.111.111-11).
+        // 4. Calcula os dois dígitos verificadores usando os primeiros 9 dígitos.
+        // 5. Compara os dígitos verificadores calculados com os dígitos do CPF fornecido.
+        // Retorna true se o CPF for válido, e false caso contrário.
+        // Autor: Analice Silva.
+    	
 		cpf = cpf.replaceAll("\\D", "");
 
 		if (cpf.length() != 11 || cpf.matches("(\\d)\\1{10}")) {
@@ -58,6 +68,14 @@ public class Pessoa implements IPessoa {
 
     @Override
 	public int calcularDigitoVerificador(String base, int pesoInicial) {
+    	
+    	// Este método calcula um dígito verificador para um CPF.
+        // 1. Recebe uma sequência de 9 dígitos (base) e um peso inicial.
+        // 2. Realiza a soma ponderada dos dígitos, multiplicando cada um pelo peso correspondente.
+        // 3. Calcula o resto da divisão da soma por 11.
+        // 4. Retorna o dígito verificador: se o resto for menor que 2, retorna 0; caso contrário, retorna 11 menos o resto.
+        // Autor: Analice Silva.
+    	
 		int soma = 0;
 		for (int i = 0; i < base.length(); i++) {
 			int digito = Integer.parseInt(base.substring(i, i + 1));
@@ -69,6 +87,11 @@ public class Pessoa implements IPessoa {
 
 	@Override
 	public boolean checarTelefone(String telefone) throws TelefoneInvalidoException {
+		
+		// Verifica se o telefone tem exatamente 10 dígitos.
+	    // Lança uma exceção se o telefone não for válido.
+	    // Autor: Analice Silva.
+		
 		if (telefone.length() > 10 || telefone.length() < 10) {
 			throw new TelefoneInvalidoException();
 		} else {
