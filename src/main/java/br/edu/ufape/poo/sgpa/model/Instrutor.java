@@ -22,7 +22,14 @@ public class Instrutor extends Pessoa {
     @ElementCollection(targetClass = Modalidade.class) // Indica que é uma coleção de elementos simples
     @Enumerated(EnumType.STRING) // Armazena como String no banco de dados
     private List<Modalidade> modalidades;
+
+
     @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "instrutor_unidade",
+            joinColumns = @JoinColumn(name = "instrutor_id"),
+            inverseJoinColumns = @JoinColumn(name = "unidade_id")
+    )
     private List<Unidade> unidades;
 
 

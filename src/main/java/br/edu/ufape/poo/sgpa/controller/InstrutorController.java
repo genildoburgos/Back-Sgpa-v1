@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/instrutor")
 
-public class InstrutorControler {
+public class InstrutorController {
     @Autowired
     private Facade facade;
 
