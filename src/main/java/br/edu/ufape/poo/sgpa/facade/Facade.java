@@ -387,5 +387,23 @@ public class Facade {
 	public List<Sala> findByBloco(String bloco) {
 	  return salaService.findByBloco(bloco);
 	}
+
+	public Sala salvarSala(Sala sala) {
+		return salaService.salvarSala(sala);
+	}	
+
+	public Sala reservarHorario(Long id, SlotHorario slotHorario) throws SalaNaoExisteException {
+		Optional<Sala> optionalSala = salaService.buscarSalaPorId(id);
+		
+		if (optionalSala.isPresent()) {
+			Sala sala = optionalSala.get();
+			sala.reservarSala(slotHorario);
+			return salaService.salvarSala(sala);
+		} else {
+			throw new SalaNaoExisteException();
+		}
+	}
+	
+	
 	
 }
