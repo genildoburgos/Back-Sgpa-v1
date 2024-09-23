@@ -13,7 +13,7 @@ public interface InstrutorServiceInterface {
 
     void deletarIntrutor(Long id);
 
-    Instrutor atualizarInsturor(Instrutor instrutor, Long id);
+    Instrutor atualizarInstrutor(Instrutor instrutor, Long id);
 
     Instrutor buscarInstrutorPorCpf(String cpf);
 

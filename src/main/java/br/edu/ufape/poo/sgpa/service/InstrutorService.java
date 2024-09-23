@@ -48,7 +48,7 @@ public class InstrutorService implements InstrutorServiceInterface {
     }
 
     @Override
-    public Instrutor atualizarInsturor(Instrutor instrutor, Long id){
+    public Instrutor atualizarInstrutor(Instrutor instrutor, Long id){
         if (instrutor == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Instrutor não pode ser null.");
         }

@@ -178,7 +178,7 @@ public class Facade {
 
 	// atualizar instrutor
 	public Instrutor atualizarInstrutor(Instrutor instrutor, Long id) {
-		return instrutorService.atualizarInsturor(instrutor, id);
+		return instrutorService.atualizarInstrutor(instrutor, id);
 	}
 
 	//buscar por cpf

@@ -1,12 +1,12 @@
 package br.edu.ufape.poo.sgpa.controller.dto.response;
 
 import br.edu.ufape.poo.sgpa.model.Instrutor;
-import br.edu.ufape.poo.sgpa.model.Pessoa;
 import br.edu.ufape.poo.sgpa.model.SlotHorario;
 import br.edu.ufape.poo.sgpa.model.Unidade;
 import br.edu.ufape.poo.sgpa.model.enums.Modalidade;
 
 import java.util.List;
+import java.util.Optional;
 
 public class InstrutorResponse extends PessoaResponse {
     private Long id;
@@ -15,7 +15,7 @@ public class InstrutorResponse extends PessoaResponse {
     private List<Modalidade> modalidades;
     private List<Unidade> unidades;
 
-    public InstrutorResponse() {
+    public InstrutorResponse(Optional<Instrutor> instrutor) {
     }
 
     public InstrutorResponse(Instrutor instrutor) {

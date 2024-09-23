@@ -26,7 +26,8 @@ public class Unidade {
     @Column(name = "email")
     private String email;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+
+    @ManyToMany(mappedBy = "unidades", cascade = CascadeType.PERSIST)
     private List<Instrutor> instrutores;
 
     @OneToMany(cascade = CascadeType.PERSIST)
