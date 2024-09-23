@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Service
-public class UnidadeService implements UnidadeServiceInterface{
+public class UnidadeService implements IUnidadeServiceInterface{
     @Autowired
     private UnidadeRepository repository;
 

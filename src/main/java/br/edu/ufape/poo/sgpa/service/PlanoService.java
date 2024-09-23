@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Service
-public class PlanoService implements PlanoServiceInterface {
+public class PlanoService implements IPlanoServiceInterface {
 
     @Autowired
     private PlanoRepository repository;
