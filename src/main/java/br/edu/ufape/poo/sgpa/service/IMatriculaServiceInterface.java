@@ -7,7 +7,7 @@ import br.edu.ufape.poo.sgpa.model.enums.StatusDaMatricula;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface MatriculaServiceInterface {
+public interface IMatriculaServiceInterface {
     Matricula criarMatricula(Matricula matricula);
 
     List <Matricula> listarMatriculas();

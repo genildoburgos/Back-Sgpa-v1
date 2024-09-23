@@ -11,7 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Service
-public class VagaService implements VagaServiceInterface {
+public class VagaService implements IVagaServiceInterface {
     @Autowired
     private VagaRepository repository;
 

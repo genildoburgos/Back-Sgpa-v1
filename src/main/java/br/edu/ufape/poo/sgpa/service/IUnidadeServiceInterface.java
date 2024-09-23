@@ -4,7 +4,7 @@ import br.edu.ufape.poo.sgpa.model.Unidade;
 
 import java.util.List;
 
-public interface UnidadeServiceInterface {
+public interface IUnidadeServiceInterface {
     Unidade criarUnidade(Unidade obj);
 
     List<Unidade> listarUnidades();

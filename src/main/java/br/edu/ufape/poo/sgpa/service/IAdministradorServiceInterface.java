@@ -4,7 +4,7 @@ import br.edu.ufape.poo.sgpa.model.Administrador;
 
 import java.util.List;
 
-public interface AdministradorServiceInterface {
+public interface IAdministradorServiceInterface {
     Administrador criarAdministrador(Administrador novaInstancia);
 
     List<Administrador> listarAdministradores();
