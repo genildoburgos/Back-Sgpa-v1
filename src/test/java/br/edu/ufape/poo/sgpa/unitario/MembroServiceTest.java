@@ -28,10 +28,10 @@ class MembroServiceTest {
 	@Test
 	void cadastrarMembroDuplicadoTest() {
 
-		Membro membro1 = new Membro("Enzo Henrique", "16623014489", "Masculino", LocalDate.of(2000, 2, 21),
+		Membro membro1 = new Membro("Enzo Henrique", "98765432100", "Masculino", LocalDate.of(2000, 2, 21),
 				"8798175324", "9879811595", "enzoh@gmail.com", null, "123M34", null, StatusDePagamento.EFETUADO, 21);
 
-		Membro membro2 = new Membro("Enzo Henrique", "16623014489", "Masculino", LocalDate.of(2000, 2, 21),
+		Membro membro2 = new Membro("Enzo Henrique", "98765432100", "Masculino", LocalDate.of(2000, 2, 21),
 				"8781753241", "8781159537", "enzoh@gmail.com", null, "123M34", null, StatusDePagamento.EFETUADO, 21);
 
 		MembroDuplicadoException exception = assertThrows(MembroDuplicadoException.class, () -> {
@@ -58,7 +58,7 @@ class MembroServiceTest {
 
 	@Test
 	void cadastrarMembroComNomeNulo() {
-		Membro membro = new Membro(null, "16623014489", "Masculino", LocalDate.of(2000, 2, 21), "8798175324",
+		Membro membro = new Membro(null, "55566677788", "Masculino", LocalDate.of(2000, 2, 21), "8798175324",
 				"9879811595", "enzoh@gmail.com", null, "123M34", null, StatusDePagamento.EFETUADO, 21);
 
 		CampoObrigatorioNuloException exception = assertThrows(CampoObrigatorioNuloException.class, () -> {
@@ -71,7 +71,7 @@ class MembroServiceTest {
 
 	@Test
 	void cadastrarMembroComDataDeNascimentoNula() {
-		Membro membro = new Membro("Enzo Henrique", "16623014489", "Masculino", null, "8798175324", "9879811595",
+		Membro membro = new Membro("Enzo Henrique", "55566677788", "Masculino", null, "8798175324", "9879811595",
 				"enzoh@gmail.com", null, "123M34", null, StatusDePagamento.EFETUADO, 21);
 
 		CampoObrigatorioNuloException exception = assertThrows(CampoObrigatorioNuloException.class, () -> {
@@ -84,7 +84,7 @@ class MembroServiceTest {
 
 	@Test
 	void cadastrarMembroComTelefoneNulo() {
-		Membro membro = new Membro("Enzo Henrique", "16623014489", "Masculino", LocalDate.of(2000, 2, 21), null,
+		Membro membro = new Membro("Enzo Henrique", "55566677788", "Masculino", LocalDate.of(2000, 2, 21), null,
 				"9879811595", "enzoh@gmail.com", null, "123M34", null, StatusDePagamento.EFETUADO, 21);
 
 		CampoObrigatorioNuloException exception = assertThrows(CampoObrigatorioNuloException.class, () -> {
@@ -97,7 +97,7 @@ class MembroServiceTest {
 
 	@Test
 	void cadastrarMembroComContatoDeEmergenciaNulo() {
-		Membro membro = new Membro("Enzo Henrique", "16623014489", "Masculino", LocalDate.of(2000, 2, 21), "8798175324",
+		Membro membro = new Membro("Enzo Henrique", "55566677788", "Masculino", LocalDate.of(2000, 2, 21), "8798175324",
 				null, "enzoh@gmail.com", null, "123M34", null, StatusDePagamento.EFETUADO, 21);
 
 		CampoObrigatorioNuloException exception = assertThrows(CampoObrigatorioNuloException.class, () -> {
@@ -127,7 +127,7 @@ class MembroServiceTest {
 
 		Responsavel responsavel = new Responsavel("Maria Aparecida", "Mãe", "8781159537");
 
-		Membro membro = new Membro("Enzo Henrique", "16623014489", "Masculino", LocalDate.of(2000, 2, 21), "8798175324",
+		Membro membro = new Membro("Enzo Henrique", "98765432100", "Masculino", LocalDate.of(2000, 2, 21), "8798175324",
 				"9879811595", "enzoh@gmail.com", null, "123M34", responsavel, StatusDePagamento.EFETUADO, 15);
 
 		assertDoesNotThrow(() -> {
@@ -139,7 +139,7 @@ class MembroServiceTest {
 	void deletarMembroInexistentePorCpfTest() {
 
 		MembroNaoExisteException exception = assertThrows(MembroNaoExisteException.class, () -> {
-			membroService.deletarMembroPorCpf("16624015589");
+			membroService.deletarMembroPorCpf("57005779843");
 		});
 
 		assertEquals("O membro não está cadastrado no sistema", exception.getMessage());
@@ -148,7 +148,7 @@ class MembroServiceTest {
 	
 	@Test
 	void gerarMatriculaTest() throws CampoObrigatorioNuloException, CpfInvalidoException, MembroDuplicadoException, TelefoneInvalidoException, DataForaDaFaixaException, MembroMenorDeIdadeException {
-	    Membro membro = new Membro("Enzo Henrique", "98765432100", "Masculino", LocalDate.of(2000, 2, 21),
+	    Membro membro = new Membro("Enzo Henrique", "27182123223", "Masculino", LocalDate.of(2000, 2, 21),
 	            "8798175324", "9879811595", "enzoh@gmail.com", null, null, null, StatusDePagamento.EFETUADO, 21);
 	    
 	    // Cadastrar o membro para gerar uma matrícula
