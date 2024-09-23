@@ -150,6 +150,17 @@ public class MembroService implements IMembroService {
 	
 	@Override
 	public String gerarMatricula() {
+		
+		// Este método gera um novo número de matrícula exclusivo.
+	    // 1. Cria um objeto Random para gerar números aleatórios.
+	    // 2. Inicia um loop para garantir que a matrícula gerada seja única.
+	    // 3. Constrói uma nova matrícula começando com "MA" seguido por 10 dígitos aleatórios (de 0 a 9).
+	    // 4. Verifica se a matrícula já existe no repositório chamando existsByNumeroDeMatricula.
+	    // 5. Se a matrícula já existir, o loop se repete até que uma matrícula única seja gerada.
+	    // 6. Retorna a nova matrícula gerada.
+		// OBS: Podem ser gerados 10 bilhões de números de matrícula únicos com essa configuração.
+	    // Autor: Analice Silva.
+		
         Random random = new Random();
         String novaMatricula;
 
