@@ -2,6 +2,7 @@ package br.edu.ufape.poo.sgpa.controller;
 
 import br.edu.ufape.poo.sgpa.controller.dto.request.InstrutorRequest;
 import br.edu.ufape.poo.sgpa.controller.dto.response.InstrutorResponse;
+import br.edu.ufape.poo.sgpa.exception.InstrutorNaoEncontradoException;
 import br.edu.ufape.poo.sgpa.facade.Facade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,7 +46,7 @@ public class InstrutorController {
     }
 
     @PutMapping("atualizar/{id}")
-    public InstrutorResponse atualizarInstrutor(@RequestBody InstrutorRequest instrutorAtualizado, @PathVariable Long id){
+    public InstrutorResponse atualizarInstrutor(@RequestBody InstrutorRequest instrutorAtualizado, @PathVariable Long id) throws InstrutorNaoEncontradoException {
         return new InstrutorResponse(facade.atualizarInstrutor(instrutorAtualizado.toInstrutor(), id));
     }
 

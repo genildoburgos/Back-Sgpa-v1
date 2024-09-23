@@ -30,21 +30,21 @@ public class InstrutorRepositoryTest {
     }
 
     @Test
-    public void testFindById() {
+    public void buscarInstrutorPorIdTest() {
         Optional<Instrutor> found = instrutorRepository.findById(instrutor.getId());
         assertThat(found).isPresent();
         assertThat(found.get().getNome()).isEqualTo("Ravenna");
     }
 
     @Test
-    public void testFindByCpf() {
+    public void buscarInstrutorPorCpfTest() {
         Optional<Instrutor> found = instrutorRepository.findByCpf("123456789");
         assertThat(found).isPresent();
         assertThat(found.get().getNome()).isEqualTo("Ravenna");
     }
 
     @Test
-    public void testDeleteById() {
+    public void deletarInstrutorPorIdTest() {
         Long id = instrutor.getId();
         instrutorRepository.deleteById(id);
         Optional<Instrutor> found = instrutorRepository.findById(id);
@@ -52,7 +52,7 @@ public class InstrutorRepositoryTest {
     }
 
     @Test
-    public void testUpdateInstrutor() {
+    public void atualizarInstrutorTest() {
         instrutor.setNome("Ravenna Silva");
         instrutorRepository.save(instrutor);
 
@@ -62,7 +62,7 @@ public class InstrutorRepositoryTest {
     }
 
     @Test
-    public void testFindAll() {
+    public void listarInstrutoresTest() {
         Iterable<Instrutor> instrutores = instrutorRepository.findAll();
         assertThat(instrutores).isNotEmpty();
         assertThat(instrutores).contains(instrutor);

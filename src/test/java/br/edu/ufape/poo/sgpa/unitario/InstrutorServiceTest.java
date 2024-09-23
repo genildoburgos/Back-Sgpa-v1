@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import br.edu.ufape.poo.sgpa.exception.InstrutorNaoEncontradoException;
 import br.edu.ufape.poo.sgpa.model.*;
 import br.edu.ufape.poo.sgpa.model.enums.DiaDaSemana;
 import br.edu.ufape.poo.sgpa.model.enums.Modalidade;
@@ -89,7 +90,7 @@ public class InstrutorServiceTest {
     }
 
     @Test
-    public void atualizarInstrutor() {
+    public void atualizarInstrutor() throws InstrutorNaoEncontradoException {
         // Cenário
         Instrutor instrutor = new Instrutor("Ravenna", "123456789", "Feminino", LocalDate.of(1998, 7, 22),
                 "(11) 98765-4321", "(11) 91234-5678", "ravenna@example.com", null, null, null, "123456789", 26);

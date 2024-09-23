@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import br.edu.ufape.poo.sgpa.exception.InstrutorNaoEncontradoException;
 
 import java.util.List;
 
@@ -48,18 +49,22 @@ public class InstrutorService implements InstrutorServiceInterface {
     }
 
     @Override
-    public Instrutor atualizarInstrutor(Instrutor instrutor, Long id){
+    public Instrutor atualizarInstrutor(Instrutor instrutor, Long id) throws InstrutorNaoEncontradoException {
         if (instrutor == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Instrutor não pode ser null.");
         }
 
+        // Verificando se o instrutor existe
         Instrutor entity = buscarInstrutor(id);
+        if (entity == null) {
+            throw new InstrutorNaoEncontradoException();
+        }
 
+        // Atualizando os campos do instrutor existente
         entity.setClt(instrutor.getClt());
         entity.setHorariosDeTrabalho(instrutor.getHorariosDeTrabalho());
         entity.setModalidades(instrutor.getModalidades());
         entity.setUnidades(instrutor.getUnidades());
-
         entity.setNome(instrutor.getNome());
         entity.setCpf(instrutor.getCpf());
         entity.setDataDeNascimento(instrutor.getDataDeNascimento());
@@ -68,13 +73,15 @@ public class InstrutorService implements InstrutorServiceInterface {
         entity.setSexo(instrutor.getSexo());
         entity.setContatoDeEmergencia(instrutor.getContatoDeEmergencia());
 
-        try{
-            validaInstrutor(entity);
-            return repository.save(entity);
+        try {
+            validaInstrutor(entity); // Validação dos dados
+            return repository.save(entity); // Salvando no repositório
         } catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Dados invalidos para atualizar a instrutor", e);
+            // Tratamento de dados inválidos
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Dados inválidos para atualizar o instrutor", e);
         }
     }
+
 
     // buscar alem do C.R.U.D
 

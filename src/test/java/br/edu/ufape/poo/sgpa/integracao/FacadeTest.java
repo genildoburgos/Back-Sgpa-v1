@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 
+import br.edu.ufape.poo.sgpa.exception.InstrutorNaoEncontradoException;
+import br.edu.ufape.poo.sgpa.model.Instrutor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,6 +15,8 @@ import br.edu.ufape.poo.sgpa.facade.Facade;
 import br.edu.ufape.poo.sgpa.model.Membro;
 import br.edu.ufape.poo.sgpa.model.enums.StatusDePagamento;
 import jakarta.transaction.Transactional;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 @SpringBootTest
 @Transactional
@@ -38,5 +42,26 @@ class FacadeTest {
 		assertEquals(m1.getCpf(), m2.getCpf());
 		assertEquals("Existe no sistema um membro com o CPF informado", exception.getMessage());
 	}
+
+	@Test
+	void atualizarInstrutorInexistenteTest() {
+		Instrutor instrutor = new Instrutor("Ravenna", "123456789", "Feminino", LocalDate.of(1998, 7, 22),
+				"(11) 98765-4321", "(11) 91234-5678", "ravenna@example.com", null, null, null, "123456789", 26);
+
+		// Captura da exceção ResponseStatusException
+		ResponseStatusException exception = assertThrows(ResponseStatusException.class, () -> {
+			facade.atualizarInstrutor(instrutor, 1L);
+		});
+
+		// Printando a mensagem da exceção
+		System.out.println(exception.getMessage());
+
+		// Verificando se o status HTTP e a mensagem da exceção estão corretos
+		assertEquals(HttpStatus.NOT_FOUND, exception.getStatusCode());
+		assertEquals("404 NOT_FOUND \"Instrutor com o id informado não encontrado\"", exception.getMessage());
+	}
+
+
+
 
 }
