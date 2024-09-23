@@ -1,5 +1,6 @@
 package br.edu.ufape.poo.sgpa.service;
 
+import br.edu.ufape.poo.sgpa.exception.InstrutorNaoEncontradoException;
 import br.edu.ufape.poo.sgpa.model.Instrutor;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public interface InstrutorServiceInterface {
 
     void deletarIntrutor(Long id);
 
-    Instrutor atualizarInstrutor(Instrutor instrutor, Long id);
+    Instrutor atualizarInstrutor(Instrutor instrutor, Long id) throws InstrutorNaoEncontradoException;
 
     Instrutor buscarInstrutorPorCpf(String cpf);
 

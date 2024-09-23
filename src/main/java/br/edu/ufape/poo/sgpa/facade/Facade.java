@@ -1,16 +1,6 @@
 package br.edu.ufape.poo.sgpa.facade;
 
-import br.edu.ufape.poo.sgpa.exception.CampoObrigatorioNuloException;
-import br.edu.ufape.poo.sgpa.exception.CpfInvalidoException;
-import br.edu.ufape.poo.sgpa.exception.DataForaDaFaixaException;
-import br.edu.ufape.poo.sgpa.exception.MembroDuplicadoException;
-import br.edu.ufape.poo.sgpa.exception.MembroMenorDeIdadeException;
-import br.edu.ufape.poo.sgpa.exception.MembroNaoExisteException;
-import br.edu.ufape.poo.sgpa.exception.SalaDuplicadaException;
-import br.edu.ufape.poo.sgpa.exception.SalaNaoExisteException;
-import br.edu.ufape.poo.sgpa.exception.TelefoneInvalidoException;
-import br.edu.ufape.poo.sgpa.exception.TurmaComMembrosException;
-import br.edu.ufape.poo.sgpa.exception.TurmaNaoExisteException;
+import br.edu.ufape.poo.sgpa.exception.*;
 import br.edu.ufape.poo.sgpa.model.*;
 import br.edu.ufape.poo.sgpa.model.enums.StatusDaMatricula;
 import br.edu.ufape.poo.sgpa.service.*;
@@ -177,7 +167,7 @@ public class Facade {
 	}
 
 	// atualizar instrutor
-	public Instrutor atualizarInstrutor(Instrutor instrutor, Long id) {
+	public Instrutor atualizarInstrutor(Instrutor instrutor, Long id) throws InstrutorNaoEncontradoException {
 		return instrutorService.atualizarInstrutor(instrutor, id);
 	}
 
