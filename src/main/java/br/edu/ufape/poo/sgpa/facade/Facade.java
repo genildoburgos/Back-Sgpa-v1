@@ -302,7 +302,7 @@ public class Facade {
 	@Autowired
 	private final MatriculaService matriculaService;
 
-	public Matricula criarMatricula(Matricula matricula) {
+	public Matricula criarMatricula(Matricula matricula) throws MembroNaoExisteException, TurmaNaoExisteException {
 		return matriculaService.criarMatricula(matricula);
 	}
 

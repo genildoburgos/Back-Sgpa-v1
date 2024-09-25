@@ -13,7 +13,7 @@ public class SlotHorario {
     private LocalTime horarioInicial;
     private LocalTime horarioFinal;
     @Enumerated(EnumType.STRING)
-    private DiaDaSemana DiaDaSemana;
+    private DiaDaSemana diaDaSemana;
 
     public SlotHorario() {
     }
@@ -21,7 +21,7 @@ public class SlotHorario {
     public SlotHorario(LocalTime horarioInicial, LocalTime horarioFinal, br.edu.ufape.poo.sgpa.model.enums.DiaDaSemana diaDaSemana) {
         this.horarioInicial = horarioInicial;
         this.horarioFinal = horarioFinal;
-        DiaDaSemana = diaDaSemana;
+        this.diaDaSemana = diaDaSemana;
     }
 
     public long getId() {
@@ -49,11 +49,11 @@ public class SlotHorario {
     }
 
     public br.edu.ufape.poo.sgpa.model.enums.DiaDaSemana getDiaDaSemana() {
-        return DiaDaSemana;
+        return diaDaSemana;
     }
 
     public void setDiaDaSemana(br.edu.ufape.poo.sgpa.model.enums.DiaDaSemana diaDaSemana) {
-        DiaDaSemana = diaDaSemana;
+        this.diaDaSemana = diaDaSemana;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class SlotHorario {
                 "id=" + id +
                 ", horarioInicial=" + horarioInicial +
                 ", horarioFinal=" + horarioFinal +
-                ", DiaDaSemana=" + DiaDaSemana +
+                ", DiaDaSemana=" + diaDaSemana +
                 '}';
     }
 

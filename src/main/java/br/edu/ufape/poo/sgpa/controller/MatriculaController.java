@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.edu.ufape.poo.sgpa.controller.dto.request.MatriculaRequest;
 import br.edu.ufape.poo.sgpa.controller.dto.request.MembroRequest;
 import br.edu.ufape.poo.sgpa.controller.dto.response.MatriculaResponse;
+import br.edu.ufape.poo.sgpa.exception.MembroNaoExisteException;
+import br.edu.ufape.poo.sgpa.exception.TurmaNaoExisteException;
 import br.edu.ufape.poo.sgpa.facade.Facade;
 import br.edu.ufape.poo.sgpa.model.Matricula;
 import br.edu.ufape.poo.sgpa.model.Membro;
@@ -33,7 +35,7 @@ public class MatriculaController {
 	private Facade facade;
 
 	@PostMapping
-	public MatriculaResponse criarMatricula(@RequestBody MatriculaRequest matricula) {
+	public MatriculaResponse criarMatricula(@RequestBody MatriculaRequest matricula) throws MembroNaoExisteException, TurmaNaoExisteException {
 		return new MatriculaResponse(facade.criarMatricula(matricula.toMatricula()));
 	}
 
