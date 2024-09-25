@@ -4,7 +4,7 @@ import br.edu.ufape.poo.sgpa.model.Plano;
 
 import java.util.List;
 
-public interface IPlanoServiceInterface {
+public interface IPlanoService {
     List<Plano> listarPlanos();
 
     Plano criarPlano(Plano novoObj);

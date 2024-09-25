@@ -4,7 +4,7 @@ import br.edu.ufape.poo.sgpa.model.Vaga;
 
 import java.util.List;
 
-public interface IVagaServiceInterface {
+public interface IVagaService {
     List<Vaga> listarVagas();
 
     Vaga criarVaga(Vaga novaInstancia);

@@ -11,7 +11,7 @@ import br.edu.ufape.poo.sgpa.exception.InstrutorNaoEncontradoException;
 import java.util.List;
 
 @Service
-public class InstrutorService implements InstrutorServiceInterface {
+public class InstrutorService implements IInstrutorService {
     @Autowired
     private InstrutorRepository repository;
 

@@ -9,7 +9,7 @@ import br.edu.ufape.poo.sgpa.model.enums.StatusDaMatricula;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface IMatriculaServiceInterface {
+public interface IMatriculaService {
     Matricula criarMatricula(Matricula matricula) throws MembroNaoExisteException, TurmaNaoExisteException;
     List <Matricula> listarMatriculas();
     Matricula buscarMatricula(Long id);

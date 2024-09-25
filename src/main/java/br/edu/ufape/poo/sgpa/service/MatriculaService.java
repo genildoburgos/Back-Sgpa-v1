@@ -17,7 +17,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class MatriculaService implements IMatriculaServiceInterface{
+public class MatriculaService implements IMatriculaService{
     @Autowired
     private MatriculaRepository repository;
 
