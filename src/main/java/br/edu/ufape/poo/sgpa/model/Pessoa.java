@@ -23,7 +23,7 @@ public class Pessoa implements IPessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    protected long id;
 
     public Pessoa() {
     }

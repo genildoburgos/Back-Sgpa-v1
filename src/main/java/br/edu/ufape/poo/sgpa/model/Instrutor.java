@@ -10,9 +10,7 @@ import java.util.Objects;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Instrutor extends Pessoa {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    
     private String clt;
 
     @ManyToMany(cascade = CascadeType.PERSIST)

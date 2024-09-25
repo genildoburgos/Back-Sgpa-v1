@@ -11,7 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Service
-public class AdministradorService implements IAdministradorServiceInterface {
+public class AdministradorService implements IAdministradorService {
     @Autowired
     private AdministradorRepository repository;
 

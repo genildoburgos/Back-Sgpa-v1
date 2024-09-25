@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Entity
 public class Membro extends Pessoa {
-
+	
     private String numeroDeMatricula;
 
     @Enumerated(EnumType.STRING)
@@ -43,7 +43,12 @@ public class Membro extends Pessoa {
     public Membro() {
 
     }
-
+    
+    @Override
+    public long getId() {
+        return id;
+    }
+    
     public List<Matricula> getMatriculas() {
         return matriculas;
     }
@@ -94,7 +99,7 @@ public class Membro extends Pessoa {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getNumeroDeMatricula(), getStatusDePagamento(), getMatriculas(), getResponsavel(), getTurmas());
+        return Objects.hash(super.hashCode(), getId(), getNumeroDeMatricula(), getStatusDePagamento(), getMatriculas(), getResponsavel(), getTurmas());
     }
 
     @Override

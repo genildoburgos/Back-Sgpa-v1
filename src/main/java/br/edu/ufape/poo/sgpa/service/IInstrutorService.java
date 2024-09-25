@@ -5,7 +5,7 @@ import br.edu.ufape.poo.sgpa.model.Instrutor;
 
 import java.util.List;
 
-public interface InstrutorServiceInterface {
+public interface IInstrutorService {
     Instrutor criarInstrutor(Instrutor obj);
 
     List<Instrutor> listarInstrutores();
